@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: logutil-server
+server:
+  port: 7000
+  servlet:
+    context-path: /logutil
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:5060/eureka/eureka

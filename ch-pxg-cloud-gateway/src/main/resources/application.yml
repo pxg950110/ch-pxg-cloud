@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: gateway-server
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lower-case-service-id: true
+      routes:
+        - id: rabbit-server
+          uri:  lb://rabbit-server
+          predicates:
+            - Path=/rabbit/**
+        - id: product-server
+          uri:  lb://product-server
+          predicates:
+            - Path=/product/**
+        - id: wechat-server
+          uri:  lb://wechat-server
+          predicates:
+            - Path=/wechat/**
+        - id: sysadmin-server
+          uri:  lb://sysadmin-server
+          predicates:
+            - Path=/sysadmin/**
+        - id: swaggerui-server
+          uri:  lb://swaggerui-server
+          predicates:
+            - Path=/swaggerui/**
+        - id: logutil-server
+          uri:  lb://logutil-server
+          predicates:
+            - Path=/logutil/**
+        - id: author-server
+          uri:  lb://author-server
+          predicates:
+            - Path=/author/**
+        - id: common-server
+          uri:  lb://common-server
+          predicates:
+            - Path=/common/**
+        - id: config-server
+          uri:  lb://config-server
+          predicates:
+            - Path=/config/**
+        - id: sidecar-python
+          uri:  lb://sidecar-python
+          predicates:
+            - Path=/python/**
+        - id: qaserver-server
+          uri:  lb://qaserver-server
+          predicates:
+            - Path=/qaserver/**
+server:
+  port: 5070
+  servlet:
+    context-path: /gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:5060/eureka/eureka

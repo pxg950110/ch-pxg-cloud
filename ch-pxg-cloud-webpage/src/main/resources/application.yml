@@ -1,0 +1,14 @@
+
+
+spring:
+  application:
+    name: webpage-server
+server:
+  port: 7008
+  servlet:
+    context-path: /webpage
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:5060/eureka/eureka
+

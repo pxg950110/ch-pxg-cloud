@@ -1,0 +1,13 @@
+
+spring:
+  application:
+    name: sysadmin-server
+server:
+  port: 7004
+  servlet:
+    context-path: /sysadmin
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:5060/eureka/eureka
+

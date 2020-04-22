@@ -1,0 +1,21 @@
+
+spring:
+  application:
+    name: rabbit-server
+  cloud:
+    config:
+      uri: http://localhost:5080
+      fail-fast: true
+      label: master
+      profile: dev
+  profiles:
+    active: dev
+server:
+  port: 7002
+  servlet:
+    context-path: /rabbit
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:5060/eureka/eureka
+

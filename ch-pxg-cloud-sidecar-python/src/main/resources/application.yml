@@ -1,0 +1,33 @@
+spring:
+  profiles:
+    active: "dev"
+  application:
+    name: sidecar-python
+
+sidecar:
+  port: 7006
+  health-uri: http://127.0.0.1:${sidecar.port}/
+
+ribbon:
+  ConnectTimeout: 50000
+  ReadTimeout: 50000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+  metrics:
+    polling-interval-ms: 30000
+
+server:
+  port: 7007
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://localhost:5060/eureka/eureka

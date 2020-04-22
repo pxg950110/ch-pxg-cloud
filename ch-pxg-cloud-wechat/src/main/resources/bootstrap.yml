@@ -1,0 +1,23 @@
+
+spring:
+  application:
+    name: wechat-server
+  cloud:
+    config:
+      uri: http://localhost:5080
+      fail-fast: true
+      label: master
+      profile: dev
+  profiles:
+    active: dev
+
+server:
+  port: 7005
+  servlet:
+    context-path: /wechat
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:5060/eureka/eureka
+

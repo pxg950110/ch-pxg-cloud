@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <!--    配置服务名称-->
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+<!--        <Target>System.out</Target>-->
+<!--        <encoder>-->
+<!--            <pattern>[%d{YYYY-MM-dd HH:mm:ss}]   [%t]  [%p]  [%c]-%m%n</pattern>-->
+<!--        </encoder>-->
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+<!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+<!--            <level>info</level>-->
+<!--        </filter>-->
+    </appender>
+
+<!--    为logstash输出的JSON格式的Appender-->
+    <appender name="app-log-info" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>192.168.56.1:5044</destination>
+<!--        日志输出编码-->
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <pattern>
+                    <pattern>
+                        {
+                        "severity": "%level",
+                        "service": "${springAppName:-}",
+                        "trace": "%X{X-B3-TraceId:-}",
+                        "span": "%X{X-B3-SpanId:-}",
+                        "exportable": "%X{X-Span-Export:-}",
+                        "pid": "${PID:-}",
+                        "thread": "%thread",
+                        "class": "%logger{40}",
+                        "rest": "%message"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+<!--    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+<!--        <destination>192.168.56.1:4567</destination>-->
+<!--        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder"/>-->
+<!--    </appender>-->
+
+<!--    <appender name="LOGSTASH" class="com.cwbase.logback.RedisAppender">-->
+<!--        <source>boot-sleuth</source>-->
+<!--        <type>dev</type>-->
+<!--        <host>127.0.0.1</host>-->
+<!--        <key>logstash:redis</key>-->
+<!--        <tags>dev</tags>-->
+<!--        <mdc>true</mdc>-->
+<!--        <location>true</location>-->
+<!--        <callerStackIndex>0</callerStackIndex>-->
+<!--    </appender>-->
+
+<!--    <appender name="logstash2" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+<!--        <remoteHost>192.168.56.1</remoteHost>-->
+<!--        <port>4568</port>-->
+<!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+<!--            &lt;!&ndash; Minimum logging level to be presented in the console logs&ndash;&gt;-->
+<!--            <level>INFO</level> &lt;!&ndash;写入logstash的日志级别&ndash;&gt;-->
+<!--        </filter>-->
+<!--        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder"/>-->
+<!--    </appender>-->
+<!--    ​-->
+    <root level="INFO">
+    <appender-ref ref="Console"/>
+    <appender-ref ref="app-log-info"/>
+<!--    <appender-ref ref="logstash2"/>-->
+    </root>
+    <!--<appender-ref ref="flatfile"/>-->
+</configuration>

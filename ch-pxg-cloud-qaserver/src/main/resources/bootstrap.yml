@@ -1,0 +1,26 @@
+
+spring:
+  application:
+    name: qaserver-server
+  cloud:
+    config:
+      uri: http://localhost:5080
+      fail-fast: true
+      label: master
+      profile: dev
+  profiles:
+    active: dev
+logstash:
+  app-log-info:
+    url: 192.168.56.1:5044
+
+server:
+  port: 7012
+  servlet:
+    context-path: /qaserver
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:5060/eureka/eureka
+

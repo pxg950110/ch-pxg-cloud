@@ -1,0 +1,32 @@
+#���÷���
+spring:
+  application:
+    name: config-server
+  profiles:
+    #ָ�������ļ��Ǳ����ļ�
+    active: jdbc
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: D:/profile
+        jdbc:
+          sql: select property_key,property_value from appsystem.config_properties  a inner  join appsystem.system_config b on a.server_id=b.id where b.server_name=? and b.profile=? and b.label=?  union select property_key,property_value from appsystem.config_properties where server_id=0
+  #mysql
+#  datasource:
+#    driver-class-name:
+  systemconfig:
+    datasource:
+      driverClassName:  com.mysql.cj.jdbc.Driver
+      jdbcUrl: jdbc:mysql://192.168.56.1:3306/?database=mysql
+      username: root
+      password: 123456
+server:
+  port: 5080
+#  servlet:
+#    context-path: /config
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:5060/eureka/eureka
+    
