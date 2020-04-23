@@ -1,6 +1,9 @@
 package ch.pxg.cloud.chpxgcloudauthorserver.controller;
 
+import com.pxg.clould.chpxgclouldutil.CommonResult;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,5 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Api("用户权限相关操作接口")
 public class AuthorController {
 
-
+    @ApiOperation("用户登录")
+    @PostMapping("login")
+    public CommonResult login(){
+        return null;
+    }
 }

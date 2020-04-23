@@ -127,10 +127,5 @@ public class UserVI {
                 '}';
     }
 
-    public enum  LoginType{
-        DEFAULT,//默认的配置方法
-        PHONE,//电话方式注册
-        EMAIL; //邮箱方式注册
-    }
 
 }
