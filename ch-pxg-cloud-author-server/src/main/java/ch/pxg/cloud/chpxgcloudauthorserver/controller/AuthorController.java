@@ -1,5 +1,7 @@
 package ch.pxg.cloud.chpxgcloudauthorserver.controller;
 
+import ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi.LoginVI;
+import ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi.UserInfoVi;
 import com.pxg.clould.chpxgclouldutil.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,7 +27,7 @@ public class AuthorController {
 
     @ApiOperation("用户登录")
     @PostMapping("login")
-    public CommonResult login(){
-        return null;
+    public CommonResult<UserInfoVi> login(LoginVI loginVI){
+        return  CommonResult.success(new UserInfoVi());
     }
 }
