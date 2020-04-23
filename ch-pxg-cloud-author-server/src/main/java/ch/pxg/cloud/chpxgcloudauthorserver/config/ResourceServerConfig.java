@@ -28,6 +28,11 @@ import javax.servlet.http.HttpServletResponse;
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
+    /**
+     * 定义免登陆接口
+     * @param http
+     * @throws Exception
+     */
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().exceptionHandling().authenticationEntryPoint(

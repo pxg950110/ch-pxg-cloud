@@ -86,10 +86,10 @@ public class SwaggerUIConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("Swagger API")
-                .description("test3434")
+                .description("用户权限管理服务")
                 .termsOfServiceUrl("")
-                .contact(new Contact("wd", "", ""))
-                .version("2.0")
+                .contact(new Contact("ch_pxg", "www.pxgandppm.top", "pxg950110@163.com"))
+                .version("1.0.0")
                 .build();
     }
 }
