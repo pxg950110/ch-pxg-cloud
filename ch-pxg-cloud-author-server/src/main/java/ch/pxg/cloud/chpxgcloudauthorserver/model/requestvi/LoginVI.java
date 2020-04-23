@@ -26,8 +26,18 @@ public class LoginVI {
     private String phone;
     @ApiModelProperty("密码")
     private String email;
+    @ApiModelProperty("验证码")
+    private String checkCode;
     @ApiModelProperty("消息id")
     private String messageId;
+
+    public String getCheckCode() {
+        return checkCode;
+    }
+
+    public void setCheckCode(String checkCode) {
+        this.checkCode = checkCode;
+    }
 
     public LoginType getLoginType() {
         return loginType;

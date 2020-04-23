@@ -45,7 +45,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         "/v2/api-docs","/user/login",//
                         "/oauth/token",//
                         "/user/regist"//
-                        ,"/test/test"
+                        ,"/test/test",
+                        "/auth/login"
                 ).permitAll()
                 .anyRequest().authenticated().and().httpBasic();
     }

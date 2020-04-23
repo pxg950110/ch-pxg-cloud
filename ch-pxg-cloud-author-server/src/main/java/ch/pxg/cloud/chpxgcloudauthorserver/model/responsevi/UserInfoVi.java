@@ -1,5 +1,11 @@
 package ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi;
 
+import ch.pxg.cloud.chpxgcloudauthorserver.util.JWTUtil;
+import sun.plugin2.message.Serializer;
+
+import java.io.Serializable;
+import java.util.UUID;
+
 /**
  * <p>
  * 2020/3/7  18:48
@@ -17,5 +23,17 @@ package ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi;
  * @description </p>
  */
 public class UserInfoVi {
+    /**
+     * 用户登录后产生的唯一id
+     */
+    private String messageId;
+    public UserInfoVi() {
+        this.messageId= UUID.randomUUID().toString();
+    }
+
+    public String getMessageId() {
+        return messageId;
+    }
+
 
 }

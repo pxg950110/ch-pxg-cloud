@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * <p>
  * 2020/4/23  10:35
@@ -21,13 +24,20 @@ import org.springframework.web.bind.annotation.RestController;
  * @description </p>
  */
 @RestController
-@RequestMapping("author")
+@RequestMapping("auth")
 @Api("用户权限相关操作接口")
 public class AuthorController {
 
+    /**
+     *
+     * @param loginVI
+     * @param request
+     * @param response
+     * @return
+     */
     @ApiOperation("用户登录")
     @PostMapping("login")
-    public CommonResult<UserInfoVi> login(LoginVI loginVI){
+    public CommonResult<UserInfoVi> login(LoginVI loginVI, HttpServletRequest request, HttpServletResponse response){
         return  CommonResult.success(new UserInfoVi());
     }
 }
