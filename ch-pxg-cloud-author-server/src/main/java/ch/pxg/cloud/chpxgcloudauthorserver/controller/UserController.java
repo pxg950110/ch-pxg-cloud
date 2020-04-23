@@ -1,8 +1,6 @@
 package ch.pxg.cloud.chpxgcloudauthorserver.controller;
 
 import ch.pxg.cloud.chpxgcloudauthorserver.model.UserInfo;
-import ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi.UserRegistVI;
-import ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi.UserVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.server.UserService;
 import ch.pxg.cloud.chpxgcloudauthorserver.util.ResultInfo;
 import io.swagger.annotations.Api;
@@ -45,11 +43,6 @@ public class UserController {
     }
 
 
-    @ApiOperation("用户注册")
-    @PostMapping("/user/regist")
-    public ResultInfo regist(@RequestBody UserVI userVI){
-        return userService.regist(userVI);
-    }
 
     @ApiOperation("获取邮箱验证码")
     @GetMapping("/user/email/code")

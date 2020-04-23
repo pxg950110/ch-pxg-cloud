@@ -1,7 +1,9 @@
 package ch.pxg.cloud.chpxgcloudauthorserver.controller;
 
 import ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi.LoginVI;
+import ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi.UserRegistVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi.UserInfoVi;
+import ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi.UserRegistResponseVI;
 import com.pxg.clould.chpxgclouldutil.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,5 +41,19 @@ public class AuthorController {
     @PostMapping("login")
     public CommonResult<UserInfoVi> login(LoginVI loginVI, HttpServletRequest request, HttpServletResponse response){
         return  CommonResult.success(new UserInfoVi());
+    }
+
+
+    /**
+     * 用户注册接口
+     * @param userRegistVI
+     * @param request
+     * @param response
+     * @return
+     */
+    @ApiOperation("会员注册")
+    @PostMapping("/regist")
+    public CommonResult<UserRegistResponseVI> regist(UserRegistVI userRegistVI, HttpServletRequest request, HttpServletResponse response){
+        return null;
     }
 }

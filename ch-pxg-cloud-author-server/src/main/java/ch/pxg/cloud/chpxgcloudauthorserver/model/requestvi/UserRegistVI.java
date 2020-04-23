@@ -1,5 +1,11 @@
 package ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
+
+import java.util.UUID;
+
 /**
  * <p>
  * 2020/3/18  22:44
@@ -16,5 +22,17 @@ package ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi;
  * @Version 1.0.0
  * @description </p>
  */
+@ApiModel(description = "会员注册类")
 public class UserRegistVI {
+
+    @ApiModelProperty("消息ID")
+    private String messageId;
+
+    public UserRegistVI() {
+        this.messageId= UUID.randomUUID().toString();
+    }
+
+    public String getMessageId() {
+        return messageId;
+    }
 }

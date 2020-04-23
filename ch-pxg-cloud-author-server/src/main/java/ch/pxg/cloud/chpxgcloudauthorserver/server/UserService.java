@@ -1,7 +1,6 @@
 package ch.pxg.cloud.chpxgcloudauthorserver.server;
 
 import ch.pxg.cloud.chpxgcloudauthorserver.model.UserInfo;
-import ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi.UserVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.util.ResultInfo;
 
 public interface UserService {
@@ -12,14 +11,7 @@ public interface UserService {
      * @param userInfo
      * @return
      */
-    public ResultInfo login(UserInfo userInfo);
-
-    /**
-     * 用户注册
-     * @param userVI
-     * @return
-     */
-    public ResultInfo regist(UserVI userVI);
+    ResultInfo login(UserInfo userInfo);
 
 
     /**
@@ -27,5 +19,5 @@ public interface UserService {
      * @param emailUrl
      * @return
      */
-    public ResultInfo emailCode(String emailUrl);
+    ResultInfo emailCode(String emailUrl);
 }

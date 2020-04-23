@@ -46,7 +46,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         "/oauth/token",//
                         "/user/regist"//
                         ,"/test/test",
-                        "/auth/login"
+                        "/auth/**"
                 ).permitAll()
                 .anyRequest().authenticated().and().httpBasic();
     }

@@ -2,7 +2,6 @@ package ch.pxg.cloud.chpxgcloudauthorserver.server.impl;
 
 import ch.pxg.cloud.chpxgcloudauthorserver.feignclient.RabbitFeignClinet;
 import ch.pxg.cloud.chpxgcloudauthorserver.model.UserInfo;
-import ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi.UserVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.server.UserService;
 import ch.pxg.cloud.chpxgcloudauthorserver.util.EmailCodeVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.util.ResultInfo;
@@ -43,15 +42,6 @@ public class UserServoceImpl implements UserService {
         log.info(userInfo.toString());
 //        默认用户名和密码
         return ResultInfo.ok(userInfo);
-    }
-    /**
-     * 用户注册
-     * @param userVI
-     * @return
-     */
-    @Override
-    public ResultInfo regist(UserVI userVI) {
-        return null;
     }
 
     /**
