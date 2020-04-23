@@ -14,14 +14,6 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 
 /**
  * <p>
- * 2020/3/15  23:05
- * Copyright (c) 2019. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
- * </p>
- * <p>
  * @author pxg
  * @emil pxg950110@163.com
  * @Date 2020/3/15
@@ -39,8 +31,8 @@ public class AuthorizationServerConfig  extends AuthorizationServerConfigurerAda
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
-    @Autowired
-    private JPAUserDetailsService jpaUserDetailsService;
+
+
 
     @Bean
     public RedisTokenStore redisTokenStore(){
@@ -79,8 +71,6 @@ public class AuthorizationServerConfig  extends AuthorizationServerConfigurerAda
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-       endpoints.authenticationManager(authenticationManager)
-               .userDetailsService(jpaUserDetailsService)//若无，refresh_token会有UserDetailsService is required错误
-               .tokenStore(redisTokenStore());
+        super.configure(endpoints);
     }
 }
