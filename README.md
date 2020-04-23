@@ -29,6 +29,8 @@
 
 netstat -aon
 
+v1.0版本aop 日志暂时不加入
+
 
 
 

@@ -1,6 +1,5 @@
 package ch.pxg.cloud.chpxgcloudauthorserver.config;
 
-import ch.pxg.cloud.chpxgcloudauthorserver.server.JPAUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

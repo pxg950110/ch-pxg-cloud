@@ -4,9 +4,11 @@ import ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi.LoginVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi.UserRegistVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi.UserInfoVi;
 import ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi.UserRegistResponseVI;
+import ch.pxg.cloud.chpxgcloudauthorserver.server.AuthorService;
 import com.pxg.clould.chpxgclouldutil.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +32,8 @@ import javax.servlet.http.HttpServletResponse;
 @Api("用户权限相关操作接口")
 public class AuthorController {
 
+@Autowired
+private AuthorService authorService;
     /**
      *
      * @param loginVI
@@ -54,6 +58,10 @@ public class AuthorController {
     @ApiOperation("会员注册")
     @PostMapping("/regist")
     public CommonResult<UserRegistResponseVI> regist(UserRegistVI userRegistVI, HttpServletRequest request, HttpServletResponse response){
-        return null;
+        return authorService.regist(
+                userRegistVI,
+                request,
+                response
+        );
     }
 }
