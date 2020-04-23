@@ -12,6 +12,7 @@
         <module>ch-pxg-cloud-gateway</module>
         <module>ch-pxg-cloud-logutil</module>
         <module>ch-pxg-cloud-sysadmin</module>
+        <module>ch-pxg-cloud-author-server</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

@@ -31,6 +31,7 @@ import javax.sql.DataSource;
  * @Date 2020/3/1
  * @Version 1.0.0
  * @description </p>
+ * 数据库连接配置
  */
 @Configuration
 @EnableTransactionManagement
