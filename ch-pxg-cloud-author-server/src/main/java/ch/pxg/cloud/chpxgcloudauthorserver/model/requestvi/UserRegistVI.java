@@ -1,5 +1,6 @@
 package ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi;
 
+import ch.pxg.cloud.chpxgcloudauthorserver.util.CommonUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
@@ -29,7 +30,7 @@ public class UserRegistVI {
     private String messageId;
 
     public UserRegistVI() {
-        this.messageId= UUID.randomUUID().toString();
+        this.messageId= CommonUtil.UUID();
     }
 
     public String getMessageId() {

@@ -1,5 +1,6 @@
 package ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi;
 
+import ch.pxg.cloud.chpxgcloudauthorserver.util.CommonUtil;
 import ch.pxg.cloud.chpxgcloudauthorserver.util.JWTUtil;
 import sun.plugin2.message.Serializer;
 
@@ -28,7 +29,7 @@ public class UserInfoVi {
      */
     private String messageId;
     public UserInfoVi() {
-        this.messageId= UUID.randomUUID().toString();
+        this.messageId= CommonUtil.UUID();
     }
 
     public String getMessageId() {
