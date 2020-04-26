@@ -1,8 +1,6 @@
 package ch.pxg.cloud.chpxgcloudauthorserver.util;
-
 import java.io.Serializable;
 import java.util.UUID;
-
 /**
  * <p>
  * 2020/4/26  9:25
@@ -15,7 +13,6 @@ import java.util.UUID;
  * @description </p>
  */
 public class CommonUtil implements Serializable {
-
     /**
      * 生成uuid替换 -
      * @return
@@ -23,7 +20,6 @@ public class CommonUtil implements Serializable {
     public static String UUID(){
         return UUID.randomUUID().toString().replaceAll("-","");
     }
-
     /**
      * 生成标准的uuid
      * @return
