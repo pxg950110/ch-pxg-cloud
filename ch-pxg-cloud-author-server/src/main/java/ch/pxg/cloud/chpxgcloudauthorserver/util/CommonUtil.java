@@ -24,5 +24,16 @@ public class CommonUtil implements Serializable {
         return UUID.randomUUID().toString().replaceAll("-","");
     }
 
+    /**
+     * 生成标准的uuid
+     * @return
+     */
+    public static String uuid(){
+        return UUID.randomUUID().toString();
+    }
+
+
+
+
 
 }
