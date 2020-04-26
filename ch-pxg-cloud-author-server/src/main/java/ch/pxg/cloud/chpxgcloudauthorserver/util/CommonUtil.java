@@ -27,4 +27,5 @@ public class CommonUtil implements Serializable {
     public static String uuid(){
         return UUID.randomUUID().toString();
     }
+
 }
