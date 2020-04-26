@@ -27,7 +27,7 @@ public interface AuthorService {
      * @param response
      * @return
      */
-    CommonResult<UserRegistResponseVI> regist(UserRegistVI registVI,
+   CommonResult<UserRegistResponseVI> regist(UserRegistVI registVI,
                                               HttpServletRequest request, HttpServletResponse response);
 
 
