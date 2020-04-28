@@ -40,11 +40,6 @@ public class UserRegistVI {
     private String userPassword;
 
 
-
-
-
-
-
     public UserRegistVI() {
         this.messageId= CommonUtil.UUID();
     }
