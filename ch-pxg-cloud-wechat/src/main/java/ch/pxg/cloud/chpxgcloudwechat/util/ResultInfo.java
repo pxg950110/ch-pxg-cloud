@@ -3,6 +3,15 @@ package ch.pxg.cloud.chpxgcloudwechat.util;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * <p>
+ * @author pxg
+ * @emil pxg950110@163.com
+ * @Date 2020/3/12
+ * @Version 1.0.0
+ * @description </p>
+ *
+ */
 @ApiModel
 public class ResultInfo{
     @ApiModelProperty("返回状态 0成功 500失败 300警告")

@@ -1,34 +1,24 @@
 package ch.pxg.cloud.chpxgcloudwechat.controller;
 
 import ch.pxg.cloud.chpxgcloudwechat.model.BillInfo;
-import ch.pxg.cloud.chpxgcloudwechat.model.BillTypeInfo;
 import ch.pxg.cloud.chpxgcloudwechat.model.OpenIdModel;
 import ch.pxg.cloud.chpxgcloudwechat.server.WxService;
 import ch.pxg.cloud.chpxgcloudwechat.util.AppletUtil;
 import ch.pxg.cloud.chpxgcloudwechat.util.ResultInfo;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * <p>
- * 2020/2/28  11:28
- * Copyright (c) 2019. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
- * </p>
  * <p>
  * @author pxg
  * @emil pxg950110@163.com
@@ -60,8 +50,8 @@ public class WechatApi {
      */
     @GetMapping("/billinfo/type/list")
     @ApiOperation("获取账单类型")
-    public ResultInfo getBillTypeInfo(String openId) {
-        return wxService.getBillTypeList(openId);
+    public ResultInfo getBillTypeInfo(String openId, HttpServletRequest request, HttpServletResponse response) {
+        return wxService.getBillTypeList(openId,request,response);
     }
 //
 //    @PostMapping("/billinfo/type/add")
@@ -72,8 +62,8 @@ public class WechatApi {
 //
     @PostMapping("/billinfo/add")
     @ApiOperation("添加账单")
-    public ResultInfo addBillInfo(@RequestBody BillInfo billInfo) {
-        return wxService.addBillInfo(billInfo);
+    public ResultInfo addBillInfo(@RequestBody BillInfo billInfo, HttpServletRequest request, HttpServletResponse response) {
+        return wxService.addBillInfo(billInfo,request,response);
     }
 //
 //
@@ -85,7 +75,7 @@ public class WechatApi {
 
     @GetMapping("/openid")
     @ApiOperation("获取openid")
-    public ResultInfo getOpenIdByCode(String code) {
+    public ResultInfo getOpenIdByCode(String code, HttpServletRequest request, HttpServletResponse response) {
         OpenIdModel openIdModel = AppletUtil.getOpenIdByCode(code);
         if (openIdModel.getOpenId() == null || openIdModel.getOpenId().equals(""))
             return ResultInfo.error("获取openid失败");

@@ -1,7 +1,4 @@
 package com.pxg.clould.chpxgclouldutil;
-
-import io.swagger.annotations.ApiOperation;
-
 /**
  * <p>
  * 2020/4/15  16:13
@@ -18,7 +15,6 @@ import io.swagger.annotations.ApiOperation;
  * @Version 1.0.0
  * @description </p>
  * 通用返回类
- *
  */
 public class CommonResult<T> {
 
@@ -70,26 +66,26 @@ public class CommonResult<T> {
      * @param <T>
      * @return
      */
-    public  static <T> CommonResult<T> success(T data){
+    public static <T> CommonResult<T> success(T data) {
         return new CommonResult<T>(
-                ResultEumn.SUCCESS.getCode(),
-                ResultEumn.SUCCESS.getMessage()
-                ,data
+                HttpResultStatus.STATUS200.statusCode,
+                HttpResultStatus.STATUS200.statusDescription
+                , data
         );
     }
 
     /**
      * 成功返回
      * @param data
-     * @param message  提示消息
+     * @param message 提示消息
      * @param <T>
      * @return
      */
-    public  static <T> CommonResult<T> success(T data,String message){
+    public static <T> CommonResult<T> success(T data, String message) {
         return new CommonResult<T>(
-                ResultEumn.SUCCESS.getCode(),
+                HttpResultStatus.STATUS200.statusCode,
                 message
-                ,data
+                , data
         );
     }
 
@@ -98,25 +94,25 @@ public class CommonResult<T> {
      * @param <T>
      * @return
      */
-    public  static <T> CommonResult<T> error(){
+    public static <T> CommonResult<T> error() {
 
         return new CommonResult<T>(
-                ResultEumn.ERROR.getCode(),
-                ResultEumn.ERROR.getMessage(),
+                HttpResultStatus.STATUS500.statusCode,
+                HttpResultStatus.STATUS500.statusDescription,
                 null
         );
     }
 
     /**
      * 失败返回
-     * @param  message 提示消息
+     * @param message 提示消息
      * @param <T>
      * @return
      */
-    public  static <T> CommonResult<T> error(String message){
+    public static <T> CommonResult<T> error(String message) {
 
         return new CommonResult<T>(
-                ResultEumn.ERROR.getCode(),
+                HttpResultStatus.STATUS500.statusCode,
                 message,
                 null
         );
@@ -128,21 +124,22 @@ public class CommonResult<T> {
      * @param <T>
      * @return
      */
-    public  static <T> CommonResult<T>   validatefailed(){
+    public static <T> CommonResult<T> validatefailed() {
         return new CommonResult<T>(
-                ResultEumn.VALIDATE_FAILED.getCode(),
-                ResultEumn.VALIDATE_FAILED.getMessage(),
+                HttpResultStatus.STATUS300.statusCode,
+                HttpResultStatus.STATUS300.statusDescription,
                 null
         );
     }
+
     /**
      * 参数验证错误
      * @param <T>
      * @return
      */
-    public  static <T> CommonResult<T>   validatefailed(String message){
+    public static <T> CommonResult<T> validatefailed(String message) {
         return new CommonResult<T>(
-                ResultEumn.VALIDATE_FAILED.getCode(),
+                HttpResultStatus.STATUS300.statusCode,
                 message,
                 null
         );
@@ -152,14 +149,40 @@ public class CommonResult<T> {
      * 未登录返回结果
      */
     public static <T> CommonResult<T> unauthorized(T data) {
-        return new CommonResult<T>(ResultEumn.UNAUTHORIZED.getCode(), ResultEumn.UNAUTHORIZED.getMessage(), data);
+        return new CommonResult<T>(HttpResultStatus.STATUS401.statusCode,
+                HttpResultStatus.STATUS401.statusDescription,
+                data);
     }
 
     /**
      * 未授权返回结果
      */
     public static <T> CommonResult<T> forbidden(T data) {
-        return new CommonResult<T>(ResultEumn.FORBIDDEN.getCode(), ResultEumn.FORBIDDEN.getMessage(), data);
+        return new CommonResult<T>(HttpResultStatus.STATUS403.statusCode, HttpResultStatus.STATUS403.statusDescription, data);
+    }
+
+
+    /**
+     *通用返回方法
+     * @param data
+     * @param httpResultStatus
+     * @param <T>
+     * @return
+     */
+    public static <T> CommonResult<T> commomResult(T data,HttpResultStatus httpResultStatus){
+        return new CommonResult<T>(httpResultStatus.statusCode,httpResultStatus.statusDescription,data);
+    }
+
+    /**
+     * 通用返回方法
+     * @param data
+     * @param httpResultStatus
+     * @param message
+     * @param <T>
+     * @return
+     */
+    public static <T> CommonResult<T> commomResult(T data,HttpResultStatus httpResultStatus,String message){
+        return new CommonResult<T>(httpResultStatus.statusCode,message,data);
     }
 
 }

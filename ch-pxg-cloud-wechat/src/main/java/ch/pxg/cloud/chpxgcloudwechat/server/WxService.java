@@ -4,6 +4,9 @@ import ch.pxg.cloud.chpxgcloudwechat.model.BillInfo;
 import ch.pxg.cloud.chpxgcloudwechat.model.BillInfoVI;
 import ch.pxg.cloud.chpxgcloudwechat.util.ResultInfo;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 public interface WxService {
 
     /**
@@ -11,12 +14,12 @@ public interface WxService {
      * @param billInfo
      * @return
      */
-    public ResultInfo addBillInfo(BillInfo billInfo);
+    ResultInfo addBillInfo(BillInfo billInfo, HttpServletRequest request, HttpServletResponse response);
 
 
     /**
      * 获取所有类别
      * @return
      */
-    public ResultInfo getBillTypeList(String openId);
+    ResultInfo getBillTypeList(String openId, HttpServletRequest request, HttpServletResponse response);
 }

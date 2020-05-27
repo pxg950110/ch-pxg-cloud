@@ -11,18 +11,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * <p>
- * 2020/3/12  17:47
- * Copyright (c) 2019. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
- * </p>
  * <p>
  * @author pxg
  * @emil pxg950110@163.com
@@ -46,7 +40,7 @@ public class WxServiceImpl implements WxService {
      * @return
      */
     @Override
-    public ResultInfo addBillInfo(BillInfo billInfo) {
+    public ResultInfo addBillInfo(BillInfo billInfo, HttpServletRequest request, HttpServletResponse response) {
         log.info(billInfo.toString());
         return null;
     }
@@ -56,7 +50,7 @@ public class WxServiceImpl implements WxService {
      * @return
      */
     @Override
-    public ResultInfo getBillTypeList(String openId) {
+    public ResultInfo getBillTypeList(String openId, HttpServletRequest request, HttpServletResponse response) {
         try {
             //通过集合添加
             Collection<String> collection=new ArrayList<>();
@@ -67,6 +61,8 @@ public class WxServiceImpl implements WxService {
         }catch (Exception e){
             e.printStackTrace();
             log.error(e.getMessage());
+            //设置返回状态
+            response.setStatus(500);
             return ResultInfo.error(e.getMessage());
         }
     }

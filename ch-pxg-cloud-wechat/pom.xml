@@ -65,6 +65,13 @@
             <artifactId>httpclient</artifactId>
             <version>4.5.11</version>
         </dependency>
+
+<!--        加入util包-->
+        <dependency>
+            <groupId>com.pxg.clould</groupId>
+            <artifactId>ch-pxg-clould-util</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>

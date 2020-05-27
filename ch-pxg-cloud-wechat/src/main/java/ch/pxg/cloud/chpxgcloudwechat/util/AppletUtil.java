@@ -18,14 +18,6 @@ import java.io.InputStreamReader;
 
 /**
  * <p>
- * 2020/3/12  17:52
- * Copyright (c) 2019. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
- * </p>
- * <p>
  * @author pxg
  * @emil pxg950110@163.com
  * @Date 2020/3/12
@@ -38,7 +30,7 @@ public class AppletUtil {
     /**
      *
      * @param code
-     * @return
+     * @return  小程序官方接口获取每个人唯一的openId
      */
     public static OpenIdModel getOpenIdByCode(String code) {
         String url = "https://api.weixin.qq.com/sns/jscode2session?appid=" + WxProgramConfig.APPID + "&secret=" + WxProgramConfig.SECRET + "&js_code=" + code + "&grant_type=authorization_code";
@@ -60,7 +52,6 @@ public class AppletUtil {
             inputStream = httpEntity.getContent();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String line = "";
-
             while ((line = bufferedReader.readLine()) != null) {
                 //这里需要使用fastjson来提取一下内容
                 JSONObject jsonpObject = JSON.parseObject(line);

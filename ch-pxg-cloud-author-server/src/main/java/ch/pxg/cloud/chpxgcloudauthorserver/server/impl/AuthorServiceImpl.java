@@ -28,7 +28,7 @@ import java.io.Serializable;
 @Service
 public class AuthorServiceImpl implements AuthorService  , Serializable {
 
-    // v1.0版本aop 日志暂时不加入
+    // v1.0版本aop 日志暂时不加入 1.0.0版本日志未采用mq
     //日志处理
     private final Logger log = LoggerFactory.getLogger(AuthorServiceImpl.class);
 
@@ -43,7 +43,6 @@ public class AuthorServiceImpl implements AuthorService  , Serializable {
     public CommonResult<UserRegistResponseVI> regist(UserRegistVI registVI, HttpServletRequest request, HttpServletResponse response) {
         log.info(registVI.getMessageId());
         // mybatis  改为jpa的操作
-
         return null;
     }
 }
