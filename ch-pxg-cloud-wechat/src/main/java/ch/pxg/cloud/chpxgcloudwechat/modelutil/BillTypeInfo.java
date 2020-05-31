@@ -1,4 +1,4 @@
-package ch.pxg.cloud.chpxgcloudwechat.model;
+package ch.pxg.cloud.chpxgcloudwechat.modelutil;
 
 
 import javax.persistence.*;

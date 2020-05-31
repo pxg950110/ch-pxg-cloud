@@ -1,8 +1,9 @@
 package ch.pxg.cloud.chpxgcloudwechat.server;
 
-import ch.pxg.cloud.chpxgcloudwechat.model.BillInfo;
-import ch.pxg.cloud.chpxgcloudwechat.model.BillInfoVI;
+import ch.pxg.cloud.chpxgcloudwechat.modelutil.BillInfo;
+import ch.pxg.cloud.chpxgcloudwechat.modelutil.request.BillInfoVI;
 import ch.pxg.cloud.chpxgcloudwechat.util.ResultInfo;
+import com.pxg.clould.chpxgclouldutil.CommonResult;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,4 +23,6 @@ public interface WxService {
      * @return
      */
     ResultInfo getBillTypeList(String openId, HttpServletRequest request, HttpServletResponse response);
+
+    CommonResult getBillInfo(BillInfoVI billInfoVI, HttpServletRequest request, HttpServletResponse response);
 }

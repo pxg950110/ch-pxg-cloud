@@ -1,6 +1,6 @@
 package ch.pxg.cloud.chpxgcloudwechat.dao;
 
-import ch.pxg.cloud.chpxgcloudwechat.model.BillInfo;
+import ch.pxg.cloud.chpxgcloudwechat.modelutil.BillInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -11,4 +11,5 @@ import java.util.List;
 public interface BillInfoJPA extends JpaRepository<BillInfo,Integer> {
 
     List<BillInfo> findAllByUserIdAndStatus(String userId, long status);
+
 }

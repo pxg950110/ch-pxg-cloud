@@ -1,10 +1,12 @@
 package ch.pxg.cloud.chpxgcloudwechat.controller;
 
-import ch.pxg.cloud.chpxgcloudwechat.model.BillInfo;
-import ch.pxg.cloud.chpxgcloudwechat.model.OpenIdModel;
+import ch.pxg.cloud.chpxgcloudwechat.modelutil.BillInfo;
+import ch.pxg.cloud.chpxgcloudwechat.modelutil.request.BillInfoVI;
+import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.OpenIdModel;
 import ch.pxg.cloud.chpxgcloudwechat.server.WxService;
 import ch.pxg.cloud.chpxgcloudwechat.util.AppletUtil;
 import ch.pxg.cloud.chpxgcloudwechat.util.ResultInfo;
+import com.pxg.clould.chpxgclouldutil.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -35,16 +37,7 @@ public class WechatApi {
 
     @Autowired
     private WxService wxService;
-
-    @GetMapping("/test")
-    @ApiOperation("测试")
-    public Object test(HttpServletResponse response, HttpServletRequest request) {
-        System.out.println(request);
-        return "test";
-    }
-
     //账单相关的api接口
-//
     /**
      * 账单类型
      */
@@ -65,13 +58,13 @@ public class WechatApi {
     public ResultInfo addBillInfo(@RequestBody BillInfo billInfo, HttpServletRequest request, HttpServletResponse response) {
         return wxService.addBillInfo(billInfo,request,response);
     }
-//
-//
-//    @PostMapping("/billinfo/get")
-//    @ApiOperation("获取账单")
-//    public ResultInfo getBillInfo(@RequestBody BillInfoVI billInfoVI) {
-//        return wxService.getBillInfo(billInfoVI);
-//    }
+
+
+    @PostMapping("/billinfo/get")
+    @ApiOperation("获取账单")
+    public CommonResult getBillInfo(@RequestBody BillInfoVI billInfoVI, HttpServletRequest request, HttpServletResponse response) {
+        return wxService.getBillInfo(billInfoVI,request,response);
+    }
 
     @GetMapping("/openid")
     @ApiOperation("获取openid")

@@ -1,7 +1,7 @@
 package ch.pxg.cloud.chpxgcloudwechat.util;
 
 import ch.pxg.cloud.chpxgcloudwechat.config.WxProgramConfig;
-import ch.pxg.cloud.chpxgcloudwechat.model.OpenIdModel;
+import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.OpenIdModel;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;

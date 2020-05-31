@@ -1,4 +1,4 @@
-package ch.pxg.cloud.chpxgcloudwechat.model;
+package ch.pxg.cloud.chpxgcloudwechat.modelutil;
 import javax.persistence.*;
 import java.util.Date;
 @Entity
@@ -41,6 +41,9 @@ public class BillInfo {
   private String note;
   @Column(name = "bill_number")
   private double billNumber;
+
+  //账单 序号  v1.0版本采用日期+时间搓+uuid
+  private String billNo;
 
 
   public long getId() {
