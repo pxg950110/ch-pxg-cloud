@@ -10,7 +10,6 @@ spring:
       profile: dev
   profiles:
     active: dev
-
 server:
   port: 7005
   servlet:

@@ -1,6 +1,6 @@
 package ch.pxg.cloud.chpxgcloudwechat.server;
 
-import ch.pxg.cloud.chpxgcloudwechat.modelutil.BillInfo;
+import ch.pxg.cloud.chpxgcloudwechat.model.BillInfo;
 import ch.pxg.cloud.chpxgcloudwechat.modelutil.request.BillInfoVI;
 import ch.pxg.cloud.chpxgcloudwechat.util.ResultInfo;
 import com.pxg.clould.chpxgclouldutil.CommonResult;
@@ -18,6 +18,7 @@ public interface WxService {
     ResultInfo addBillInfo(BillInfo billInfo, HttpServletRequest request, HttpServletResponse response);
 
 
+    void test();
     /**
      * 获取所有类别
      * @return

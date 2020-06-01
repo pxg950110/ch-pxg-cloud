@@ -1,6 +1,6 @@
 package ch.pxg.cloud.chpxgcloudwechat.controller;
 
-import ch.pxg.cloud.chpxgcloudwechat.modelutil.BillInfo;
+import ch.pxg.cloud.chpxgcloudwechat.model.BillInfo;
 import ch.pxg.cloud.chpxgcloudwechat.modelutil.request.BillInfoVI;
 import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.OpenIdModel;
 import ch.pxg.cloud.chpxgcloudwechat.server.WxService;
@@ -73,6 +73,12 @@ public class WechatApi {
         if (openIdModel.getOpenId() == null || openIdModel.getOpenId().equals(""))
             return ResultInfo.error("获取openid失败");
         return ResultInfo.ok(openIdModel);
+    }
+
+    @ApiOperation("测试")
+    @GetMapping("/test")
+    public void test(){
+        wxService.test();
     }
 
 }

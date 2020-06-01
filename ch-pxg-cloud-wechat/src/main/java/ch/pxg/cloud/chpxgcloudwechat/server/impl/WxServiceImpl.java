@@ -1,11 +1,14 @@
 package ch.pxg.cloud.chpxgcloudwechat.server.impl;
 
-import ch.pxg.cloud.chpxgcloudwechat.dao.BillInfoJPA;
-import ch.pxg.cloud.chpxgcloudwechat.dao.BillTypeInfoJPA;
-import ch.pxg.cloud.chpxgcloudwechat.modelutil.BillInfo;
+import ch.pxg.cloud.chpxgcloudwechat.mapper.BillInfoMapper;
+import ch.pxg.cloud.chpxgcloudwechat.model.BillInfo;
 import ch.pxg.cloud.chpxgcloudwechat.modelutil.request.BillInfoVI;
+import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.BillRequestModel;
+import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.BillTypeAmount;
+import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.DateEnum;
 import ch.pxg.cloud.chpxgcloudwechat.server.WxService;
 import ch.pxg.cloud.chpxgcloudwechat.util.ResultInfo;
+import com.alibaba.fastjson.JSON;
 import com.pxg.clould.chpxgclouldutil.CommonResult;
 import com.pxg.clould.chpxgclouldutil.HttpResultStatus;
 import org.slf4j.Logger;
@@ -13,11 +16,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import sun.util.calendar.LocalGregorianCalendar;
+import sun.util.logging.resources.logging;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * <p>
@@ -31,11 +35,10 @@ import java.util.Collection;
 public class WxServiceImpl implements WxService {
     private final Logger log = LoggerFactory.getLogger(WxServiceImpl.class);
 
-    @Autowired
-    private BillInfoJPA billInfoJPA;
 
     @Autowired
-    private BillTypeInfoJPA billTypeInfoJPA;
+    BillInfoMapper billInfoMapper;
+
 
     /**
      * 记一笔账单
@@ -54,20 +57,7 @@ public class WxServiceImpl implements WxService {
      */
     @Override
     public ResultInfo getBillTypeList(String openId, HttpServletRequest request, HttpServletResponse response) {
-        try {
-            //通过集合添加
-            Collection<String> collection=new ArrayList<>();
-             // userId in(0,openId)
-            collection.add("0");
-            collection.add(openId);
-            return ResultInfo.ok(billTypeInfoJPA.findAllByUserIdIn(collection));
-        }catch (Exception e){
-            e.printStackTrace();
-            log.error(e.getMessage());
-            //设置返回状态
-            response.setStatus(500);
-            return ResultInfo.error(e.getMessage());
-        }
+        return null;
     }
 
 
@@ -79,20 +69,47 @@ public class WxServiceImpl implements WxService {
      * @return
      */
     @Override
-    public  CommonResult getBillInfo(BillInfoVI billInfoVI, HttpServletRequest request, HttpServletResponse response) {
+    public CommonResult getBillInfo(BillInfoVI billInfoVI, HttpServletRequest request, HttpServletResponse response) {
         log.info(billInfoVI.toString());
         // 设置服务端返回状态
         response.setStatus(HttpResultStatus.STATUS500.getStatusCode());
         //  openId不为空
-        if (StringUtils.isEmpty(billInfoVI.getUserId())){
+        if (StringUtils.isEmpty(billInfoVI.getUserId())) {
             response.setStatus(HttpResultStatus.STATUS203.getStatusCode());
             //返回openId不为空
-            CommonResult.commomResult(null,HttpResultStatus.STATUS203,"userId不允许为空");
+            CommonResult.commomResult(null, HttpResultStatus.STATUS203, "userId不允许为空");
         }
         //
         return null;
     }
 
+
+    @Override
+    public void test() {
+        BillRequestModel billRequestModel = new BillRequestModel();
+        billRequestModel.setBillYear("2020");
+        billRequestModel.setBillMonth("2");
+        billRequestModel.setBillDay("23");
+        billRequestModel.setDateEnum(DateEnum.MONTH);
+        try {
+            List<BillTypeAmount> billTypeAmounts = billInfoMapper.selectByBillRequestModel(billRequestModel);
+            log.info(billTypeAmounts.toString());
+            if (billRequestModel.getDateEnum() == DateEnum.DAY || billRequestModel.getDateEnum() == DateEnum.MONTH) {
+                for (BillTypeAmount billTypeAmount : billTypeAmounts) {
+                    BillInfo billInfo = new BillInfo();
+                    billInfo.setBillYear(billRequestModel.getBillYear());
+                    billInfo.setBillMonth(billRequestModel.getBillMonth());
+                    billInfo.setBillDay(billTypeAmount.getBillDay());
+                    billInfo.setUserId("ogYK94ij6CIveNOze2XEMDcatHrM");
+                    billInfo.setStatus(0);
+                    List<BillInfo> billInfos= billInfoMapper.selectByBillInfo(billInfo);
+                    log.info(billInfos.toString());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 
