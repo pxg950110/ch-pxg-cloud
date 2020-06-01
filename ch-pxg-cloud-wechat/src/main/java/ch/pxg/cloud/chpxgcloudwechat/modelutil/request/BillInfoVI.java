@@ -1,7 +1,11 @@
 package ch.pxg.cloud.chpxgcloudwechat.modelutil.request;
 
+import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.DateEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
+
+import java.util.UUID;
 
 /**
  * @author pxg
@@ -23,7 +27,17 @@ public class BillInfoVI {
     String billMonth;
     @ApiModelProperty("日")
     String billDay;
+    @ApiModelProperty("账单类型")
+    String billType;
+    @ApiModelProperty("日期类型选择")
+    DateEnum dateEnum;
+    //是否需要子菜单
+    @ApiModelProperty("是否需要具体账单")
+    private boolean hasBillInfo;
 
+    public BillInfoVI() {
+        this.messageId= UUID.randomUUID().toString();
+    }
 
     public String getBillYear() {
         return billYear;
@@ -55,5 +69,44 @@ public class BillInfoVI {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+
+
+    public String getBillType() {
+        return billType;
+    }
+
+    public void setBillType(String billType) {
+        this.billType = billType;
+    }
+
+    public DateEnum getDateEnum() {
+        return dateEnum;
+    }
+
+    public void setDateEnum(DateEnum dateEnum) {
+        this.dateEnum = dateEnum;
+    }
+
+    public boolean isHasBillInfo() {
+        return hasBillInfo;
+    }
+
+    public void setHasBillInfo(boolean hasBillInfo) {
+        this.hasBillInfo = hasBillInfo;
+    }
+
+    @Override
+    public String toString() {
+        return "BillInfoVI{" +
+                "messageId='" + messageId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", billYear='" + billYear + '\'' +
+                ", billMonth='" + billMonth + '\'' +
+                ", billDay='" + billDay + '\'' +
+                ", billType='" + billType + '\'' +
+                ", dateEnum=" + dateEnum +
+                '}';
     }
 }

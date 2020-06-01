@@ -2,20 +2,20 @@ package ch.pxg.cloud.chpxgcloudwechat.controller;
 
 import ch.pxg.cloud.chpxgcloudwechat.model.BillInfo;
 import ch.pxg.cloud.chpxgcloudwechat.modelutil.request.BillInfoVI;
+import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.BillModel;
 import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.OpenIdModel;
 import ch.pxg.cloud.chpxgcloudwechat.server.WxService;
 import ch.pxg.cloud.chpxgcloudwechat.util.AppletUtil;
 import ch.pxg.cloud.chpxgcloudwechat.util.ResultInfo;
 import com.pxg.clould.chpxgclouldutil.CommonResult;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -81,4 +81,10 @@ public class WechatApi {
         wxService.test();
     }
 
+
+    @ApiOperation("获取账单信息")
+    @PostMapping("/billinfo/list")
+    public CommonResult<BillModel> getBillModelInfo(@RequestBody BillInfoVI billInfoVI, HttpServletRequest request, HttpServletResponse response) {
+        return wxService.getBillModelInfo(billInfoVI, request, response);
+    }
 }

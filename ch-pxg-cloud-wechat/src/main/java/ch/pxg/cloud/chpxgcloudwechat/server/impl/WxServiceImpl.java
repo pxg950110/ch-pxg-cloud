@@ -3,9 +3,7 @@ package ch.pxg.cloud.chpxgcloudwechat.server.impl;
 import ch.pxg.cloud.chpxgcloudwechat.mapper.BillInfoMapper;
 import ch.pxg.cloud.chpxgcloudwechat.model.BillInfo;
 import ch.pxg.cloud.chpxgcloudwechat.modelutil.request.BillInfoVI;
-import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.BillRequestModel;
-import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.BillTypeAmount;
-import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.DateEnum;
+import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.*;
 import ch.pxg.cloud.chpxgcloudwechat.server.WxService;
 import ch.pxg.cloud.chpxgcloudwechat.util.ResultInfo;
 import com.alibaba.fastjson.JSON;
@@ -21,6 +19,7 @@ import sun.util.logging.resources.logging;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -102,13 +101,69 @@ public class WxServiceImpl implements WxService {
                     billInfo.setBillDay(billTypeAmount.getBillDay());
                     billInfo.setUserId("ogYK94ij6CIveNOze2XEMDcatHrM");
                     billInfo.setStatus(0);
-                    List<BillInfo> billInfos= billInfoMapper.selectByBillInfo(billInfo);
+                    List<BillInfo> billInfos = billInfoMapper.selectByBillInfo(billInfo);
                     log.info(billInfos.toString());
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    @Override
+    public CommonResult<BillModel> getBillModelInfo(BillInfoVI billInfoVI, HttpServletRequest request, HttpServletResponse response) {
+        log.info(billInfoVI.toString());
+        // 设置 requestModel
+        BillRequestModel requestModel = new BillRequestModel(billInfoVI.getBillYear()
+                , billInfoVI.getBillMonth(), billInfoVI.getBillDay(), billInfoVI.getDateEnum(), billInfoVI.getUserId());
+        boolean hasBillInfo = billInfoVI.isHasBillInfo();
+        //日期
+        // 某一天的数据必须都获取
+        if (billInfoVI.getDateEnum() == DateEnum.DAY) {
+            // 获取每天的数据
+            BillRequestModel dayModel = requestModel;
+            List<BillTypeAmount> dayBillTypeAmount = billInfoMapper.selectByBillRequestModel(dayModel);
+            //
+            DayBillModel dayBillModel = getDayBillModel(dayModel,hasBillInfo);
+            return CommonResult.commomResult(dayBillModel, HttpResultStatus.STATUS200);
+        } else if (billInfoVI.getDateEnum() == DateEnum.MONTH) {
+            // 一个月的数据
+            BillRequestModel monthRequestModel = requestModel;
+            List<BillTypeAmount> monthBillTypeAmount = billInfoMapper.selectByBillRequestModel(monthRequestModel);
+            MonthBillModel monthBillModel = new MonthBillModel();
+            monthBillModel.setAmountList(monthBillTypeAmount);
+            log.info(monthBillTypeAmount.toString());
+            // 查询 一个月下的所有记账单
+            List<String> dayList = billInfoMapper.selectchildDateByBillRequestModel(monthRequestModel);
+            log.info(dayList.toString());
+            List<BillModel> dayBillModels = new ArrayList<>();
+            for (String day : dayList) {
+                DayBillModel dayBillModel = getDayBillModel(new BillRequestModel(
+                        monthRequestModel.getBillYear(), monthRequestModel.getBillMonth(), day,
+                        DateEnum.DAY, monthRequestModel.getUserId()
+                ),hasBillInfo);
+                dayBillModels.add(dayBillModel);
+            }
+            monthBillModel.setChirdernList(dayBillModels);
+            return CommonResult.commomResult(monthBillModel, HttpResultStatus.STATUS200);
+        } else if (billInfoVI.getDateEnum() == DateEnum.YEAR) {
+            // 年报 暂时不处理
+            return null;
+        } else {
+            return CommonResult.commomResult(null, HttpResultStatus.STATUS304);
+        }
+    }
+    public DayBillModel getDayBillModel(BillRequestModel dayModel, boolean hasBillInfo) {
+        DayBillModel dayBillModel = new DayBillModel();
+        dayBillModel.setAmountList(billInfoMapper.selectByBillRequestModel(dayModel));
+        // 获取日报下的所有数据
+        BillInfo billInfo = new BillInfo(dayModel.getBillYear(),dayModel.getBillMonth(),dayModel.getBillDay()
+        ,0,dayModel.getUserId());
+        if (hasBillInfo) {
+            dayBillModel.setBillInfoList(billInfoMapper.selectByBillInfo(billInfo));
+        }
+        return dayBillModel;
     }
 }
 
