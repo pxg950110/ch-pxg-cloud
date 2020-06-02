@@ -4,9 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
+        <module>ch-pxg-cloud-config</module>
+        <module>ch-pxg-cloud-common</module>
+        <module>ch-pxg-cloud-hadoop-common</module>
+        <module>ch-pxg-cloud-produce</module>
+        <module>ch-pxg-cloud-qaserver</module>
+        <module>ch-pxg-cloud-sidecar-python</module>
         <module>spring-eureka</module>
         <module>ch-pxg-cloud-swaggerui</module>
-        <module>ch-pxg-cloud-produce</module>
         <module>ch-pxg-cloud-wechat</module>
         <module>ch-pxg-cloud-rabbitmq</module>
         <module>ch-pxg-cloud-gateway</module>
