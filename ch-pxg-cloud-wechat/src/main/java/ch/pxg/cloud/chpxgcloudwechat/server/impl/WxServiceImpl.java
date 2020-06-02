@@ -113,6 +113,10 @@ public class WxServiceImpl implements WxService {
 
     @Override
     public CommonResult<BillModel> getBillModelInfo(BillInfoVI billInfoVI, HttpServletRequest request, HttpServletResponse response) {
+        // 验证查询是否含有openId
+        if (StringUtils.isEmpty(billInfoVI.getUserId())){
+            return CommonResult.commomResult(null,HttpResultStatus.STATUS405,"openId必须要有");
+        }
         log.info(billInfoVI.toString());
         // 设置 requestModel
         BillRequestModel requestModel = new BillRequestModel(billInfoVI.getBillYear()
