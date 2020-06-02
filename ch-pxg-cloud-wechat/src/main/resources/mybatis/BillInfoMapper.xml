@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ch.pxg.cloud.chpxgcloudwechat.mapper.BillInfoMapper">
+    <resultMap id="BaseResultMap" type="ch.pxg.cloud.chpxgcloudwechat.model.BillInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="bill_type" jdbcType="VARCHAR" property="billType"/>
+        <result column="bill_date" jdbcType="VARCHAR" property="billDate"/>
+        <result column="bill_year" jdbcType="VARCHAR" property="billYear"/>
+        <result column="bill_month" jdbcType="VARCHAR" property="billMonth"/>
+        <result column="bill_day" jdbcType="VARCHAR" property="billDay"/>
+        <result column="bill_type_id" jdbcType="INTEGER" property="billTypeId"/>
+        <result column="bill_type_code" jdbcType="VARCHAR" property="billTypeCode"/>
+        <result column="bill_type_name" jdbcType="VARCHAR" property="billTypeName"/>
+        <result column="bill_type_imageurl" jdbcType="VARCHAR" property="billTypeImageurl"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="status" jdbcType="SMALLINT" property="status"/>
+        <result column="extend" jdbcType="VARCHAR" property="extend"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="note" jdbcType="VARCHAR" property="note"/>
+        <result column="bill_number" jdbcType="DECIMAL" property="billNumber"/>
+        <result column="bill_no" jdbcType="VARCHAR" property="billNo"/>
+    </resultMap>
+    <resultMap id="BillTypeAmountResultMap" type="ch.pxg.cloud.chpxgcloudwechat.modelutil.util.BillTypeAmount">
+        <result column="bill_year" jdbcType="VARCHAR" property="billYear"/>
+        <result column="bill_month" jdbcType="VARCHAR" property="billMonth"/>
+        <result column="bill_day" jdbcType="VARCHAR" property="billDay"/>
+        <result column="bill_type" jdbcType="VARCHAR" property="billType"/>
+        <result column="total_amount" jdbcType="DECIMAL" property="sumAmount"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, bill_type, bill_date, bill_year, bill_month, bill_day, bill_type_id, bill_type_code,
+    bill_type_name, bill_type_imageurl, create_time, `status`, extend, user_id, update_time, 
+    note, bill_number, bill_no
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wxapp.bill_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <!--  数据统计  年   月  日   -->
+    <select id="selectByBillRequestModel" parameterType="ch.pxg.cloud.chpxgcloudwechat.modelutil.util.BillRequestModel"
+            resultMap="BillTypeAmountResultMap">
+        <choose>
+            <!--每年的数据  返回一年内每个月的账单 按照月份倒序排列-->
+            <when test="dateEnum==@ch.pxg.cloud.chpxgcloudwechat.modelutil.util.DateEnum@YEAR">
+                select bill_year,bill_type,sum(bill_number) as total_amount
+                from wxapp.bill_info
+                where bill_year=#{billYear} and status='0'   and user_id=#{userId}
+                group by bill_year, bill_type order by bill_year desc ;
+            </when>
+
+            <when test="dateEnum==@ch.pxg.cloud.chpxgcloudwechat.modelutil.util.DateEnum@MONTH">
+                select bill_month,bill_year,bill_type,sum(bill_number) as total_amount from wxapp.bill_info
+                where bill_month=#{billMonth} and bill_year=#{billYear} and status='0' and user_id=#{userId}
+                group by bill_month,bill_year, bill_type order by bill_month desc ;
+            </when>
+            <!--某一天的数据统计-->
+            <otherwise>
+                select bill_day, bill_month,bill_year,bill_type,sum(bill_number) as total_amount from wxapp.bill_info
+                where bill_month=#{billMonth} and bill_year=#{billYear} and bill_day=#{billDay} and status='0' and user_id=#{userId}
+                group by bill_day, bill_month,bill_year,bill_type;
+            </otherwise>
+        </choose>
+    </select>
+    <select id="selectByBillInfo"
+            parameterType="ch.pxg.cloud.chpxgcloudwechat.model.BillInfo"
+            resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from wxapp.bill_info
+         <where>
+            <trim prefixOverrides="and">
+             <if test="billType != null">
+                and  bill_type = #{billType,jdbcType=VARCHAR}
+             </if>
+             <if test="billDate != null">
+               and   bill_date = #{billDate,jdbcType=VARCHAR}
+             </if>
+             <if test="billYear != null">
+                 and  bill_year = #{billYear,jdbcType=VARCHAR}
+             </if>
+             <if test="billMonth != null">
+                 and  bill_month = #{billMonth,jdbcType=VARCHAR}
+             </if>
+             <if test="billDay != null">
+                and  bill_day = #{billDay,jdbcType=VARCHAR}
+             </if>
+             <if test="billTypeId != null">
+               and    bill_type_id = #{billTypeId,jdbcType=INTEGER}
+             </if>
+             <if test="billTypeCode != null">
+                 bill_type_code = #{billTypeCode,jdbcType=VARCHAR},
+             </if>
+             <if test="billTypeName != null">
+               and   bill_type_name = #{billTypeName,jdbcType=VARCHAR}
+             </if>
+             <if test="createTime != null">
+                 create_time = #{createTime,jdbcType=TIMESTAMP},
+             </if>
+             <if test="status != null">
+                 and `status` = #{status,jdbcType=SMALLINT}
+             </if>
+             <if test="userId != null">
+               and    user_id = #{userId,jdbcType=VARCHAR}
+             </if>
+            </trim>
+         </where>
+    </select>
+    <select id="selectchildDateByBillRequestModel"
+            parameterType="ch.pxg.cloud.chpxgcloudwechat.modelutil.util.BillRequestModel"
+            resultType="java.lang.String">
+        <choose>
+            <!--每年的数据  返回一年内每个月的账单 按照月份倒序排列-->
+            <when test="dateEnum==@ch.pxg.cloud.chpxgcloudwechat.modelutil.util.DateEnum@YEAR">
+                select  distinct  bill_month
+                from wxapp.bill_info
+                where bill_year=#{billYear} and status='0'   and user_id=#{userId}
+                order by bill_month desc ;
+            </when>
+            <when test="dateEnum==@ch.pxg.cloud.chpxgcloudwechat.modelutil.util.DateEnum@MONTH">
+                select  distinct bill_day
+                from wxapp.bill_info
+                where bill_month=#{billMonth} and bill_year=#{billYear} and status='0' and user_id=#{userId}
+                 order by bill_day desc ;
+            </when>
+            <!--某一天的数据统计-->
+            <otherwise>
+                select bill_day from wxapp.bill_info
+                where bill_month=#{billMonth} and bill_year=#{billYear} and bill_day=#{billDay} and status='0' and user_id=#{userId};
+            </otherwise>
+        </choose>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from  wxapp.bill_info
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudwechat.model.BillInfo"
+            useGeneratedKeys="true">
+        insert into wxapp.bill_info (bill_type, bill_date, bill_year,
+                                     bill_month, bill_day, bill_type_id,
+                                     bill_type_code, bill_type_name, bill_type_imageurl,
+                                     create_time, `status`, extend,
+                                     user_id, update_time, note,
+                                     bill_number, bill_no)
+        values (#{billType,jdbcType=VARCHAR}, #{billDate,jdbcType=VARCHAR}, #{billYear,jdbcType=VARCHAR},
+                #{billMonth,jdbcType=VARCHAR}, #{billDay,jdbcType=VARCHAR}, #{billTypeId,jdbcType=INTEGER},
+                #{billTypeCode,jdbcType=VARCHAR}, #{billTypeName,jdbcType=VARCHAR},
+                #{billTypeImageurl,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=SMALLINT}, #{extend,jdbcType=VARCHAR},
+                #{userId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR},
+                #{billNumber,jdbcType=DECIMAL}, #{billNo,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="ch.pxg.cloud.chpxgcloudwechat.model.BillInfo" useGeneratedKeys="true">
+        insert into wxapp.bill_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="billType != null">
+                bill_type,
+            </if>
+            <if test="billDate != null">
+                bill_date,
+            </if>
+            <if test="billYear != null">
+                bill_year,
+            </if>
+            <if test="billMonth != null">
+                bill_month,
+            </if>
+            <if test="billDay != null">
+                bill_day,
+            </if>
+            <if test="billTypeId != null">
+                bill_type_id,
+            </if>
+            <if test="billTypeCode != null">
+                bill_type_code,
+            </if>
+            <if test="billTypeName != null">
+                bill_type_name,
+            </if>
+            <if test="billTypeImageurl != null">
+                bill_type_imageurl,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="extend != null">
+                extend,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="note != null">
+                note,
+            </if>
+            <if test="billNumber != null">
+                bill_number,
+            </if>
+            <if test="billNo != null">
+                bill_no,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="billType != null">
+                #{billType,jdbcType=VARCHAR},
+            </if>
+            <if test="billDate != null">
+                #{billDate,jdbcType=VARCHAR},
+            </if>
+            <if test="billYear != null">
+                #{billYear,jdbcType=VARCHAR},
+            </if>
+            <if test="billMonth != null">
+                #{billMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="billDay != null">
+                #{billDay,jdbcType=VARCHAR},
+            </if>
+            <if test="billTypeId != null">
+                #{billTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="billTypeCode != null">
+                #{billTypeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="billTypeName != null">
+                #{billTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="billTypeImageurl != null">
+                #{billTypeImageurl,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="extend != null">
+                #{extend,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="note != null">
+                #{note,jdbcType=VARCHAR},
+            </if>
+            <if test="billNumber != null">
+                #{billNumber,jdbcType=DECIMAL},
+            </if>
+            <if test="billNo != null">
+                #{billNo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="ch.pxg.cloud.chpxgcloudwechat.model.BillInfo">
+        update wxapp.bill_info
+        <set>
+            <if test="billType != null">
+                bill_type = #{billType,jdbcType=VARCHAR},
+            </if>
+            <if test="billDate != null">
+                bill_date = #{billDate,jdbcType=VARCHAR},
+            </if>
+            <if test="billYear != null">
+                bill_year = #{billYear,jdbcType=VARCHAR},
+            </if>
+            <if test="billMonth != null">
+                bill_month = #{billMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="billDay != null">
+                bill_day = #{billDay,jdbcType=VARCHAR},
+            </if>
+            <if test="billTypeId != null">
+                bill_type_id = #{billTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="billTypeCode != null">
+                bill_type_code = #{billTypeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="billTypeName != null">
+                bill_type_name = #{billTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="billTypeImageurl != null">
+                bill_type_imageurl = #{billTypeImageurl,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="extend != null">
+                extend = #{extend,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="note != null">
+                note = #{note,jdbcType=VARCHAR},
+            </if>
+            <if test="billNumber != null">
+                bill_number = #{billNumber,jdbcType=DECIMAL},
+            </if>
+            <if test="billNo != null">
+                bill_no = #{billNo,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="ch.pxg.cloud.chpxgcloudwechat.model.BillInfo">
+        update wxapp.bill_info
+        set bill_type          = #{billType,jdbcType=VARCHAR},
+            bill_date          = #{billDate,jdbcType=VARCHAR},
+            bill_year          = #{billYear,jdbcType=VARCHAR},
+            bill_month         = #{billMonth,jdbcType=VARCHAR},
+            bill_day           = #{billDay,jdbcType=VARCHAR},
+            bill_type_id       = #{billTypeId,jdbcType=INTEGER},
+            bill_type_code     = #{billTypeCode,jdbcType=VARCHAR},
+            bill_type_name     = #{billTypeName,jdbcType=VARCHAR},
+            bill_type_imageurl = #{billTypeImageurl,jdbcType=VARCHAR},
+            create_time        = #{createTime,jdbcType=TIMESTAMP},
+            ` status ` = #{status,jdbcType=SMALLINT},
+            extend = #{extend,jdbcType=VARCHAR},
+            user_id = #{userId,jdbcType=VARCHAR},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            note = #{note,jdbcType=VARCHAR},
+            bill_number = #{billNumber,jdbcType=DECIMAL},
+            bill_no = #{billNo,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

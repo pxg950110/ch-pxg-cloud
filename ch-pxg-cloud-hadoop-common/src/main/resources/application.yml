@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: hadoop-common-server
+server:
+  port: 7015
+  servlet:
+    context-path: /hadoop-common
+hadoop:
+  name-node: hdfs://192.168.174.128:8040
+  namespace: /nias
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:5060/eureka/eureka
