@@ -5,15 +5,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>ch-pxg-cloud-config</module>
-        <module>ch-pxg-cloud-produce</module>
         <module>spring-eureka</module>
-        <module>ch-pxg-cloud-swaggerui</module>
-        <module>ch-pxg-cloud-wechat</module>
-        <module>ch-pxg-cloud-rabbitmq</module>
         <module>ch-pxg-cloud-gateway</module>
-        <module>ch-pxg-cloud-logutil</module>
-        <module>ch-pxg-cloud-sysadmin</module>
-        <module>ch-pxg-cloud-author-server</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
