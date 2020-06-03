@@ -4,6 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
+        <module>ch-pxg-clould-util</module>
         <module>ch-pxg-cloud-config</module>
         <module>spring-eureka</module>
         <module>ch-pxg-cloud-gateway</module>
