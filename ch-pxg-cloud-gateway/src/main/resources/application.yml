@@ -57,9 +57,10 @@ spring:
             - Path=/hadoop-common/**
 server:
   port: 5070
+  address:  0.0.0.0
   servlet:
     context-path: /gateway
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:5060/eureka/eureka
+      defaultZone: http://192.168.174.131:5060/eureka/eureka

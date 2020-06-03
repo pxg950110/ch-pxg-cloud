@@ -23,10 +23,11 @@ spring:
       password: 123456
 server:
   port: 5080
+  address: 0.0.0.0
 #  servlet:
 #    context-path: /config
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:5060/eureka/eureka
+      defaultZone: http://192.168.174.131:5060/eureka/eureka
     
