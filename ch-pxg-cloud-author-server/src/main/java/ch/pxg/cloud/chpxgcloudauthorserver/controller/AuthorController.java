@@ -5,7 +5,7 @@ import ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi.UserRegistVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi.UserInfoVi;
 import ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi.UserRegistResponseVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.server.AuthorService;
-import com.pxg.clould.chpxgclouldutil.CommonResult;
+import ch.pxg.cloud.chpxgcloudauthorserver.util.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

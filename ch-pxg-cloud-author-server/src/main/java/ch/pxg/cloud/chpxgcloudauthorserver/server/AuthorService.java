@@ -2,7 +2,7 @@ package ch.pxg.cloud.chpxgcloudauthorserver.server;
 
 import ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi.UserRegistVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi.UserRegistResponseVI;
-import com.pxg.clould.chpxgclouldutil.CommonResult;
+import ch.pxg.cloud.chpxgcloudauthorserver.util.CommonResult;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
