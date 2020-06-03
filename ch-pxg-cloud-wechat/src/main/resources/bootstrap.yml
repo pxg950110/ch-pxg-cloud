@@ -4,7 +4,7 @@ spring:
     name: wechat-server
   cloud:
     config:
-      uri: http://localhost:5080
+      uri: http://192.168.174.131:5080
       fail-fast: true
       label: master
       profile: dev
@@ -18,5 +18,5 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:5060/eureka/eureka
+      defaultZone: http://192.168.174.131:5060/eureka/eureka
 
