@@ -89,19 +89,7 @@
         </dependency>
 
 
-        <!--        加入util包-->
-        <dependency>
-            <groupId>com.pxg.clould</groupId>
-            <artifactId>ch-pxg-clould-util</artifactId>
-            <version>1.0.0</version>
-        </dependency>
 
-        <!--        &lt;!&ndash;自动生成&ndash;&gt;-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.mybatis.generator</groupId>-->
-        <!--            <artifactId>mybatis-generator-core</artifactId>-->
-        <!--            <version>1.3.7</version>-->
-        <!--        </dependency>-->
 
     </dependencies>
 

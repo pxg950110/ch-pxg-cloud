@@ -4,7 +4,6 @@ import ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi.UserRegistVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi.UserRegistResponseVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.server.AuthorService;
 import com.pxg.clould.chpxgclouldutil.CommonResult;
-import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

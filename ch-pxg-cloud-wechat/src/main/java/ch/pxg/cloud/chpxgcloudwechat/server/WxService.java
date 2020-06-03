@@ -4,7 +4,7 @@ import ch.pxg.cloud.chpxgcloudwechat.model.BillInfo;
 import ch.pxg.cloud.chpxgcloudwechat.modelutil.request.BillInfoVI;
 import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.BillModel;
 import ch.pxg.cloud.chpxgcloudwechat.util.ResultInfo;
-import com.pxg.clould.chpxgclouldutil.CommonResult;
+import ch.pxg.cloud.chpxgcloudwechat.util.CommonResult;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

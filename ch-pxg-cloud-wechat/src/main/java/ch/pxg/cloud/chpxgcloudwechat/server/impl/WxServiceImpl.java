@@ -6,16 +6,13 @@ import ch.pxg.cloud.chpxgcloudwechat.modelutil.request.BillInfoVI;
 import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.*;
 import ch.pxg.cloud.chpxgcloudwechat.server.WxService;
 import ch.pxg.cloud.chpxgcloudwechat.util.ResultInfo;
-import com.alibaba.fastjson.JSON;
-import com.pxg.clould.chpxgclouldutil.CommonResult;
-import com.pxg.clould.chpxgclouldutil.HttpResultStatus;
+import ch.pxg.cloud.chpxgcloudwechat.util.CommonResult;
+import ch.pxg.cloud.chpxgcloudwechat.util.HttpResultStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import sun.util.calendar.LocalGregorianCalendar;
-import sun.util.logging.resources.logging;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

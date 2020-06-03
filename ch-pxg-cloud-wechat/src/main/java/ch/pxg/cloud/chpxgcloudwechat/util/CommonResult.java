@@ -1,4 +1,4 @@
-package com.pxg.clould.chpxgclouldutil;
+package ch.pxg.cloud.chpxgcloudwechat.util;
 /**
  * <p>
  * 2020/4/15  16:13
