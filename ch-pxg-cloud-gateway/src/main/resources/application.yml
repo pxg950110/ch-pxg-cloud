@@ -3,6 +3,8 @@ spring:
     name: gateway-server
   cloud:
     gateway:
+      x-forwarded:
+        enabled: false
       discovery:
         locator:
           lower-case-service-id: true
@@ -16,8 +18,7 @@ spring:
           predicates:
             - Path=/product/**
         - id: wechat-server
-          uri: http://192.168.174.131:7005
-#          uri:  lb://wechat-server
+          uri:  lb://wechat-server
           predicates:
             - Path=/wechat/**
         - id: sysadmin-server
