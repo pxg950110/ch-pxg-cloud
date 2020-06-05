@@ -25,9 +25,7 @@ public interface BillInfoMapper {
      * @param record
      * @return
      */
-    List<BillInfo> selectByBillInfo(BillInfo record,
-                                    @Param("startNumber") long startNumber ,
-                                    @Param("pageSize") long pageSize);
+    List<BillInfo> selectByBillInfo(BillInfo record);
 
     //billDateType year month day  年  月  日
     List<BillTypeAmount>  selectByBillRequestModel(BillRequestModel requestModel);

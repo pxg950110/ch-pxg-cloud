@@ -137,7 +137,7 @@ public class WxServiceImpl implements WxService {
         BillInfo billInfo = new BillInfo(dayModel.getBillYear(),dayModel.getBillMonth(),dayModel.getBillDay()
         ,0,dayModel.getUserId());
         if (hasBillInfo) {
-            dayBillModel.setBillInfoList(billInfoMapper.selectByBillInfo(billInfo,startNumer,pageSize));
+            dayBillModel.setBillInfoList(billInfoMapper.selectByBillInfo(billInfo));
         }
         return dayBillModel;
     }
