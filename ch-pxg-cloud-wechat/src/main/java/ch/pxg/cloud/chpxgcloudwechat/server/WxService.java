@@ -19,7 +19,7 @@ public interface WxService {
     ResultInfo addBillInfo(BillInfo billInfo, HttpServletRequest request, HttpServletResponse response);
 
 
-    void test();
+
     /**
      * 获取所有类别
      * @return

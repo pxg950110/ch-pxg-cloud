@@ -76,8 +76,8 @@ public class WechatApi {
 
     @ApiOperation("测试")
     @GetMapping("/test")
-    public void test(){
-        wxService.test();
+    public String  test(){
+       return "hello wechat app";
     }
 
 

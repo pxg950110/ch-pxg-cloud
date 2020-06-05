@@ -80,32 +80,7 @@ public class WxServiceImpl implements WxService {
     }
 
 
-    @Override
-    public void test() {
-        BillRequestModel billRequestModel = new BillRequestModel();
-        billRequestModel.setBillYear("2020");
-        billRequestModel.setBillMonth("2");
-        billRequestModel.setBillDay("23");
-        billRequestModel.setDateEnum(DateEnum.MONTH);
-        try {
-            List<BillTypeAmount> billTypeAmounts = billInfoMapper.selectByBillRequestModel(billRequestModel);
-            log.info(billTypeAmounts.toString());
-            if (billRequestModel.getDateEnum() == DateEnum.DAY || billRequestModel.getDateEnum() == DateEnum.MONTH) {
-                for (BillTypeAmount billTypeAmount : billTypeAmounts) {
-                    BillInfo billInfo = new BillInfo();
-                    billInfo.setBillYear(billRequestModel.getBillYear());
-                    billInfo.setBillMonth(billRequestModel.getBillMonth());
-                    billInfo.setBillDay(billTypeAmount.getBillDay());
-                    billInfo.setUserId("ogYK94ij6CIveNOze2XEMDcatHrM");
-                    billInfo.setStatus(0);
-                    List<BillInfo> billInfos = billInfoMapper.selectByBillInfo(billInfo);
-                    log.info(billInfos.toString());
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 
 
     @Override
@@ -126,7 +101,7 @@ public class WxServiceImpl implements WxService {
             BillRequestModel dayModel = requestModel;
             List<BillTypeAmount> dayBillTypeAmount = billInfoMapper.selectByBillRequestModel(dayModel);
             //
-            DayBillModel dayBillModel = getDayBillModel(dayModel,hasBillInfo);
+            DayBillModel dayBillModel = getDayBillModel(dayModel,hasBillInfo,billInfoVI.getStartNumber(),billInfoVI.getPageSize());
             return CommonResult.commomResult(dayBillModel, HttpResultStatus.STATUS200);
         } else if (billInfoVI.getDateEnum() == DateEnum.MONTH) {
             // 一个月的数据
@@ -143,7 +118,7 @@ public class WxServiceImpl implements WxService {
                 DayBillModel dayBillModel = getDayBillModel(new BillRequestModel(
                         monthRequestModel.getBillYear(), monthRequestModel.getBillMonth(), day,
                         DateEnum.DAY, monthRequestModel.getUserId()
-                ),hasBillInfo);
+                ),hasBillInfo,billInfoVI.getStartNumber(),billInfoVI.getPageSize());
                 dayBillModels.add(dayBillModel);
             }
             monthBillModel.setChirdernList(dayBillModels);
@@ -155,14 +130,14 @@ public class WxServiceImpl implements WxService {
             return CommonResult.commomResult(null, HttpResultStatus.STATUS304);
         }
     }
-    public DayBillModel getDayBillModel(BillRequestModel dayModel, boolean hasBillInfo) {
+    public DayBillModel getDayBillModel(BillRequestModel dayModel, boolean hasBillInfo,long startNumer,long pageSize) {
         DayBillModel dayBillModel = new DayBillModel();
         dayBillModel.setAmountList(billInfoMapper.selectByBillRequestModel(dayModel));
         // 获取日报下的所有数据
         BillInfo billInfo = new BillInfo(dayModel.getBillYear(),dayModel.getBillMonth(),dayModel.getBillDay()
         ,0,dayModel.getUserId());
         if (hasBillInfo) {
-            dayBillModel.setBillInfoList(billInfoMapper.selectByBillInfo(billInfo));
+            dayBillModel.setBillInfoList(billInfoMapper.selectByBillInfo(billInfo,startNumer,pageSize));
         }
         return dayBillModel;
     }

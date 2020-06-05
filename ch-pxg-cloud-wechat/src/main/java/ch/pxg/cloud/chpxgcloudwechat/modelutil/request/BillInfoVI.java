@@ -3,7 +3,6 @@ package ch.pxg.cloud.chpxgcloudwechat.modelutil.request;
 import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.DateEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiOperation;
 
 import java.util.UUID;
 
@@ -20,16 +19,16 @@ public class BillInfoVI {
     @ApiModelProperty("消息id,UUID系统自动生成")
     private String messageId;
     @ApiModelProperty("openId")
-   private String userId;
+    private String userId;
     @ApiModelProperty("年")
-   private String billYear;
+    private String billYear;
     @ApiModelProperty("月")
     private String billMonth;
     @ApiModelProperty("日")
     private String billDay;
     @ApiModelProperty("账单类型")
-   private String billType;
-    @ApiModelProperty("日期类型选择")
+    private String billType;
+    @ApiModelProperty("日期类型选择  YEAR 年  MONTH 月  DAY天")
     private DateEnum dateEnum;
     //是否需要子菜单
     @ApiModelProperty("是否需要具体账单")
@@ -40,7 +39,7 @@ public class BillInfoVI {
     private long pageSize;
 
     public BillInfoVI() {
-        this.messageId= UUID.randomUUID().toString();
+        this.messageId = UUID.randomUUID().toString();
     }
 
     public String getBillYear() {
@@ -74,7 +73,6 @@ public class BillInfoVI {
     public void setUserId(String userId) {
         this.userId = userId;
     }
-
 
 
     public String getBillType() {
