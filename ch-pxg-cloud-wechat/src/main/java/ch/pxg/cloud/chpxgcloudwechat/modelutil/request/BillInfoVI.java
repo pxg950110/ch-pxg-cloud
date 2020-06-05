@@ -18,19 +18,19 @@ import java.util.UUID;
 public class BillInfoVI {
 
     @ApiModelProperty("消息id,UUID系统自动生成")
-    String messageId;
+    private String messageId;
     @ApiModelProperty("openId")
-    String userId;
+   private String userId;
     @ApiModelProperty("年")
-    String billYear;
+   private String billYear;
     @ApiModelProperty("月")
-    String billMonth;
+    private String billMonth;
     @ApiModelProperty("日")
-    String billDay;
+    private String billDay;
     @ApiModelProperty("账单类型")
-    String billType;
+   private String billType;
     @ApiModelProperty("日期类型选择")
-    DateEnum dateEnum;
+    private DateEnum dateEnum;
     //是否需要子菜单
     @ApiModelProperty("是否需要具体账单")
     private boolean hasBillInfo;
