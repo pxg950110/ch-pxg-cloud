@@ -34,6 +34,10 @@ public class BillInfoVI {
     //是否需要子菜单
     @ApiModelProperty("是否需要具体账单")
     private boolean hasBillInfo;
+    @ApiModelProperty("开始序列")
+    private long startNumber;
+    @ApiModelProperty("页码")
+    private long pageSize;
 
     public BillInfoVI() {
         this.messageId= UUID.randomUUID().toString();
@@ -95,6 +99,22 @@ public class BillInfoVI {
 
     public void setHasBillInfo(boolean hasBillInfo) {
         this.hasBillInfo = hasBillInfo;
+    }
+
+    public long getStartNumber() {
+        return startNumber;
+    }
+
+    public void setStartNumber(long startNumber) {
+        this.startNumber = startNumber;
+    }
+
+    public long getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(long pageSize) {
+        this.pageSize = pageSize;
     }
 
     @Override

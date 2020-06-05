@@ -62,6 +62,7 @@ server:
   port: 5070
   servlet:
     context-path: /gateway
+  address: 0.0.0.0
 eureka:
   client:
     service-url:
