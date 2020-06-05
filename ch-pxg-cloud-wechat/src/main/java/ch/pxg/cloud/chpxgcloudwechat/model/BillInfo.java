@@ -3,6 +3,9 @@ package ch.pxg.cloud.chpxgcloudwechat.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 
 /**
@@ -11,38 +14,48 @@ import lombok.Data;
  */
 @Data
 public class BillInfo implements Serializable {
+    @ApiModelProperty("id")
     private Integer id;
 
+    @ApiModelProperty("账单类别")
     private String billType;
 
+    @ApiModelProperty("账单日期")
     private String billDate;
-
+    @ApiModelProperty("账单日期-年")
     private String billYear;
-
+    @ApiModelProperty("账单日期-月")
     private String billMonth;
-
+    @ApiModelProperty("账单日期-日")
     private String billDay;
 
+    @ApiModelProperty("账单类型-id")
     private Integer billTypeId;
 
+    @ApiModelProperty("账单类型-代码")
     private String billTypeCode;
-
+    @ApiModelProperty("账单类型-名称")
     private String billTypeName;
-
+    @ApiModelProperty("账单类型的图标路径")
     private String billTypeImageurl;
-
+    @ApiModelProperty("创建时间")
     private Date createTime;
-
+    @ApiModelProperty("状态  0有效 2 无效")
     private Integer status;
 
+    @ApiModelProperty("扩展字段")
     private String extend;
 
+    @ApiModelProperty("openId")
     private String userId;
 
+    @ApiModelProperty("修改时间")
     private Date updateTime;
 
+    @ApiModelProperty("备注")
     private String note;
 
+    @ApiModelProperty("具体金额")
     private BigDecimal billNumber;
 
 
@@ -50,6 +63,7 @@ public class BillInfo implements Serializable {
     /**
      * 唯一编号 v1.0版本未加入使用
      */
+    @ApiModelProperty("账单唯一编号")
     private String billNo;
 
     private static final long serialVersionUID = 1L;
@@ -149,5 +163,149 @@ public class BillInfo implements Serializable {
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getBillType() {
+        return billType;
+    }
+
+    public void setBillType(String billType) {
+        this.billType = billType;
+    }
+
+    public String getBillDate() {
+        return billDate;
+    }
+
+    public void setBillDate(String billDate) {
+        this.billDate = billDate;
+    }
+
+    public String getBillYear() {
+        return billYear;
+    }
+
+    public void setBillYear(String billYear) {
+        this.billYear = billYear;
+    }
+
+    public String getBillMonth() {
+        return billMonth;
+    }
+
+    public void setBillMonth(String billMonth) {
+        this.billMonth = billMonth;
+    }
+
+    public String getBillDay() {
+        return billDay;
+    }
+
+    public void setBillDay(String billDay) {
+        this.billDay = billDay;
+    }
+
+    public Integer getBillTypeId() {
+        return billTypeId;
+    }
+
+    public void setBillTypeId(Integer billTypeId) {
+        this.billTypeId = billTypeId;
+    }
+
+    public String getBillTypeCode() {
+        return billTypeCode;
+    }
+
+    public void setBillTypeCode(String billTypeCode) {
+        this.billTypeCode = billTypeCode;
+    }
+
+    public String getBillTypeName() {
+        return billTypeName;
+    }
+
+    public void setBillTypeName(String billTypeName) {
+        this.billTypeName = billTypeName;
+    }
+
+    public String getBillTypeImageurl() {
+        return billTypeImageurl;
+    }
+
+    public void setBillTypeImageurl(String billTypeImageurl) {
+        this.billTypeImageurl = billTypeImageurl;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getExtend() {
+        return extend;
+    }
+
+    public void setExtend(String extend) {
+        this.extend = extend;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public BigDecimal getBillNumber() {
+        return billNumber;
+    }
+
+    public void setBillNumber(BigDecimal billNumber) {
+        this.billNumber = billNumber;
+    }
+
+    public String getBillNo() {
+        return billNo;
+    }
+
+    public void setBillNo(String billNo) {
+        this.billNo = billNo;
     }
 }
