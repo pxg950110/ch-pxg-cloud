@@ -141,6 +141,16 @@ public class WxServiceImpl implements WxService {
         }
         return dayBillModel;
     }
+
+
+    /**
+     * 获取最大的年月
+     * @return
+     */
+    @Override
+    public CommonResult<String> getMaxBillDateInfo(HttpServletRequest request, HttpServletResponse response) {
+        return CommonResult.commomResult(billInfoMapper.getMaxBillDateInfo(),HttpResultStatus.STATUS200);
+    }
 }
 
 

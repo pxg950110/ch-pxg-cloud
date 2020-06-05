@@ -29,4 +29,6 @@ public interface WxService {
     CommonResult getBillInfo(BillInfoVI billInfoVI, HttpServletRequest request, HttpServletResponse response);
 
     CommonResult<BillModel> getBillModelInfo(BillInfoVI billInfoVI, HttpServletRequest request, HttpServletResponse response);
+
+    CommonResult<String> getMaxBillDateInfo(HttpServletRequest request,HttpServletResponse response);
 }

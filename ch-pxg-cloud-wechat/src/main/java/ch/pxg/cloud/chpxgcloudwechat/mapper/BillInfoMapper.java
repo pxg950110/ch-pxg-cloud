@@ -14,6 +14,12 @@ public interface BillInfoMapper {
 
     int insert(BillInfo record);
 
+
+    /**
+     * 获取最大的年月
+     * @return
+     */
+   String getMaxBillDateInfo();
     /**
      * 通过年月日查询相关数据
      * @param record

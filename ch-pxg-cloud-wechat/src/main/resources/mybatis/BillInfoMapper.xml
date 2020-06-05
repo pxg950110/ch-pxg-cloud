@@ -42,6 +42,11 @@
     </select>
 
 
+<!--    最大 年月-->
+    <select id="getMaxBillDateInfo" resultType="java.lang.String">
+        select max(bill_date) from wxapp.bill_info where status ='0'
+    </select>
+
     <!--  数据统计  年   月  日   -->
     <select id="selectByBillRequestModel" parameterType="ch.pxg.cloud.chpxgcloudwechat.modelutil.util.BillRequestModel"
             resultMap="BillTypeAmountResultMap">
@@ -67,6 +72,8 @@
             </otherwise>
         </choose>
     </select>
+
+
     <select id="selectByBillInfo"
             parameterType="ch.pxg.cloud.chpxgcloudwechat.model.BillInfo"
             resultMap="BaseResultMap">
