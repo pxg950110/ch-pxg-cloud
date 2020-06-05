@@ -82,8 +82,8 @@ public class WechatApi {
 
     @ApiOperation("获取账单中的最大年月")
     @GetMapping("/billinfo/get/max/date")
-    public  CommonResult getMaxBillDateInfo(HttpServletRequest request, HttpServletResponse response){
-        return wxService.getMaxBillDateInfo( request, response);
+    public  CommonResult getMaxBillDateInfo(String openId,HttpServletRequest request, HttpServletResponse response){
+        return wxService.getMaxBillDateInfo( openId,request, response);
     }
 
     @ApiOperation("获取账单信息")

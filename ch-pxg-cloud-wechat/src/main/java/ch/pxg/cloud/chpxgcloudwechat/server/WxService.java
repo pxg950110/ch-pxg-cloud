@@ -5,6 +5,7 @@ import ch.pxg.cloud.chpxgcloudwechat.modelutil.request.BillInfoVI;
 import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.BillModel;
 import ch.pxg.cloud.chpxgcloudwechat.util.ResultInfo;
 import ch.pxg.cloud.chpxgcloudwechat.util.CommonResult;
+import org.springframework.data.repository.query.Param;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,5 +31,5 @@ public interface WxService {
 
     CommonResult<BillModel> getBillModelInfo(BillInfoVI billInfoVI, HttpServletRequest request, HttpServletResponse response);
 
-    CommonResult<String> getMaxBillDateInfo(HttpServletRequest request,HttpServletResponse response);
+    CommonResult<String> getMaxBillDateInfo(@Param("userId") String userId , HttpServletRequest request, HttpServletResponse response);
 }

@@ -45,6 +45,7 @@
 <!--    最大 年月-->
     <select id="getMaxBillDateInfo" resultType="java.lang.String">
         select max(bill_date) from wxapp.bill_info where status ='0'
+        and user_id=#{userId}
     </select>
 
     <!--  数据统计  年   月  日   -->

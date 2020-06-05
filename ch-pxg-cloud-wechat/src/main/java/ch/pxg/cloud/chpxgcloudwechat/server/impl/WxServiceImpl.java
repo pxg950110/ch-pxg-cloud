@@ -148,8 +148,8 @@ public class WxServiceImpl implements WxService {
      * @return
      */
     @Override
-    public CommonResult<String> getMaxBillDateInfo(HttpServletRequest request, HttpServletResponse response) {
-        return CommonResult.commomResult(billInfoMapper.getMaxBillDateInfo(),HttpResultStatus.STATUS200);
+    public CommonResult<String> getMaxBillDateInfo(String userId ,HttpServletRequest request, HttpServletResponse response) {
+        return CommonResult.commomResult(billInfoMapper.getMaxBillDateInfo(userId),HttpResultStatus.STATUS200);
     }
 }
 

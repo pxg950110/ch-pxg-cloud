@@ -19,7 +19,7 @@ public interface BillInfoMapper {
      * 获取最大的年月
      * @return
      */
-   String getMaxBillDateInfo();
+   String getMaxBillDateInfo(@Param("userId") String userId);
     /**
      * 通过年月日查询相关数据
      * @param record
