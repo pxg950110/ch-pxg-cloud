@@ -38,7 +38,7 @@
         select
         <include refid="Base_Column_List"/>
         from wxapp.bill_info
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER} and user_id=#{userId}
     </select>
 
 
@@ -143,9 +143,10 @@
         </choose>
     </select>
 
+<!--    所有的操作必须带上userId openId-->
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from  wxapp.bill_info
-        where id = #{id,jdbcType=INTEGER}
+        update   wxapp.bill_info set status=2
+        where id = #{id,jdbcType=INTEGER} and user_id=#{userId}
     </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudwechat.model.BillInfo"
             useGeneratedKeys="true">

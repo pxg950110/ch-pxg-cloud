@@ -80,14 +80,11 @@ public class WxServiceImpl implements WxService {
     }
 
 
-
-
-
     @Override
     public CommonResult<BillModel> getBillModelInfo(BillInfoVI billInfoVI, HttpServletRequest request, HttpServletResponse response) {
         // 验证查询是否含有openId
-        if (StringUtils.isEmpty(billInfoVI.getUserId())){
-            return CommonResult.commomResult(null,HttpResultStatus.STATUS405,"openId必须要有");
+        if (StringUtils.isEmpty(billInfoVI.getUserId())) {
+            return CommonResult.commomResult(null, HttpResultStatus.STATUS405, "openId必须要有");
         }
         log.info(billInfoVI.toString());
         // 设置 requestModel
@@ -101,7 +98,7 @@ public class WxServiceImpl implements WxService {
             BillRequestModel dayModel = requestModel;
             List<BillTypeAmount> dayBillTypeAmount = billInfoMapper.selectByBillRequestModel(dayModel);
             //
-            DayBillModel dayBillModel = getDayBillModel(dayModel,hasBillInfo,billInfoVI.getStartNumber(),billInfoVI.getPageSize());
+            DayBillModel dayBillModel = getDayBillModel(dayModel, hasBillInfo, billInfoVI.getStartNumber(), billInfoVI.getPageSize());
             return CommonResult.commomResult(dayBillModel, HttpResultStatus.STATUS200);
         } else if (billInfoVI.getDateEnum() == DateEnum.MONTH) {
             // 一个月的数据
@@ -118,7 +115,7 @@ public class WxServiceImpl implements WxService {
                 DayBillModel dayBillModel = getDayBillModel(new BillRequestModel(
                         monthRequestModel.getBillYear(), monthRequestModel.getBillMonth(), day,
                         DateEnum.DAY, monthRequestModel.getUserId()
-                ),hasBillInfo,billInfoVI.getStartNumber(),billInfoVI.getPageSize());
+                ), hasBillInfo, billInfoVI.getStartNumber(), billInfoVI.getPageSize());
                 dayBillModels.add(dayBillModel);
             }
             monthBillModel.setChirdernList(dayBillModels);
@@ -130,12 +127,13 @@ public class WxServiceImpl implements WxService {
             return CommonResult.commomResult(null, HttpResultStatus.STATUS304);
         }
     }
-    public DayBillModel getDayBillModel(BillRequestModel dayModel, boolean hasBillInfo,long startNumer,long pageSize) {
+
+    public DayBillModel getDayBillModel(BillRequestModel dayModel, boolean hasBillInfo, long startNumer, long pageSize) {
         DayBillModel dayBillModel = new DayBillModel();
         dayBillModel.setAmountList(billInfoMapper.selectByBillRequestModel(dayModel));
         // 获取日报下的所有数据
-        BillInfo billInfo = new BillInfo(dayModel.getBillYear(),dayModel.getBillMonth(),dayModel.getBillDay()
-        ,0,dayModel.getUserId());
+        BillInfo billInfo = new BillInfo(dayModel.getBillYear(), dayModel.getBillMonth(), dayModel.getBillDay()
+                , 0, dayModel.getUserId());
         if (hasBillInfo) {
             dayBillModel.setBillInfoList(billInfoMapper.selectByBillInfo(billInfo));
         }
@@ -148,8 +146,11 @@ public class WxServiceImpl implements WxService {
      * @return
      */
     @Override
-    public CommonResult<String> getMaxBillDateInfo(String userId ,HttpServletRequest request, HttpServletResponse response) {
-        return CommonResult.commomResult(billInfoMapper.getMaxBillDateInfo(userId),HttpResultStatus.STATUS200);
+    public CommonResult<String> getMaxBillDateInfo(String userId, HttpServletRequest request, HttpServletResponse response) {
+        if (StringUtils.isEmpty(userId)) {
+            return CommonResult.commomResult(null, HttpResultStatus.STATUS300, "openId不允许为空");
+        }
+        return CommonResult.commomResult(billInfoMapper.getMaxBillDateInfo(userId), HttpResultStatus.STATUS200);
     }
 }
 

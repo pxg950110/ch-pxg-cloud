@@ -3,7 +3,6 @@ package ch.pxg.cloud.chpxgcloudwechat.modelutil.request;
 import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.DateEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
 import java.util.UUID;
 
 /**

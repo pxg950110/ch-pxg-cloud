@@ -3,17 +3,14 @@ package ch.pxg.cloud.chpxgcloudwechat.mapper;
 import ch.pxg.cloud.chpxgcloudwechat.model.BillInfo;
 import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.BillRequestModel;
 import ch.pxg.cloud.chpxgcloudwechat.modelutil.util.BillTypeAmount;
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 public interface BillInfoMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer id,@Param("userId") String userId);
 
     int insert(BillInfo record);
-
 
     /**
      * 获取最大的年月
@@ -34,7 +31,7 @@ public interface BillInfoMapper {
 
     int insertSelective(BillInfo record);
 
-    BillInfo selectByPrimaryKey(Integer id);
+    BillInfo selectByPrimaryKey(Integer id,@Param("userId") String userId);
 
     int updateByPrimaryKeySelective(BillInfo record);
 

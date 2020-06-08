@@ -45,13 +45,7 @@ public class WechatApi {
     public ResultInfo getBillTypeInfo(String openId, HttpServletRequest request, HttpServletResponse response) {
         return wxService.getBillTypeList(openId,request,response);
     }
-//
-//    @PostMapping("/billinfo/type/add")
-//    @ApiOperation("添加账单类型")
-//    public ResultInfo addBillTypeInfo(@RequestBody BillTypeInfo billTypeInfo) {
-//        return wxService.addBillTypeInfo(billTypeInfo);
-//    }
-//
+
     @PostMapping("/billinfo/add")
     @ApiOperation("添加账单")
     public ResultInfo addBillInfo(@RequestBody BillInfo billInfo, HttpServletRequest request, HttpServletResponse response) {
@@ -65,10 +59,12 @@ public class WechatApi {
         return wxService.getBillInfo(billInfoVI,request,response);
     }
 
+
     @GetMapping("/openid")
     @ApiOperation("获取openid")
     public ResultInfo getOpenIdByCode(String code, HttpServletRequest request, HttpServletResponse response) {
         OpenIdModel openIdModel = AppletUtil.getOpenIdByCode(code);
+        //发送OpenIdModel到rabbitMQ 暂时未加入
         if (openIdModel.getOpenId() == null || openIdModel.getOpenId().equals(""))
             return ResultInfo.error("获取openid失败");
         return ResultInfo.ok(openIdModel);
