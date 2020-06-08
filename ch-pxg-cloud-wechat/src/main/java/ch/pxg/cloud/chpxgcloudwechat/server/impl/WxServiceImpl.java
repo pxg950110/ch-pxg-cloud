@@ -140,7 +140,6 @@ public class WxServiceImpl implements WxService {
         return dayBillModel;
     }
 
-
     /**
      * 获取最大的年月
      * @return
