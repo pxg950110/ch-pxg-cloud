@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ch.pxg.cloud.chpxgcloudwechat.mapper.WxUserLogMapper">
+  <resultMap id="BaseResultMap" type="ch.pxg.cloud.chpxgcloudwechat.model.WxUserLog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="log_type" jdbcType="VARCHAR" property="logType" />
+    <result column="log_detail" jdbcType="VARCHAR" property="logDetail" />
+    <result column="extend" jdbcType="VARCHAR" property="extend" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, log_type, log_detail, extend, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wx_user_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudwechat.model.WxUserLog" useGeneratedKeys="true">
+    insert into wx_user_log (user_id, log_type, log_detail, 
+      extend, create_time)
+    values (#{userId,jdbcType=INTEGER}, #{logType,jdbcType=VARCHAR}, #{logDetail,jdbcType=VARCHAR}, 
+      #{extend,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudwechat.model.WxUserLog" useGeneratedKeys="true">
+    insert into wx_user_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="logType != null">
+        log_type,
+      </if>
+      <if test="logDetail != null">
+        log_detail,
+      </if>
+      <if test="extend != null">
+        extend,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="logType != null">
+        #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="logDetail != null">
+        #{logDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="extend != null">
+        #{extend,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

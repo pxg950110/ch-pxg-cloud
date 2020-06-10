@@ -1,0 +1,22 @@
+
+spring:
+  application:
+    name: manager-server
+  cloud:
+    config:
+      uri: http://192.168.174.131:5080
+      fail-fast: true
+      label: master
+      profile: dev
+  profiles:
+    active: dev
+server:
+  port: 7016
+  servlet:
+    context-path: /manager
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.174.131:5060/eureka/eureka
+
