@@ -27,7 +27,7 @@ spring:
           uri: http://192.168.174.131:7016
 #          uri:  lb://wechat-server
           predicates:
-            - Path=/wechat/**
+            - Path=/manager/**
         - id: sysadmin-server
           uri:  lb://sysadmin-server
           predicates:
