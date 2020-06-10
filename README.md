@@ -24,7 +24,7 @@
 * [spring-cloud-vue-project 前端页面](http://localhost:7010/#/)
 * [spring-cloud-qaserver qa程序](http://localhost:7012/#/)
 * [spring-cloud-hadoop-common hadoop相关服务](http://localhost:7015/#/)
-
+* [ch-pxg-cloud-manager 后台配置接口](http://localhost:7016)
 ****
 
 

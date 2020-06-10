@@ -8,6 +8,12 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface BillInfoMapper {
+    /**
+     * 删除只做状态的更新
+     * @param id
+     * @param userId
+     * @return
+     */
     int deleteByPrimaryKey(Integer id,@Param("userId") String userId);
 
     int insert(BillInfo record);

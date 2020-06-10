@@ -8,6 +8,7 @@
         <module>spring-eureka</module>
         <module>ch-pxg-cloud-gateway</module>
         <module>ch-pxg-cloud-wechat</module>
+        <module>ch-pxg-cloud-manager</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
