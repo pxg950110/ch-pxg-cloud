@@ -35,10 +35,8 @@ import java.util.SortedSet;
 @Configuration
 @EnableSwagger2
 public class SwaggerUIConfig {
-
     @Bean
     public Docket createRestApi() {
-
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
@@ -48,7 +46,6 @@ public class SwaggerUIConfig {
                 .securitySchemes(secruitySchemes())
                 .securityContexts(securityContexts());
     }
-
     /**
      * 头部增加author
      * @return

@@ -27,6 +27,7 @@ import java.io.Serializable;
 @Service
 public class AuthorServiceImpl implements AuthorService  , Serializable {
 
+    private static final long serialVersionUID = 2664724877017936511L;
     // v1.0版本aop 日志暂时不加入 1.0.0版本日志未采用mq
     //日志处理
     private final Logger log = LoggerFactory.getLogger(AuthorServiceImpl.class);

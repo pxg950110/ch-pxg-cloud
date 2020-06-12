@@ -18,33 +18,33 @@
 <!--        </filter>-->
     </appender>
 
-<!--    为logstash输出的JSON格式的Appender-->
-    <appender name="app-log-info" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>192.168.56.1:5044</destination>
-<!--        日志输出编码-->
-        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-            <providers>
-                <timestamp>
-                    <timeZone>UTC</timeZone>
-                </timestamp>
-                <pattern>
-                    <pattern>
-                        {
-                        "severity": "%level",
-                        "service": "${springAppName:-}",
-                        "trace": "%X{X-B3-TraceId:-}",
-                        "span": "%X{X-B3-SpanId:-}",
-                        "exportable": "%X{X-Span-Export:-}",
-                        "pid": "${PID:-}",
-                        "thread": "%thread",
-                        "class": "%logger{40}",
-                        "rest": "%message"
-                        }
-                    </pattern>
-                </pattern>
-            </providers>
-        </encoder>
-    </appender>
+<!--&lt;!&ndash;    为logstash输出的JSON格式的Appender&ndash;&gt;-->
+<!--    <appender name="app-log-info" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+<!--        <destination>192.168.56.1:5044</destination>-->
+<!--&lt;!&ndash;        日志输出编码&ndash;&gt;-->
+<!--        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">-->
+<!--            <providers>-->
+<!--                <timestamp>-->
+<!--                    <timeZone>UTC</timeZone>-->
+<!--                </timestamp>-->
+<!--                <pattern>-->
+<!--                    <pattern>-->
+<!--                        {-->
+<!--                        "severity": "%level",-->
+<!--                        "service": "${springAppName:-}",-->
+<!--                        "trace": "%X{X-B3-TraceId:-}",-->
+<!--                        "span": "%X{X-B3-SpanId:-}",-->
+<!--                        "exportable": "%X{X-Span-Export:-}",-->
+<!--                        "pid": "${PID:-}",-->
+<!--                        "thread": "%thread",-->
+<!--                        "class": "%logger{40}",-->
+<!--                        "rest": "%message"-->
+<!--                        }-->
+<!--                    </pattern>-->
+<!--                </pattern>-->
+<!--            </providers>-->
+<!--        </encoder>-->
+<!--    </appender>-->
 
 <!--    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
 <!--        <destination>192.168.56.1:4567</destination>-->
@@ -74,7 +74,7 @@
 <!--    ​-->
     <root level="INFO">
     <appender-ref ref="Console"/>
-    <appender-ref ref="app-log-info"/>
+<!--    <appender-ref ref="app-log-info"/>-->
 <!--    <appender-ref ref="logstash2"/>-->
     </root>
     <logger name="org.apache.http" level="info"/>

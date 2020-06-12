@@ -1,9 +1,17 @@
 package ch.pxg.cloud.chpxgcloudmanager.controller;
 
-import io.swagger.annotations.ApiModelProperty;
+import ch.pxg.cloud.chpxgcloudmanager.model.reponse.ServerReponseVi;
+import ch.pxg.cloud.chpxgcloudmanager.model.request.ServerRequestVi;
+import ch.pxg.cloud.chpxgcloudmanager.server.ManagerServer;
+import ch.pxg.cloud.chpxgcloudmanager.util.CommonResult;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * <p>
@@ -19,9 +27,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ManagerApi {
 
+    @Autowired
+    ManagerServer managerServer;
     @ApiOperation("测试")
     @GetMapping("test")
     public String test() {
         return "测试";
+    }
+
+
+    /**
+     * 获取配置中的所有服务
+     * @param serverRequestVi
+     * @param request
+     * @param response
+     * @return
+     */
+    @ApiOperation("获取所有配置中的服务")
+    @PostMapping("/server/all/list")
+    public CommonResult<ServerReponseVi>
+    getAllServer(ServerRequestVi serverRequestVi ,
+                 HttpServletRequest request,
+                 HttpServletResponse response){
+        return managerServer.getAllServer(serverRequestVi,request,response);
     }
 }
