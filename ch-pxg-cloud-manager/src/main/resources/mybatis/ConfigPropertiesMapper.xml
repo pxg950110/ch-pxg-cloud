@@ -11,6 +11,13 @@
   <sql id="Base_Column_List">
     id, property_key, property_value, server_id, des
   </sql>
+
+  <select id="selectByServerId" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from appsystem.config_properties where server_id=#{serverId}
+    where
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

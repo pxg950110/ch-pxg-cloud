@@ -1,11 +1,14 @@
 package ch.pxg.cloud.chpxgcloudmanager.server;
 
+import ch.pxg.cloud.chpxgcloudmanager.model.ConfigProperties;
 import ch.pxg.cloud.chpxgcloudmanager.model.reponse.ServerReponseVi;
+import ch.pxg.cloud.chpxgcloudmanager.model.request.ConfigRequestVI;
 import ch.pxg.cloud.chpxgcloudmanager.model.request.ServerRequestVi;
 import ch.pxg.cloud.chpxgcloudmanager.util.CommonResult;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * <p>
@@ -25,4 +28,6 @@ public interface ManagerServer {
     getAllServer(ServerRequestVi serverRequestVi,
                  HttpServletRequest request,
                  HttpServletResponse response);
+
+    CommonResult<List<ConfigProperties>> getConfigByServerId(ConfigRequestVI configRequestVI, HttpServletRequest request, HttpServletResponse response);
 }

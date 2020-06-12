@@ -1,6 +1,8 @@
 package ch.pxg.cloud.chpxgcloudmanager.controller;
 
+import ch.pxg.cloud.chpxgcloudmanager.model.ConfigProperties;
 import ch.pxg.cloud.chpxgcloudmanager.model.reponse.ServerReponseVi;
+import ch.pxg.cloud.chpxgcloudmanager.model.request.ConfigRequestVI;
 import ch.pxg.cloud.chpxgcloudmanager.model.request.ServerRequestVi;
 import ch.pxg.cloud.chpxgcloudmanager.server.ManagerServer;
 import ch.pxg.cloud.chpxgcloudmanager.util.CommonResult;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * <p>
@@ -50,5 +53,11 @@ public class ManagerApi {
                  HttpServletRequest request,
                  HttpServletResponse response){
         return managerServer.getAllServer(serverRequestVi,request,response);
+    }
+
+    @ApiOperation("获取该服务下的配置信息")
+    @GetMapping("/server/config/list")
+    public CommonResult<List<ConfigProperties>> getConfigByServerId(ConfigRequestVI configRequestVI, HttpServletRequest request, HttpServletResponse response){
+        return managerServer.getConfigByServerId( configRequestVI,  request,  response);
     }
 }

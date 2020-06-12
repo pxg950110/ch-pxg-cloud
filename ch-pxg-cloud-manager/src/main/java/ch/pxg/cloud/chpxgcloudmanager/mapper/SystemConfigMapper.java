@@ -1,8 +1,6 @@
 package ch.pxg.cloud.chpxgcloudmanager.mapper;
 
 import ch.pxg.cloud.chpxgcloudmanager.model.SystemConfig;
-import org.apache.ibatis.annotations.Select;
-
 import java.util.List;
 
 public interface SystemConfigMapper {
@@ -11,6 +9,7 @@ public interface SystemConfigMapper {
     int insert(SystemConfig record);
 
     int insertSelective(SystemConfig record);
+
 
     /**
      * 获取所有服务
