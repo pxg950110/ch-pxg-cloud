@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ch.pxg.cloud.chpxgcloudmanager.mapper.SystemConfigMapper">
+  <resultMap id="BaseResultMap" type="ch.pxg.cloud.chpxgcloudmanager.model.SystemConfig">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="server_name" jdbcType="VARCHAR" property="serverName" />
+    <result column="server_info" jdbcType="VARCHAR" property="serverInfo" />
+    <result column="profile" jdbcType="VARCHAR" property="profile" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+    <result column="version" jdbcType="VARCHAR" property="version" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `server_name`, server_info, profile, `label`, version, create_time
+  </sql>
+
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from  appsystem.system_config
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from `system_config`
+    where `id` = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from system_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudmanager.model.SystemConfig" useGeneratedKeys="true">
+    insert into system_config (`server_name`, server_info, profile, 
+      `label`, version, create_time
+      )
+    values (#{serverName,jdbcType=VARCHAR}, #{serverInfo,jdbcType=VARCHAR}, #{profile,jdbcType=VARCHAR}, 
+      #{label,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudmanager.model.SystemConfig" useGeneratedKeys="true">
+    insert into system_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="serverName != null">
+        `server_name`,
+      </if>
+      <if test="serverInfo != null">
+        server_info,
+      </if>
+      <if test="profile != null">
+        profile,
+      </if>
+      <if test="label != null">
+        `label`,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serverName != null">
+        #{serverName,jdbcType=VARCHAR},
+      </if>
+      <if test="serverInfo != null">
+        #{serverInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="profile != null">
+        #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null">
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ch.pxg.cloud.chpxgcloudmanager.model.SystemConfig">
+    update system_config
+    <set>
+      <if test="serverName != null">
+        `server_name` = #{serverName,jdbcType=VARCHAR},
+      </if>
+      <if test="serverInfo != null">
+        server_info = #{serverInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="profile != null">
+        profile = #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null">
+        `label` = #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ch.pxg.cloud.chpxgcloudmanager.model.SystemConfig">
+    update system_config
+    set `server_name` = #{serverName,jdbcType=VARCHAR},
+      server_info = #{serverInfo,jdbcType=VARCHAR},
+      profile = #{profile,jdbcType=VARCHAR},
+      `label` = #{label,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

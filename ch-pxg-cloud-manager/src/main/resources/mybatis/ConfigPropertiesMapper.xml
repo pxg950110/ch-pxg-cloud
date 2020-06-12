@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ch.pxg.cloud.chpxgcloudmanager.mapper.ConfigPropertiesMapper">
+  <resultMap id="BaseResultMap" type="ch.pxg.cloud.chpxgcloudmanager.model.ConfigProperties">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="property_key" jdbcType="VARCHAR" property="propertyKey" />
+    <result column="property_value" jdbcType="VARCHAR" property="propertyValue" />
+    <result column="server_id" jdbcType="INTEGER" property="serverId" />
+    <result column="des" jdbcType="VARCHAR" property="des" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, property_key, property_value, server_id, des
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from config_properties
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from config_properties
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudmanager.model.ConfigProperties" useGeneratedKeys="true">
+    insert into config_properties (property_key, property_value, server_id, 
+      des)
+    values (#{propertyKey,jdbcType=VARCHAR}, #{propertyValue,jdbcType=VARCHAR}, #{serverId,jdbcType=INTEGER}, 
+      #{des,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudmanager.model.ConfigProperties" useGeneratedKeys="true">
+    insert into config_properties
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="propertyKey != null">
+        property_key,
+      </if>
+      <if test="propertyValue != null">
+        property_value,
+      </if>
+      <if test="serverId != null">
+        server_id,
+      </if>
+      <if test="des != null">
+        des,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="propertyKey != null">
+        #{propertyKey,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyValue != null">
+        #{propertyValue,jdbcType=VARCHAR},
+      </if>
+      <if test="serverId != null">
+        #{serverId,jdbcType=INTEGER},
+      </if>
+      <if test="des != null">
+        #{des,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ch.pxg.cloud.chpxgcloudmanager.model.ConfigProperties">
+    update config_properties
+    <set>
+      <if test="propertyKey != null">
+        property_key = #{propertyKey,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyValue != null">
+        property_value = #{propertyValue,jdbcType=VARCHAR},
+      </if>
+      <if test="serverId != null">
+        server_id = #{serverId,jdbcType=INTEGER},
+      </if>
+      <if test="des != null">
+        des = #{des,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ch.pxg.cloud.chpxgcloudmanager.model.ConfigProperties">
+    update config_properties
+    set property_key = #{propertyKey,jdbcType=VARCHAR},
+      property_value = #{propertyValue,jdbcType=VARCHAR},
+      server_id = #{serverId,jdbcType=INTEGER},
+      des = #{des,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

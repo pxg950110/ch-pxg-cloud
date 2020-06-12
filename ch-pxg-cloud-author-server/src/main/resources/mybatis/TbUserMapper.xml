@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ch.pxg.cloud.chpxgcloudauthorserver.mapper.TbUserMapper">
+  <resultMap id="BaseResultMap" type="ch.pxg.cloud.chpxgcloudauthorserver.model.TbUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="detail_info" jdbcType="VARCHAR" property="detailInfo" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="extend1" jdbcType="OTHER" property="extend1" />
+    <result column="extend2" jdbcType="OTHER" property="extend2" />
+    <result column="extend3" jdbcType="OTHER" property="extend3" />
+    <result column="extend4" jdbcType="OTHER" property="extend4" />
+    <result column="extend5" jdbcType="OTHER" property="extend5" />
+    <result column="extend6" jdbcType="OTHER" property="extend6" />
+    <result column="extend7" jdbcType="OTHER" property="extend7" />
+    <result column="extend8" jdbcType="OTHER" property="extend8" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, email, phone, `name`, detail_info, `status`, extend1, extend2, extend3, 
+    extend4, extend5, extend6, extend7, extend8, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudauthorserver.model.TbUser" useGeneratedKeys="true">
+    insert into tb_user (user_id, email, phone, 
+      `name`, detail_info, `status`, 
+      extend1, extend2, extend3, 
+      extend4, extend5, extend6, 
+      extend7, extend8, create_time
+      )
+    values (#{userId,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{detailInfo,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, 
+      #{extend1,jdbcType=OTHER}, #{extend2,jdbcType=OTHER}, #{extend3,jdbcType=OTHER}, 
+      #{extend4,jdbcType=OTHER}, #{extend5,jdbcType=OTHER}, #{extend6,jdbcType=OTHER}, 
+      #{extend7,jdbcType=OTHER}, #{extend8,jdbcType=OTHER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudauthorserver.model.TbUser" useGeneratedKeys="true">
+    insert into tb_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="detailInfo != null">
+        detail_info,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="extend1 != null">
+        extend1,
+      </if>
+      <if test="extend2 != null">
+        extend2,
+      </if>
+      <if test="extend3 != null">
+        extend3,
+      </if>
+      <if test="extend4 != null">
+        extend4,
+      </if>
+      <if test="extend5 != null">
+        extend5,
+      </if>
+      <if test="extend6 != null">
+        extend6,
+      </if>
+      <if test="extend7 != null">
+        extend7,
+      </if>
+      <if test="extend8 != null">
+        extend8,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="detailInfo != null">
+        #{detailInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="extend1 != null">
+        #{extend1,jdbcType=OTHER},
+      </if>
+      <if test="extend2 != null">
+        #{extend2,jdbcType=OTHER},
+      </if>
+      <if test="extend3 != null">
+        #{extend3,jdbcType=OTHER},
+      </if>
+      <if test="extend4 != null">
+        #{extend4,jdbcType=OTHER},
+      </if>
+      <if test="extend5 != null">
+        #{extend5,jdbcType=OTHER},
+      </if>
+      <if test="extend6 != null">
+        #{extend6,jdbcType=OTHER},
+      </if>
+      <if test="extend7 != null">
+        #{extend7,jdbcType=OTHER},
+      </if>
+      <if test="extend8 != null">
+        #{extend8,jdbcType=OTHER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ch.pxg.cloud.chpxgcloudauthorserver.model.TbUser">
+    update tb_user
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="detailInfo != null">
+        detail_info = #{detailInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="extend1 != null">
+        extend1 = #{extend1,jdbcType=OTHER},
+      </if>
+      <if test="extend2 != null">
+        extend2 = #{extend2,jdbcType=OTHER},
+      </if>
+      <if test="extend3 != null">
+        extend3 = #{extend3,jdbcType=OTHER},
+      </if>
+      <if test="extend4 != null">
+        extend4 = #{extend4,jdbcType=OTHER},
+      </if>
+      <if test="extend5 != null">
+        extend5 = #{extend5,jdbcType=OTHER},
+      </if>
+      <if test="extend6 != null">
+        extend6 = #{extend6,jdbcType=OTHER},
+      </if>
+      <if test="extend7 != null">
+        extend7 = #{extend7,jdbcType=OTHER},
+      </if>
+      <if test="extend8 != null">
+        extend8 = #{extend8,jdbcType=OTHER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ch.pxg.cloud.chpxgcloudauthorserver.model.TbUser">
+    update tb_user
+    set user_id = #{userId,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      detail_info = #{detailInfo,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=SMALLINT},
+      extend1 = #{extend1,jdbcType=OTHER},
+      extend2 = #{extend2,jdbcType=OTHER},
+      extend3 = #{extend3,jdbcType=OTHER},
+      extend4 = #{extend4,jdbcType=OTHER},
+      extend5 = #{extend5,jdbcType=OTHER},
+      extend6 = #{extend6,jdbcType=OTHER},
+      extend7 = #{extend7,jdbcType=OTHER},
+      extend8 = #{extend8,jdbcType=OTHER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
