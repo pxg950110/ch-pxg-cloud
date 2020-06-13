@@ -15,8 +15,7 @@
   <select id="selectByServerId" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
-    from appsystem.config_properties where server_id=#{serverId}
-    where
+    from  appsystem.config_properties where server_id=#{serverId}
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
