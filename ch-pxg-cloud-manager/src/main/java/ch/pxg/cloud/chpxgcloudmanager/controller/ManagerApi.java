@@ -64,6 +64,8 @@ public class ManagerApi {
     }
 
 
+    @ApiOperation("获取单个server")
+    @GetMapping("/server/info")
     public CommonResult<SystemConfig> getServerInfo(ServerRequestVi serverRequestVi, HttpServletRequest request, HttpServletResponse response){
 
         return  managerServer.getServerInfo(serverRequestVi,request,response);
