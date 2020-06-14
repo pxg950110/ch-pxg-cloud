@@ -23,7 +23,7 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from `system_config`
+    from appsystem.system_config
     where `id` = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -31,7 +31,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudmanager.model.SystemConfig" useGeneratedKeys="true">
-    insert into system_config (`server_name`, server_info, profile, 
+    insert into appsystem.system_config (`server_name`, server_info, profile,
       `label`, version, create_time
       )
     values (#{serverName,jdbcType=VARCHAR}, #{serverInfo,jdbcType=VARCHAR}, #{profile,jdbcType=VARCHAR}, 
@@ -39,7 +39,7 @@
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudmanager.model.SystemConfig" useGeneratedKeys="true">
-    insert into system_config
+    insert into appsystem.system_config
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="serverName != null">
         `server_name`,
@@ -82,7 +82,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="ch.pxg.cloud.chpxgcloudmanager.model.SystemConfig">
-    update system_config
+    update appsystem.system_config
     <set>
       <if test="serverName != null">
         `server_name` = #{serverName,jdbcType=VARCHAR},
@@ -106,7 +106,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="ch.pxg.cloud.chpxgcloudmanager.model.SystemConfig">
-    update system_config
+    update appsystem.system_config
     set `server_name` = #{serverName,jdbcType=VARCHAR},
       server_info = #{serverInfo,jdbcType=VARCHAR},
       profile = #{profile,jdbcType=VARCHAR},
