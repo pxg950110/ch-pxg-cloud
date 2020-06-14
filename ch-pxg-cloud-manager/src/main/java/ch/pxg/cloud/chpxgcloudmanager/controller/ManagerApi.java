@@ -1,12 +1,14 @@
 package ch.pxg.cloud.chpxgcloudmanager.controller;
 
 import ch.pxg.cloud.chpxgcloudmanager.model.ConfigProperties;
+import ch.pxg.cloud.chpxgcloudmanager.model.SystemConfig;
 import ch.pxg.cloud.chpxgcloudmanager.model.reponse.ServerReponseVi;
 import ch.pxg.cloud.chpxgcloudmanager.model.request.ConfigRequestVI;
 import ch.pxg.cloud.chpxgcloudmanager.model.request.ServerRequestVi;
 import ch.pxg.cloud.chpxgcloudmanager.server.ManagerServer;
 import ch.pxg.cloud.chpxgcloudmanager.util.CommonResult;
 import io.swagger.annotations.ApiOperation;
+import org.apache.catalina.util.ServerInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,5 +61,11 @@ public class ManagerApi {
     @GetMapping("/server/config/list")
     public CommonResult<List<ConfigProperties>> getConfigByServerId(ConfigRequestVI configRequestVI, HttpServletRequest request, HttpServletResponse response){
         return managerServer.getConfigByServerId( configRequestVI,  request,  response);
+    }
+
+
+    public CommonResult<SystemConfig> getServerInfo(ServerRequestVi serverRequestVi, HttpServletRequest request, HttpServletResponse response){
+
+        return  managerServer.getServerInfo(serverRequestVi,request,response);
     }
 }
