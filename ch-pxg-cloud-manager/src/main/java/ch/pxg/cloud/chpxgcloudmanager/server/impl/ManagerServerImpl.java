@@ -93,17 +93,13 @@ public class ManagerServerImpl implements ManagerServer, Serializable {
      * @return
      */
     @Override
-    public CommonResult saveServerConfig(SaveServerConfigRequestVI saveServerConfigRequestVI, HttpServletRequest request, HttpServletResponse response) {
+    public CommonResult<String> saveServerConfig(SaveServerConfigRequestVI saveServerConfigRequestVI, HttpServletRequest request, HttpServletResponse response) {
         //服务的配置 key value 不允许为空
-        if (StringUtils.isEmpty(saveServerConfigRequestVI.getPropertyKey()) || StringUtils.isEmpty(saveServerConfigRequestVI.getPropertyValue())) {
+        if (StringUtils.isEmpty(saveServerConfigRequestVI.getPropertyKey()) || StringUtils.isEmpty(saveServerConfigRequestVI.getPropertyValue())
+        ||saveServerConfigRequestVI.getPropertyKey().equals("string")) {
             response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
-            return CommonResult.commomResult(null, HttpResultStatus.STATUS400, "服务配置key && value 不允许为空");
+            return CommonResult.commomResult("服务配置key && value 不允许为空", HttpResultStatus.STATUS400);
         }
-//        if (saveServerConfigRequestVI.getPropertyKey().equals(""))
-//        {
-//            response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
-//            return CommonResult.commomResult(null, HttpResultStatus.STATUS400, "服务配置key && value 不允许为空");
-//        }
         // 检查服务在库中是否存在
         if (systemConfigMapper.selectByPrimaryKey(saveServerConfigRequestVI.getServerId()) == null) {
             response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
