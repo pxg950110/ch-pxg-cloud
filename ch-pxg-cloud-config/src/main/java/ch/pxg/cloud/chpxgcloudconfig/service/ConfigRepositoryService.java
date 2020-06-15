@@ -30,13 +30,13 @@ public class ConfigRepositoryService {
     private ConfigPropertiseRepository configPropertiseRepository;
 
     public Environment findByApplicationAndProfileAndLabel(String application, String profile, String label) {
-        SystemConfig systemConfig=systemConfigDbRepository.getByServerNameAndProfileAndLabelAndIsDeleted(
-                application,profile,label,0
+        SystemConfig systemConfig=systemConfigDbRepository.getByServerNameAndProfileAndLabel(
+                application,profile,label
         );
 
         Environment environment=new Environment(application,profile,label,null,null);
         //serverId为0 默认为公共配置
-        List<ConfigProperties> configProperties=configPropertiseRepository.getAllByServerIdOrServerId(systemConfig.getId(),0);
+        List<ConfigProperties> configProperties=configPropertiseRepository.getAllByIsDeletedAndServerIdOrServerId(0,systemConfig.getId(),0);
         List<PropertySource> propertySources = new ArrayList<>();
         configProperties.forEach(
                 configProperties1 -> {

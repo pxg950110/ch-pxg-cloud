@@ -15,7 +15,7 @@
   <select id="selectByServerId" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
-    from  appsystem.config_properties where server_id=#{serverId}
+    from  appsystem.config_properties where server_id=#{serverId} and is_deleted=0
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

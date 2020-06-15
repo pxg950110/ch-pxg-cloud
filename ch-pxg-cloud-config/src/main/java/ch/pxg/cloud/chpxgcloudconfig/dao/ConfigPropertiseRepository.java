@@ -25,4 +25,5 @@ public interface ConfigPropertiseRepository
 extends JpaRepository<ConfigProperties,Integer> {
     //    id为0时表示为公共配置
     List<ConfigProperties> getAllByServerIdOrServerId(long serverId, long serverId2);
+    List<ConfigProperties> getAllByIsDeletedAndServerIdOrServerId(Integer isDeleted, long serverId, long serverId2);
 }
