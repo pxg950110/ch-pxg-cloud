@@ -4,6 +4,7 @@ import ch.pxg.cloud.chpxgcloudmanager.model.ConfigProperties;
 import ch.pxg.cloud.chpxgcloudmanager.model.SystemConfig;
 import ch.pxg.cloud.chpxgcloudmanager.model.reponse.ServerReponseVi;
 import ch.pxg.cloud.chpxgcloudmanager.model.request.ConfigRequestVI;
+import ch.pxg.cloud.chpxgcloudmanager.model.request.SaveServerConfigRequestVI;
 import ch.pxg.cloud.chpxgcloudmanager.model.request.ServerRequestVi;
 import ch.pxg.cloud.chpxgcloudmanager.server.ManagerServer;
 import ch.pxg.cloud.chpxgcloudmanager.util.CommonResult;
@@ -12,6 +13,7 @@ import org.apache.catalina.util.ServerInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,5 +71,11 @@ public class ManagerApi {
     public CommonResult<SystemConfig> getServerInfo(ServerRequestVi serverRequestVi, HttpServletRequest request, HttpServletResponse response){
 
         return  managerServer.getServerInfo(serverRequestVi,request,response);
+    }
+
+    @ApiOperation("保存配置信息,单条")
+    @PostMapping("/server/config/save")
+    public CommonResult saveServerConfig(@RequestBody  SaveServerConfigRequestVI  saveServerConfigRequestVI, HttpServletRequest request, HttpServletResponse response){
+        return managerServer.saveServerConfig(saveServerConfigRequestVI,request,response);
     }
 }

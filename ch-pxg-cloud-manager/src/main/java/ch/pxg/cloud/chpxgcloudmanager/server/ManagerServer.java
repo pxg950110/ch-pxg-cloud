@@ -4,6 +4,7 @@ import ch.pxg.cloud.chpxgcloudmanager.model.ConfigProperties;
 import ch.pxg.cloud.chpxgcloudmanager.model.SystemConfig;
 import ch.pxg.cloud.chpxgcloudmanager.model.reponse.ServerReponseVi;
 import ch.pxg.cloud.chpxgcloudmanager.model.request.ConfigRequestVI;
+import ch.pxg.cloud.chpxgcloudmanager.model.request.SaveServerConfigRequestVI;
 import ch.pxg.cloud.chpxgcloudmanager.model.request.ServerRequestVi;
 import ch.pxg.cloud.chpxgcloudmanager.util.CommonResult;
 import org.apache.catalina.util.ServerInfo;
@@ -41,4 +42,6 @@ public interface ManagerServer {
      * @return
      */
     CommonResult<SystemConfig> getServerInfo(ServerRequestVi serverRequestVi, HttpServletRequest request, HttpServletResponse response);
+
+    CommonResult saveServerConfig(SaveServerConfigRequestVI saveServerConfigRequestVI, HttpServletRequest request, HttpServletResponse response);
 }

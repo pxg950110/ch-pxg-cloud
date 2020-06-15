@@ -23,6 +23,30 @@
     from appsystem.config_properties
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectSelective" resultType="ch.pxg.cloud.chpxgcloudmanager.model.ConfigProperties">
+    select
+    <include refid="Base_Column_List"/>
+    from appsystem.config_properties
+    <where>
+      <trim prefixOverrides="and">
+        <if test="id != null">
+          and   id=#{id,jdbcType=INTEGER}
+        </if>
+        <if test="propertyKey != null">
+        and   property_key=#{propertyKey,jdbcType=VARCHAR}
+        </if>
+        <if test="propertyValue != null">
+          and property_value=  #{propertyValue,jdbcType=VARCHAR}
+        </if>
+        <if test="serverId != null">
+        and  server_id= #{serverId,jdbcType=INTEGER}
+        </if>
+        <if test="des != null">
+          and des= #{des,jdbcType=VARCHAR}
+        </if>
+      </trim>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from appsystem.config_properties
     where id = #{id,jdbcType=INTEGER}

@@ -19,4 +19,6 @@ public interface ConfigPropertiesMapper {
     int updateByPrimaryKeySelective(ConfigProperties record);
 
     int updateByPrimaryKey(ConfigProperties record);
+
+    List<ConfigProperties> selectSelective(ConfigProperties configProperties);
 }

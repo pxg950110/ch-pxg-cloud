@@ -6,6 +6,7 @@ import ch.pxg.cloud.chpxgcloudmanager.model.ConfigProperties;
 import ch.pxg.cloud.chpxgcloudmanager.model.SystemConfig;
 import ch.pxg.cloud.chpxgcloudmanager.model.reponse.ServerReponseVi;
 import ch.pxg.cloud.chpxgcloudmanager.model.request.ConfigRequestVI;
+import ch.pxg.cloud.chpxgcloudmanager.model.request.SaveServerConfigRequestVI;
 import ch.pxg.cloud.chpxgcloudmanager.model.request.ServerRequestVi;
 import ch.pxg.cloud.chpxgcloudmanager.server.ManagerServer;
 import ch.pxg.cloud.chpxgcloudmanager.util.CommonResult;
@@ -80,7 +81,43 @@ public class ManagerServerImpl implements ManagerServer, Serializable {
             return CommonResult.commomResult(null, HttpResultStatus.STATUS300, "请求参数为空");
         }
         // 通过主键查询服务
-        SystemConfig systemConfig=systemConfigMapper.selectByPrimaryKey(serverRequestVi.getServerId());
-        return CommonResult.commomResult(systemConfig,HttpResultStatus.STATUS200);
+        SystemConfig systemConfig = systemConfigMapper.selectByPrimaryKey(serverRequestVi.getServerId());
+        return CommonResult.commomResult(systemConfig, HttpResultStatus.STATUS200);
+    }
+
+    /**
+     * 更新或者插入配置文件
+     * @param saveServerConfigRequestVI
+     * @param request
+     * @param response
+     * @return
+     */
+    @Override
+    public CommonResult saveServerConfig(SaveServerConfigRequestVI saveServerConfigRequestVI, HttpServletRequest request, HttpServletResponse response) {
+        //服务的配置 key value 不允许为空
+        if (StringUtils.isEmpty(saveServerConfigRequestVI.getPropertyKey()) || StringUtils.isEmpty(saveServerConfigRequestVI.getPropertyValue())) {
+            response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
+            return CommonResult.commomResult(null, HttpResultStatus.STATUS400, "服务配置key && value 不允许为空");
+        }
+        // 检查服务在库中是否存在
+        if (systemConfigMapper.selectByPrimaryKey(saveServerConfigRequestVI.getServerId()) == null) {
+            response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
+            return CommonResult.commomResult(null, HttpResultStatus.STATUS400, "服务不存在    &&  请检查所选择的服务是否正确");
+        }
+        // 插入或者更新数据 通过 key  serverId 查询 数据
+        //  serverid key  唯一
+        List<ConfigProperties> configPropertiesList = configPropertiesMapper.selectSelective(new ConfigProperties(saveServerConfigRequestVI.getPropertyKey(), saveServerConfigRequestVI.getServerId()));
+        // saveServerConfigRequestVI
+        ConfigProperties configProperties = new ConfigProperties(saveServerConfigRequestVI.getPropertyId(), saveServerConfigRequestVI.getPropertyKey(),
+                saveServerConfigRequestVI.getPropertyValue(), saveServerConfigRequestVI.getServerId(), saveServerConfigRequestVI.getDescription());
+        //数据不存在执行插入
+        if (configPropertiesList.size() <= 0) {
+            configPropertiesMapper.insert(configProperties);
+        } else {
+            // 数据存在执行更新操作
+            configProperties.setServerId(configPropertiesList.get(0).getId());
+            configPropertiesMapper.updateByPrimaryKey(configProperties);
+        }
+        return CommonResult.commomResult(null, HttpResultStatus.STATUS200);
     }
 }
