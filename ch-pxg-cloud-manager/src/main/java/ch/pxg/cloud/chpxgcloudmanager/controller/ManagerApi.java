@@ -9,7 +9,6 @@ import ch.pxg.cloud.chpxgcloudmanager.model.request.ServerRequestVi;
 import ch.pxg.cloud.chpxgcloudmanager.server.ManagerServer;
 import ch.pxg.cloud.chpxgcloudmanager.util.CommonResult;
 import io.swagger.annotations.ApiOperation;
-import org.apache.catalina.util.ServerInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,7 +60,9 @@ public class ManagerApi {
 
     @ApiOperation("获取该服务下的配置信息")
     @GetMapping("/server/config/list")
-    public CommonResult<List<ConfigProperties>> getConfigByServerId(ConfigRequestVI configRequestVI, HttpServletRequest request, HttpServletResponse response){
+    public CommonResult<List<ConfigProperties>> getConfigByServerId(ConfigRequestVI configRequestVI,
+                                                                    HttpServletRequest request,
+                                                                    HttpServletResponse response){
         return managerServer.getConfigByServerId( configRequestVI,  request,  response);
     }
 
