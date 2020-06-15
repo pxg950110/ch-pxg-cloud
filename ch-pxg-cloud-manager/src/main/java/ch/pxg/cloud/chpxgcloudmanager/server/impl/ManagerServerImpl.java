@@ -95,15 +95,18 @@ public class ManagerServerImpl implements ManagerServer, Serializable {
     @Override
     public CommonResult<String> saveServerConfig(SaveServerConfigRequestVI saveServerConfigRequestVI, HttpServletRequest request, HttpServletResponse response) {
         //服务的配置 key value 不允许为空
-        if (StringUtils.isEmpty(saveServerConfigRequestVI.getPropertyKey()) || StringUtils.isEmpty(saveServerConfigRequestVI.getPropertyValue())
-        ||saveServerConfigRequestVI.getPropertyKey().equals("string")) {
+        if (StringUtils.isEmpty(saveServerConfigRequestVI.getPropertyKey()) || StringUtils.isEmpty(saveServerConfigRequestVI.getPropertyValue())) {
+            response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
+            return CommonResult.commomResult("服务配置key && value 不允许为空", HttpResultStatus.STATUS400);
+        }
+        if("string".equals(saveServerConfigRequestVI.getPropertyKey().trim())){
             response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
             return CommonResult.commomResult("服务配置key && value 不允许为空", HttpResultStatus.STATUS400);
         }
         // 检查服务在库中是否存在
         if (systemConfigMapper.selectByPrimaryKey(saveServerConfigRequestVI.getServerId()) == null) {
             response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
-            return CommonResult.commomResult(null, HttpResultStatus.STATUS400, "服务不存在    &&  请检查所选择的服务是否正确");
+            return CommonResult.commomResult("请求参数不存在    &&  请检查所选择的服务是否正确", HttpResultStatus.STATUS400);
         }
         // 插入或者更新数据 通过 key  serverId 查询 数据
         //  serverid key  唯一
