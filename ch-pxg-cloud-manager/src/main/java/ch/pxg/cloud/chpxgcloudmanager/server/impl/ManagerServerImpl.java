@@ -99,11 +99,11 @@ public class ManagerServerImpl implements ManagerServer, Serializable {
             response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
             return CommonResult.commomResult(null, HttpResultStatus.STATUS400, "服务配置key && value 不允许为空");
         }
-        if (saveServerConfigRequestVI.getPropertyKey().equals("string"))
-        {
-            response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
-            return CommonResult.commomResult(null, HttpResultStatus.STATUS400, "服务配置key && value 不允许为空");
-        }
+//        if (saveServerConfigRequestVI.getPropertyKey().equals(""))
+//        {
+//            response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
+//            return CommonResult.commomResult(null, HttpResultStatus.STATUS400, "服务配置key && value 不允许为空");
+//        }
         // 检查服务在库中是否存在
         if (systemConfigMapper.selectByPrimaryKey(saveServerConfigRequestVI.getServerId()) == null) {
             response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
