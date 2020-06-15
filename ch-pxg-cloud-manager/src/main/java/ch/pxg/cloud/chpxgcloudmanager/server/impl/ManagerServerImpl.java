@@ -119,6 +119,6 @@ public class ManagerServerImpl implements ManagerServer, Serializable {
             configProperties.setServerId(configPropertiesList.get(0).getId());
             configPropertiesMapper.updateByPrimaryKey(configProperties);
         }
-        return CommonResult.commomResult(null, HttpResultStatus.STATUS200);
+        return CommonResult.commomResult("保存成功", HttpResultStatus.STATUS200);
     }
 }

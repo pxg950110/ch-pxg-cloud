@@ -76,7 +76,7 @@ public class ManagerApi {
 
     @ApiOperation("保存配置信息,单条")
     @PostMapping("/server/config/save")
-    public CommonResult saveServerConfig(@RequestBody  SaveServerConfigRequestVI  saveServerConfigRequestVI, HttpServletRequest request, HttpServletResponse response){
+    public CommonResult<String> saveServerConfig(@RequestBody  SaveServerConfigRequestVI  saveServerConfigRequestVI, HttpServletRequest request, HttpServletResponse response){
         return managerServer.saveServerConfig(saveServerConfigRequestVI,request,response);
     }
 }
