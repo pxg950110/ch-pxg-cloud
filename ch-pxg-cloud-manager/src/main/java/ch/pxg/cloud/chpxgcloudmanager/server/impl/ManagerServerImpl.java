@@ -104,6 +104,7 @@ public class ManagerServerImpl implements ManagerServer, Serializable {
             response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
             return CommonResult.commomResult("请求参数不存在    &&  请检查所选择的服务是否正确", HttpResultStatus.STATUS400);
         }
+
         // 插入或者更新数据 通过 key  serverId 查询 数据
         //  serverid key  唯一
         List<ConfigProperties> configPropertiesList = configPropertiesMapper.selectSelective(new ConfigProperties(saveServerConfigRequestVI.getPropertyKey(), saveServerConfigRequestVI.getServerId()));

@@ -52,7 +52,7 @@ public enum HttpResultStatus {
     //    因为http1.0和http1.1的差别因此有交叉
     //400-499 客户端错误状态码
     //    400 bad request 错误请求
-    STATUS400(100, "bad request", "错误请求"),
+    STATUS400(400, "bad request", "错误请求"),
     //    401 unauthorized 没权限
     STATUS401(401, "unauthorized", "没权限"),
     //    402 payment required 未使用
