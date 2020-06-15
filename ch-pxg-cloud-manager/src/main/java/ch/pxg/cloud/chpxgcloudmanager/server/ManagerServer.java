@@ -44,4 +44,6 @@ public interface ManagerServer {
     CommonResult<SystemConfig> getServerInfo(ServerRequestVi serverRequestVi, HttpServletRequest request, HttpServletResponse response);
 
     CommonResult<String> saveServerConfig(SaveServerConfigRequestVI saveServerConfigRequestVI, HttpServletRequest request, HttpServletResponse response);
+
+    CommonResult<String> deleteServerConfig(Integer configId, HttpServletRequest request, HttpServletResponse response);
 }

@@ -30,8 +30,8 @@ public class ConfigRepositoryService {
     private ConfigPropertiseRepository configPropertiseRepository;
 
     public Environment findByApplicationAndProfileAndLabel(String application, String profile, String label) {
-        SystemConfig systemConfig=systemConfigDbRepository.getByServerNameAndProfileAndLabel(
-                application,profile,label
+        SystemConfig systemConfig=systemConfigDbRepository.getByServerNameAndProfileAndLabelAndIsDeleted(
+                application,profile,label,0
         );
 
         Environment environment=new Environment(application,profile,label,null,null);

@@ -21,13 +21,13 @@
     select 
     <include refid="Base_Column_List" />
     from appsystem.config_properties
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER} and is_deleted=0
   </select>
   <select id="selectSelective" resultType="ch.pxg.cloud.chpxgcloudmanager.model.ConfigProperties">
     select
     <include refid="Base_Column_List"/>
     from appsystem.config_properties
-    <where>
+    <where> is_deleted=0 and
       <trim prefixOverrides="and">
         <if test="id != null">
           and   id=#{id,jdbcType=INTEGER}
@@ -47,10 +47,10 @@
       </trim>
     </where>
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from appsystem.config_properties
+  <update id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    update appsystem.config_properties set is_deleted=1
     where id = #{id,jdbcType=INTEGER}
-  </delete>
+  </update>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudmanager.model.ConfigProperties" useGeneratedKeys="true">
     insert into appsystem.config_properties  (property_key, property_value, server_id,
       des)

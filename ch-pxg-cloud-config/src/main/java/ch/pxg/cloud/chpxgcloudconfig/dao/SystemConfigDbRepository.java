@@ -23,6 +23,6 @@ import java.util.List;
  */
 public interface SystemConfigDbRepository extends
         JpaRepository<SystemConfig,Integer> {
-    SystemConfig getByServerNameAndProfileAndLabel(String serverName, String profile, String label);
+    SystemConfig getByServerNameAndProfileAndLabelAndIsDeleted(String serverName, String profile, String label,Integer isDeleted);
 
 }

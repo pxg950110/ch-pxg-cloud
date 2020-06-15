@@ -99,6 +99,10 @@ public class ManagerServerImpl implements ManagerServer, Serializable {
             response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
             return CommonResult.commomResult("服务配置key && value 不允许为空", HttpResultStatus.STATUS400);
         }
+        if ("string".equals(saveServerConfigRequestVI.getPropertyKey())){
+            response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
+            return CommonResult.commomResult("服务配置key 不允许为空", HttpResultStatus.STATUS400);
+        }
         // 检查服务在库中是否存在
         if (systemConfigMapper.selectByPrimaryKey(saveServerConfigRequestVI.getServerId()) ==null) {
             response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
@@ -116,9 +120,26 @@ public class ManagerServerImpl implements ManagerServer, Serializable {
             configPropertiesMapper.insert(configProperties);
         } else {
             // 数据存在执行更新操作
-            configProperties.setServerId(configPropertiesList.get(0).getId());
+            configProperties.setId(configPropertiesList.get(0).getId());
             configPropertiesMapper.updateByPrimaryKey(configProperties);
         }
         return CommonResult.commomResult("保存成功", HttpResultStatus.STATUS200);
+    }
+
+    /**
+     * 删除数据的操作  在数据库中是修改数据的is_deleted状态
+     * @param configId
+     * @param request
+     * @param response
+     * @return
+     */
+    @Override
+    public CommonResult<String> deleteServerConfig(Integer configId, HttpServletRequest request, HttpServletResponse response) {
+       if (configPropertiesMapper.selectByPrimaryKey(configId)==null){
+           response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
+          return CommonResult.commomResult("配置信息不存在",HttpResultStatus.STATUS400);
+       }
+       configPropertiesMapper.deleteByPrimaryKey(configId);
+        return  CommonResult.commomResult(null,HttpResultStatus.STATUS200);
     }
 }

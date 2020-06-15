@@ -10,10 +10,7 @@ import ch.pxg.cloud.chpxgcloudmanager.server.ManagerServer;
 import ch.pxg.cloud.chpxgcloudmanager.util.CommonResult;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -78,5 +75,12 @@ public class ManagerApi {
     @PostMapping("/server/config/save")
     public CommonResult<String> saveServerConfig(@RequestBody  SaveServerConfigRequestVI  saveServerConfigRequestVI, HttpServletRequest request, HttpServletResponse response){
         return managerServer.saveServerConfig(saveServerConfigRequestVI,request,response);
+    }
+
+    // 关键配置信息 不做删除操作
+    @DeleteMapping("/server/config/delete")
+    @ApiOperation("删除单条配置")
+    public CommonResult<String> deleteServerConfig(Integer configId,HttpServletRequest request,HttpServletResponse response){
+        return managerServer.deleteServerConfig(configId,request,response);
     }
 }

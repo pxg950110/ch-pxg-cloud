@@ -19,6 +19,16 @@ public class ConfigProperties {
   @Column(name = "des")
   private String des;
 
+  @Column(name = "is_deleted")
+  private Integer isDeleted;
+
+  public Integer getIsDeleted() {
+    return isDeleted;
+  }
+
+  public void setIsDeleted(Integer isDeleted) {
+    this.isDeleted = isDeleted;
+  }
 
   public long getId() {
     return id;
