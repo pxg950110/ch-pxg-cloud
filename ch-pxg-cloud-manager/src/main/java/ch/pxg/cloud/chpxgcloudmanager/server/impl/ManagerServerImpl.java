@@ -95,8 +95,12 @@ public class ManagerServerImpl implements ManagerServer, Serializable {
     @Override
     public CommonResult saveServerConfig(SaveServerConfigRequestVI saveServerConfigRequestVI, HttpServletRequest request, HttpServletResponse response) {
         //服务的配置 key value 不允许为空
-        if (StringUtils.isEmpty(saveServerConfigRequestVI.getPropertyKey()) || StringUtils.isEmpty(saveServerConfigRequestVI.getPropertyValue())||
-                saveServerConfigRequestVI.getPropertyKey().equals("string")) {
+        if (StringUtils.isEmpty(saveServerConfigRequestVI.getPropertyKey()) || StringUtils.isEmpty(saveServerConfigRequestVI.getPropertyValue())) {
+            response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
+            return CommonResult.commomResult(null, HttpResultStatus.STATUS400, "服务配置key && value 不允许为空");
+        }
+        if (saveServerConfigRequestVI.getPropertyKey().equals("string"))
+        {
             response.setStatus(HttpResultStatus.STATUS400.getStatusCode());
             return CommonResult.commomResult(null, HttpResultStatus.STATUS400, "服务配置key && value 不允许为空");
         }
