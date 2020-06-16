@@ -26,15 +26,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tb_user
+    from appuser.tb_user
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tb_user
+    delete from appuser.tb_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudauthorserver.model.TbUser" useGeneratedKeys="true">
-    insert into tb_user (user_id, email, phone, 
+    insert into appuser.tb_user (user_id, email, phone,
       `name`, detail_info, `status`, 
       extend1, extend2, extend3, 
       extend4, extend5, extend6, 
@@ -48,7 +48,7 @@
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudauthorserver.model.TbUser" useGeneratedKeys="true">
-    insert into tb_user
+    insert into appuser.tb_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
         user_id,
@@ -145,7 +145,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="ch.pxg.cloud.chpxgcloudauthorserver.model.TbUser">
-    update tb_user
+    update appuser.tb_user
     <set>
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
@@ -196,7 +196,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="ch.pxg.cloud.chpxgcloudauthorserver.model.TbUser">
-    update tb_user
+    update appuser.tb_user
     set user_id = #{userId,jdbcType=INTEGER},
       email = #{email,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},

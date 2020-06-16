@@ -10,7 +10,7 @@ spring:
           lower-case-service-id: true
       routes:
         - id: rabbit-server
-          uri:  lb://rabbit-server
+          uri:  http://192.168.126.1:7002
           predicates:
             - Path=/rabbit/**
         - id: product-server
@@ -51,7 +51,7 @@ spring:
           predicates:
             - Path=/common/**
         - id: config-server
-          uri:  lb://config-server
+          uri:  http://192.168.126.1:6000
           predicates:
             - Path=/config/**
         - id: sidecar-python

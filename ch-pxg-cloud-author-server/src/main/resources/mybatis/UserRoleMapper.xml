@@ -14,21 +14,21 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user_role
+    from appuser.user_role
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user_role
+    delete from appuser.user_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudauthorserver.model.UserRole" useGeneratedKeys="true">
-    insert into user_role (`name`, description, `status`, 
+    insert into appuser.user_role (`name`, description, `status`,
       create_time)
     values (#{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudauthorserver.model.UserRole" useGeneratedKeys="true">
-    insert into user_role
+    insert into appuser.user_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">
         `name`,
@@ -77,7 +77,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="ch.pxg.cloud.chpxgcloudauthorserver.model.UserRole">
-    update user_role
+    update appuser.user_role
     set `name` = #{name,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       `status` = #{status,jdbcType=INTEGER},

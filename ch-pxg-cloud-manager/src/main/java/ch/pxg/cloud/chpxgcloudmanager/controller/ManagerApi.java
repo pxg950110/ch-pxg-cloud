@@ -7,8 +7,11 @@ import ch.pxg.cloud.chpxgcloudmanager.model.request.ConfigRequestVI;
 import ch.pxg.cloud.chpxgcloudmanager.model.request.SaveServerConfigRequestVI;
 import ch.pxg.cloud.chpxgcloudmanager.model.request.ServerRequestVi;
 import ch.pxg.cloud.chpxgcloudmanager.server.ManagerServer;
+import ch.pxg.cloud.chpxgcloudmanager.server.impl.ManagerServerImpl;
 import ch.pxg.cloud.chpxgcloudmanager.util.CommonResult;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +32,7 @@ import java.util.List;
  */
 @RestController
 public class ManagerApi {
-
+    private  static Logger log= LoggerFactory.getLogger(ManagerApi.class);
     @Autowired
     ManagerServer managerServer;
     @ApiOperation("测试")

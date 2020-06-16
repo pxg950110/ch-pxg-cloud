@@ -11,19 +11,19 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user_permission
+    from appuser.user_permission
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user_permission
+    delete from appuser.user_permission
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="user_id" keyProperty="userId" parameterType="ch.pxg.cloud.chpxgcloudauthorserver.model.UserPermission" useGeneratedKeys="true">
-    insert into user_permission (role_id)
+    insert into appuser.user_permission (role_id)
     values (#{roleId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="user_id" keyProperty="userId" parameterType="ch.pxg.cloud.chpxgcloudauthorserver.model.UserPermission" useGeneratedKeys="true">
-    insert into user_permission
+    insert into appuser.user_permission
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roleId != null">
         role_id,
@@ -36,7 +36,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="ch.pxg.cloud.chpxgcloudauthorserver.model.UserPermission">
-    update user_permission
+    update appuser.user_permission
     <set>
       <if test="roleId != null">
         role_id = #{roleId,jdbcType=INTEGER},
@@ -45,7 +45,7 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="ch.pxg.cloud.chpxgcloudauthorserver.model.UserPermission">
-    update user_permission
+    update appuser.user_permission
     set role_id = #{roleId,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>

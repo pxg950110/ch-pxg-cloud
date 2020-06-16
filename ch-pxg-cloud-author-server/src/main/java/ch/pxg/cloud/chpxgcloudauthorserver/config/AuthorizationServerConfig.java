@@ -31,9 +31,6 @@ public class AuthorizationServerConfig  extends AuthorizationServerConfigurerAda
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
-
-
-
     @Bean
     public RedisTokenStore redisTokenStore(){
         return new RedisTokenStore(redisConnectionFactory);

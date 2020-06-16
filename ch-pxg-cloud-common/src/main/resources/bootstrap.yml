@@ -3,7 +3,7 @@ spring:
     name: common-server
   cloud:
     config:
-      uri: http://localhost:5080
+      uri: http://192.168.174.131:5080
       fail-fast: true
       label: master
       profile: dev
@@ -23,11 +23,12 @@ server:
   port: 6000
   servlet:
     context-path: /common
+  address: 0.0.0.0
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:5060/eureka/eureka
+      defaultZone: http://192.168.174.131:5060/eureka/eureka
 #  spring.mail.username=pxg950110@163.com
   #授权码g，在QQ邮箱客户端生成 修改成自己的 ,小心会报错  设置-账户-开启服务-获取授权码
 #  spring.mail.password=********

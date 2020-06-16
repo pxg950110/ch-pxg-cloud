@@ -1,7 +1,9 @@
 package ch.pxg.cloud.chpxgcloudauthorserver.controller;
 
 import ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi.LoginVI;
+import ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi.MailCodeVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi.UserRegistVI;
+import ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi.MailCodeResponseVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi.UserInfoVi;
 import ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi.UserRegistResponseVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.server.AuthorService;
@@ -10,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -63,5 +66,21 @@ private AuthorService authorService;
                 request,
                 response
         );
+    }
+
+    /**
+     * 发送邮箱接口
+     * @param mailCodeVI
+     * @param request
+     * @param response
+     * @return
+     */
+    @ApiOperation("发送邮件")
+    @PostMapping("/mail/send")
+    public CommonResult<MailCodeResponseVI> sendMailCode(@RequestBody MailCodeVI mailCodeVI ,
+                                                         HttpServletRequest request,
+                                                         HttpServletResponse response){
+        //发送邮件
+        return null;
     }
 }

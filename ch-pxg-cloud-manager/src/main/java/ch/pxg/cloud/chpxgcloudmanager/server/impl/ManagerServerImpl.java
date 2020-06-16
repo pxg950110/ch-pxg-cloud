@@ -12,6 +12,8 @@ import ch.pxg.cloud.chpxgcloudmanager.server.ManagerServer;
 import ch.pxg.cloud.chpxgcloudmanager.util.CommonResult;
 import ch.pxg.cloud.chpxgcloudmanager.util.HttpResultStatus;
 import org.apache.catalina.util.ServerInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -36,11 +38,13 @@ import java.util.List;
 @Service
 public class ManagerServerImpl implements ManagerServer, Serializable {
 
+    private  static Logger log= LoggerFactory.getLogger(ManagerServerImpl.class);
     @Autowired
     SystemConfigMapper systemConfigMapper;
 
     @Autowired
     ConfigPropertiesMapper configPropertiesMapper;
+
 
     /**
      * 获取所有服务的接口
@@ -51,7 +55,7 @@ public class ManagerServerImpl implements ManagerServer, Serializable {
      */
     @Override
     public CommonResult<ServerReponseVi> getAllServer(ServerRequestVi serverRequestVi, HttpServletRequest request, HttpServletResponse response) {
-
+        //
         //获取所有服务
         return CommonResult.commomResult(new ServerReponseVi(systemConfigMapper.selectAll()), HttpResultStatus.STATUS200);
     }

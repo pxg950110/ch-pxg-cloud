@@ -24,7 +24,7 @@ public class LoginVI {
     private String password;
     @ApiModelProperty("手机号")
     private String phone;
-    @ApiModelProperty("密码")
+    @ApiModelProperty("邮箱")
     private String email;
     @ApiModelProperty("验证码")
     private String checkCode;
