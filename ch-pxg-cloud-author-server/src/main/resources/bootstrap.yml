@@ -15,6 +15,7 @@ server:
   port: 5090
   servlet:
     context-path: /author
+  address: 0.0.0.0
 eureka:
   client:
     service-url:

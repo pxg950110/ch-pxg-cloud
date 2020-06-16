@@ -41,11 +41,13 @@ spring:
           predicates:
             - Path=/logutil/**
         - id: author-server
-          uri:  lb://author-server
+#          uri:  lb://author-server
+          uri: http://192.168.126.1:5090
           predicates:
             - Path=/author/**
         - id: common-server
           uri:  lb://common-server
+#          uri: http://192.168.126.1:5090
           predicates:
             - Path=/common/**
         - id: config-server

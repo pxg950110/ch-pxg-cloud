@@ -32,12 +32,15 @@ public class UserRegistVI {
     @ApiModelProperty("消息ID")
     private String messageId;
 
-    @ApiModelProperty("用户名/手机号/邮箱")
+    @ApiModelProperty("手机号/邮箱")
     private String userCode;
+    //  用户名  必填项
+    private String userName;
     //前台加密后传递
     // v1.0版本base64方式加密
     @ApiModelProperty("password")
     private String userPassword;
+
 
 
     public UserRegistVI() {
