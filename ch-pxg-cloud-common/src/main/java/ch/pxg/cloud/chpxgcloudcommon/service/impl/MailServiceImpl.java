@@ -61,6 +61,9 @@ public class MailServiceImpl implements MailService {
     @Override
     public void sendMail(EmailCodeVI emailCodeVI) {
         try {
+            if (emailCodeVI.getEmailUrl()==null){
+                return;
+            }
             log.info("获取后台验证码");
             String subject="邮箱验证";
             String code= RandmoUtil.getCode(6);

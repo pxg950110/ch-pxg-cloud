@@ -2,8 +2,12 @@ package ch.pxg.cloud.chpxgcloudrabbitmq.reciver;
 
 import ch.pxg.cloud.chpxgcloudrabbitmq.feignclient.CHCloudCommon;
 import ch.pxg.cloud.chpxgcloudrabbitmq.producer.EmailCodeVI;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONPObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,24 +29,27 @@ import org.springframework.stereotype.Component;
  * @description </p>
  */
 @Component
-@RabbitListener(
-        bindings = @QueueBinding(
-                value = @Queue(
-                        value = "${rabbit.config.queue.info.routing.mail-key}"
-                ), exchange =  @Exchange(value = "${rabbit.config.exchange.name}")
-        ,key ="${rabbit.config.queue.info.routing.mail-key}"
-        )
-)
 public class MailRevicer {
     private final Logger log= LoggerFactory.getLogger(MailRevicer.class);
     @Autowired
     private CHCloudCommon chCloudCommon;
 
 
-    @RabbitHandler
-    public void reciveMail(EmailCodeVI emailCodeVI){
+//    @RabbitHandler
+    @RabbitListener(
+           queues = "${rabbit.config.queue.info.routing.mail-key}"
+    )
+    public void reciveMail(Message message){
        try {
            log.info("发送邮件");
+           log.info(new String(message.getBody()));
+           //获取到mq中的消息
+         JSONObject jsonpObject= JSON.parseObject(new String(message.getBody()));
+
+          EmailCodeVI emailCodeVI=new EmailCodeVI(
+                  jsonpObject.getString("msgId"),
+                  jsonpObject.getString("emailUrl")
+                  );
           chCloudCommon.sendSimpleEmailCode(emailCodeVI);
        }catch (Exception e){
            log.info(e.getMessage());

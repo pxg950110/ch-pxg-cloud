@@ -42,6 +42,9 @@ public class Revicer {
 
     @Autowired
     private  CHCloudCommon chCloudCommon;
+
+
+
     @RabbitHandler
     private  void reciver(LogMessage logMessage){
         try {
