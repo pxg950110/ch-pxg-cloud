@@ -23,8 +23,9 @@ public class EmailCodeVI {
     public EmailCodeVI() {
     }
 
+
     public EmailCodeVI(String emailUrl) {
-        this.msgId= UUID.randomUUID().toString();
+        this.msgId= CommonUtil.UUID();
         this.emailUrl = emailUrl;
     }
 

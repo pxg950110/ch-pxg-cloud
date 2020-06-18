@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ch.pxg.cloud.chpxgcloudcommon.mapper.EmailCodeMapper">
+  <resultMap id="BaseResultMap" type="ch.pxg.cloud.chpxgcloudcommon.model.EmailCode">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="msg_id" jdbcType="VARCHAR" property="msgId" />
+    <result column="msg_detail" jdbcType="VARCHAR" property="msgDetail" />
+    <result column="email_url" jdbcType="VARCHAR" property="emailUrl" />
+    <result column="emial_code" jdbcType="VARCHAR" property="emialCode" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, msg_id, msg_detail, email_url, emial_code, create_time, `status`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from appcommon.email_code
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByEmailUrl" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from appcommon.email_code where email_url= #{emailUrl,jdbcType=VARCHAR} and  status=0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from appcommon.email_code
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.EmailCode" useGeneratedKeys="true">
+    insert into appcommon.email_code (msg_id, msg_detail, email_url,
+      emial_code, create_time, `status`
+      )
+    values (#{msgId,jdbcType=VARCHAR}, #{msgDetail,jdbcType=VARCHAR}, #{emailUrl,jdbcType=VARCHAR}, 
+      #{emialCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.EmailCode" useGeneratedKeys="true">
+    insert into appcommon.email_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="msgId != null">
+        msg_id,
+      </if>
+      <if test="msgDetail != null">
+        msg_detail,
+      </if>
+      <if test="emailUrl != null">
+        email_url,
+      </if>
+      <if test="emialCode != null">
+        emial_code,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="msgId != null">
+        #{msgId,jdbcType=VARCHAR},
+      </if>
+      <if test="msgDetail != null">
+        #{msgDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="emailUrl != null">
+        #{emailUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="emialCode != null">
+        #{emialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.EmailCode">
+    update appcommon.email_code
+    <set>
+      <if test="msgId != null">
+        msg_id = #{msgId,jdbcType=VARCHAR},
+      </if>
+      <if test="msgDetail != null">
+        msg_detail = #{msgDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="emailUrl != null">
+        email_url = #{emailUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="emialCode != null">
+        emial_code = #{emialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.EmailCode">
+    update appcommon.email_code
+    set msg_id = #{msgId,jdbcType=VARCHAR},
+      msg_detail = #{msgDetail,jdbcType=VARCHAR},
+      email_url = #{emailUrl,jdbcType=VARCHAR},
+      emial_code = #{emialCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      `status` = #{status,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateStatusbyPrimary">
+    update appcommon.email_code
+    set  `status` = 2
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

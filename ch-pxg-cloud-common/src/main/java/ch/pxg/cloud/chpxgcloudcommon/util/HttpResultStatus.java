@@ -1,4 +1,4 @@
-package ch.pxg.cloud.chpxgcloudauthorserver.util;
+package ch.pxg.cloud.chpxgcloudcommon.util;
 
 /**
  * <p>

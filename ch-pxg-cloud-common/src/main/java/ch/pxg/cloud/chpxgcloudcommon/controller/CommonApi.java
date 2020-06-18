@@ -2,6 +2,7 @@ package ch.pxg.cloud.chpxgcloudcommon.controller;
 
 import ch.pxg.cloud.chpxgcloudcommon.mail.MailSendUtil;
 import ch.pxg.cloud.chpxgcloudcommon.service.MailService;
+import ch.pxg.cloud.chpxgcloudcommon.util.CommonResult;
 import ch.pxg.cloud.chpxgcloudcommon.util.EmailCodeVI;
 import ch.pxg.cloud.chpxgcloudcommon.util.ResultInfo;
 import com.netflix.discovery.EurekaClient;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,11 +28,6 @@ import java.util.Map;
 /**
  * <p>
  * 2020/3/9  23:43
- * Copyright (c) 2019. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
  * </p>
  * <p>
  * @author pxg
@@ -78,6 +77,11 @@ private MailService mailService;
         mailService.sendMail(emailCodeVI);
     }
 
+    @GetMapping("/mail/check/code")
+    @ApiOperation("验证邮箱的验证码是否正确")
+    public CommonResult<Boolean> checkMailCode(String  msgId, String emailCode, HttpServletRequest request, HttpServletResponse response){
+        return mailService.checkMailCode(msgId,emailCode,request,response);
+    }
     @GetMapping("/")
     @ApiOperation("测试")
     public String test(String to) {

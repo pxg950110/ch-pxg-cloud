@@ -1,6 +1,8 @@
 package ch.pxg.cloud.chpxgcloudauthorserver.server;
 
+import ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi.MailCodeVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.model.requestvi.UserRegistVI;
+import ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi.MailCodeResponseVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi.UserRegistResponseVI;
 import ch.pxg.cloud.chpxgcloudauthorserver.util.CommonResult;
 
@@ -31,8 +33,5 @@ public interface AuthorService {
                                               HttpServletRequest request, HttpServletResponse response);
 
 
-
-
-
-
+    CommonResult<MailCodeResponseVI> sendMailCode(MailCodeVI mailCodeVI, HttpServletRequest request, HttpServletResponse response);
 }

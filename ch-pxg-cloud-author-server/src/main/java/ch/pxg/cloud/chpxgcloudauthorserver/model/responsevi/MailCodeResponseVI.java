@@ -1,5 +1,7 @@
 package ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi;
 
+import lombok.Data;
+
 /**
  * <p>
  * 2020/6/16  10:40
@@ -11,5 +13,15 @@ package ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi;
  * @Version 1.0.0
  * @description </p>
  */
+@Data
 public class MailCodeResponseVI {
+
+    String msgId;
+
+    public MailCodeResponseVI() {
+    }
+
+    public MailCodeResponseVI(String msgId) {
+        this.msgId = msgId;
+    }
 }

@@ -81,6 +81,6 @@ private AuthorService authorService;
                                                          HttpServletRequest request,
                                                          HttpServletResponse response){
         //发送邮件
-        return null;
+        return authorService.sendMailCode(mailCodeVI,request,response);
     }
 }
