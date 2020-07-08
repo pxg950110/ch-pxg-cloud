@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ch.pxg.cloud.chpxgcloudcommon.mapper.QrtzSimpleTriggersMapper">
+  <resultMap id="BaseResultMap" type="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzSimpleTriggers">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="SCHED_NAME" jdbcType="VARCHAR" property="schedName" />
+    <result column="TRIGGER_NAME" jdbcType="VARCHAR" property="triggerName" />
+    <result column="TRIGGER_GROUP" jdbcType="VARCHAR" property="triggerGroup" />
+    <result column="REPEAT_COUNT" jdbcType="BIGINT" property="repeatCount" />
+    <result column="REPEAT_INTERVAL" jdbcType="BIGINT" property="repeatInterval" />
+    <result column="TIMES_TRIGGERED" jdbcType="BIGINT" property="timesTriggered" />
+    <result column="QRTZ_TRIGGERS_id" jdbcType="INTEGER" property="qrtzTriggersId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, SCHED_NAME, `TRIGGER_NAME`, TRIGGER_GROUP, REPEAT_COUNT, REPEAT_INTERVAL, TIMES_TRIGGERED, 
+    QRTZ_TRIGGERS_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from QRTZ_SIMPLE_TRIGGERS
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from QRTZ_SIMPLE_TRIGGERS
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzSimpleTriggers" useGeneratedKeys="true">
+    insert into QRTZ_SIMPLE_TRIGGERS (SCHED_NAME, `TRIGGER_NAME`, TRIGGER_GROUP, 
+      REPEAT_COUNT, REPEAT_INTERVAL, TIMES_TRIGGERED, 
+      QRTZ_TRIGGERS_id)
+    values (#{schedName,jdbcType=VARCHAR}, #{triggerName,jdbcType=VARCHAR}, #{triggerGroup,jdbcType=VARCHAR}, 
+      #{repeatCount,jdbcType=BIGINT}, #{repeatInterval,jdbcType=BIGINT}, #{timesTriggered,jdbcType=BIGINT}, 
+      #{qrtzTriggersId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzSimpleTriggers" useGeneratedKeys="true">
+    insert into QRTZ_SIMPLE_TRIGGERS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        SCHED_NAME,
+      </if>
+      <if test="triggerName != null">
+        `TRIGGER_NAME`,
+      </if>
+      <if test="triggerGroup != null">
+        TRIGGER_GROUP,
+      </if>
+      <if test="repeatCount != null">
+        REPEAT_COUNT,
+      </if>
+      <if test="repeatInterval != null">
+        REPEAT_INTERVAL,
+      </if>
+      <if test="timesTriggered != null">
+        TIMES_TRIGGERED,
+      </if>
+      <if test="qrtzTriggersId != null">
+        QRTZ_TRIGGERS_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        #{schedName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null">
+        #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroup != null">
+        #{triggerGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="repeatCount != null">
+        #{repeatCount,jdbcType=BIGINT},
+      </if>
+      <if test="repeatInterval != null">
+        #{repeatInterval,jdbcType=BIGINT},
+      </if>
+      <if test="timesTriggered != null">
+        #{timesTriggered,jdbcType=BIGINT},
+      </if>
+      <if test="qrtzTriggersId != null">
+        #{qrtzTriggersId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzSimpleTriggers">
+    update QRTZ_SIMPLE_TRIGGERS
+    <set>
+      <if test="schedName != null">
+        SCHED_NAME = #{schedName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null">
+        `TRIGGER_NAME` = #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroup != null">
+        TRIGGER_GROUP = #{triggerGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="repeatCount != null">
+        REPEAT_COUNT = #{repeatCount,jdbcType=BIGINT},
+      </if>
+      <if test="repeatInterval != null">
+        REPEAT_INTERVAL = #{repeatInterval,jdbcType=BIGINT},
+      </if>
+      <if test="timesTriggered != null">
+        TIMES_TRIGGERED = #{timesTriggered,jdbcType=BIGINT},
+      </if>
+      <if test="qrtzTriggersId != null">
+        QRTZ_TRIGGERS_id = #{qrtzTriggersId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzSimpleTriggers">
+    update QRTZ_SIMPLE_TRIGGERS
+    set SCHED_NAME = #{schedName,jdbcType=VARCHAR},
+      `TRIGGER_NAME` = #{triggerName,jdbcType=VARCHAR},
+      TRIGGER_GROUP = #{triggerGroup,jdbcType=VARCHAR},
+      REPEAT_COUNT = #{repeatCount,jdbcType=BIGINT},
+      REPEAT_INTERVAL = #{repeatInterval,jdbcType=BIGINT},
+      TIMES_TRIGGERED = #{timesTriggered,jdbcType=BIGINT},
+      QRTZ_TRIGGERS_id = #{qrtzTriggersId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

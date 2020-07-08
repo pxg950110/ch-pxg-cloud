@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ch.pxg.cloud.chpxgcloudcommon.mapper.QrtzTriggersMapper">
+  <resultMap id="BaseResultMap" type="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzTriggers">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="SCHED_NAME" jdbcType="VARCHAR" property="schedName" />
+    <result column="TRIGGER_NAME" jdbcType="VARCHAR" property="triggerName" />
+    <result column="TRIGGER_GROUP" jdbcType="VARCHAR" property="triggerGroup" />
+    <result column="JOB_NAME" jdbcType="VARCHAR" property="jobName" />
+    <result column="JOB_GROUP" jdbcType="VARCHAR" property="jobGroup" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="NEXT_FIRE_TIME" jdbcType="BIGINT" property="nextFireTime" />
+    <result column="PREV_FIRE_TIME" jdbcType="BIGINT" property="prevFireTime" />
+    <result column="PRIORITY" jdbcType="INTEGER" property="priority" />
+    <result column="TRIGGER_STATE" jdbcType="VARCHAR" property="triggerState" />
+    <result column="TRIGGER_TYPE" jdbcType="VARCHAR" property="triggerType" />
+    <result column="START_TIME" jdbcType="BIGINT" property="startTime" />
+    <result column="END_TIME" jdbcType="BIGINT" property="endTime" />
+    <result column="CALENDAR_NAME" jdbcType="VARCHAR" property="calendarName" />
+    <result column="MISFIRE_INSTR" jdbcType="SMALLINT" property="misfireInstr" />
+    <result column="JOB_DATA" jdbcType="VARCHAR" property="jobData" />
+    <result column="QRTZ_JOB_DETAILS_ID" jdbcType="INTEGER" property="qrtzJobDetailsId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, SCHED_NAME, `TRIGGER_NAME`, TRIGGER_GROUP, JOB_NAME, JOB_GROUP, DESCRIPTION, 
+    NEXT_FIRE_TIME, PREV_FIRE_TIME, PRIORITY, TRIGGER_STATE, TRIGGER_TYPE, START_TIME, 
+    END_TIME, CALENDAR_NAME, MISFIRE_INSTR, JOB_DATA, QRTZ_JOB_DETAILS_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from QRTZ_TRIGGERS
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from QRTZ_TRIGGERS
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzTriggers" useGeneratedKeys="true">
+    insert into QRTZ_TRIGGERS (SCHED_NAME, `TRIGGER_NAME`, TRIGGER_GROUP, 
+      JOB_NAME, JOB_GROUP, DESCRIPTION, 
+      NEXT_FIRE_TIME, PREV_FIRE_TIME, PRIORITY, 
+      TRIGGER_STATE, TRIGGER_TYPE, START_TIME, 
+      END_TIME, CALENDAR_NAME, MISFIRE_INSTR, 
+      JOB_DATA, QRTZ_JOB_DETAILS_ID)
+    values (#{schedName,jdbcType=VARCHAR}, #{triggerName,jdbcType=VARCHAR}, #{triggerGroup,jdbcType=VARCHAR}, 
+      #{jobName,jdbcType=VARCHAR}, #{jobGroup,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{nextFireTime,jdbcType=BIGINT}, #{prevFireTime,jdbcType=BIGINT}, #{priority,jdbcType=INTEGER}, 
+      #{triggerState,jdbcType=VARCHAR}, #{triggerType,jdbcType=VARCHAR}, #{startTime,jdbcType=BIGINT}, 
+      #{endTime,jdbcType=BIGINT}, #{calendarName,jdbcType=VARCHAR}, #{misfireInstr,jdbcType=SMALLINT}, 
+      #{jobData,jdbcType=VARCHAR}, #{qrtzJobDetailsId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzTriggers" useGeneratedKeys="true">
+    insert into QRTZ_TRIGGERS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        SCHED_NAME,
+      </if>
+      <if test="triggerName != null">
+        `TRIGGER_NAME`,
+      </if>
+      <if test="triggerGroup != null">
+        TRIGGER_GROUP,
+      </if>
+      <if test="jobName != null">
+        JOB_NAME,
+      </if>
+      <if test="jobGroup != null">
+        JOB_GROUP,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="nextFireTime != null">
+        NEXT_FIRE_TIME,
+      </if>
+      <if test="prevFireTime != null">
+        PREV_FIRE_TIME,
+      </if>
+      <if test="priority != null">
+        PRIORITY,
+      </if>
+      <if test="triggerState != null">
+        TRIGGER_STATE,
+      </if>
+      <if test="triggerType != null">
+        TRIGGER_TYPE,
+      </if>
+      <if test="startTime != null">
+        START_TIME,
+      </if>
+      <if test="endTime != null">
+        END_TIME,
+      </if>
+      <if test="calendarName != null">
+        CALENDAR_NAME,
+      </if>
+      <if test="misfireInstr != null">
+        MISFIRE_INSTR,
+      </if>
+      <if test="jobData != null">
+        JOB_DATA,
+      </if>
+      <if test="qrtzJobDetailsId != null">
+        QRTZ_JOB_DETAILS_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        #{schedName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null">
+        #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroup != null">
+        #{triggerGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null">
+        #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="nextFireTime != null">
+        #{nextFireTime,jdbcType=BIGINT},
+      </if>
+      <if test="prevFireTime != null">
+        #{prevFireTime,jdbcType=BIGINT},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="triggerState != null">
+        #{triggerState,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerType != null">
+        #{triggerType,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="calendarName != null">
+        #{calendarName,jdbcType=VARCHAR},
+      </if>
+      <if test="misfireInstr != null">
+        #{misfireInstr,jdbcType=SMALLINT},
+      </if>
+      <if test="jobData != null">
+        #{jobData,jdbcType=VARCHAR},
+      </if>
+      <if test="qrtzJobDetailsId != null">
+        #{qrtzJobDetailsId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzTriggers">
+    update QRTZ_TRIGGERS
+    <set>
+      <if test="schedName != null">
+        SCHED_NAME = #{schedName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null">
+        `TRIGGER_NAME` = #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroup != null">
+        TRIGGER_GROUP = #{triggerGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        JOB_NAME = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null">
+        JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="nextFireTime != null">
+        NEXT_FIRE_TIME = #{nextFireTime,jdbcType=BIGINT},
+      </if>
+      <if test="prevFireTime != null">
+        PREV_FIRE_TIME = #{prevFireTime,jdbcType=BIGINT},
+      </if>
+      <if test="priority != null">
+        PRIORITY = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="triggerState != null">
+        TRIGGER_STATE = #{triggerState,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerType != null">
+        TRIGGER_TYPE = #{triggerType,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        START_TIME = #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null">
+        END_TIME = #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="calendarName != null">
+        CALENDAR_NAME = #{calendarName,jdbcType=VARCHAR},
+      </if>
+      <if test="misfireInstr != null">
+        MISFIRE_INSTR = #{misfireInstr,jdbcType=SMALLINT},
+      </if>
+      <if test="jobData != null">
+        JOB_DATA = #{jobData,jdbcType=VARCHAR},
+      </if>
+      <if test="qrtzJobDetailsId != null">
+        QRTZ_JOB_DETAILS_ID = #{qrtzJobDetailsId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzTriggers">
+    update QRTZ_TRIGGERS
+    set SCHED_NAME = #{schedName,jdbcType=VARCHAR},
+      `TRIGGER_NAME` = #{triggerName,jdbcType=VARCHAR},
+      TRIGGER_GROUP = #{triggerGroup,jdbcType=VARCHAR},
+      JOB_NAME = #{jobName,jdbcType=VARCHAR},
+      JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      NEXT_FIRE_TIME = #{nextFireTime,jdbcType=BIGINT},
+      PREV_FIRE_TIME = #{prevFireTime,jdbcType=BIGINT},
+      PRIORITY = #{priority,jdbcType=INTEGER},
+      TRIGGER_STATE = #{triggerState,jdbcType=VARCHAR},
+      TRIGGER_TYPE = #{triggerType,jdbcType=VARCHAR},
+      START_TIME = #{startTime,jdbcType=BIGINT},
+      END_TIME = #{endTime,jdbcType=BIGINT},
+      CALENDAR_NAME = #{calendarName,jdbcType=VARCHAR},
+      MISFIRE_INSTR = #{misfireInstr,jdbcType=SMALLINT},
+      JOB_DATA = #{jobData,jdbcType=VARCHAR},
+      QRTZ_JOB_DETAILS_ID = #{qrtzJobDetailsId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

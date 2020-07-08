@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ch.pxg.cloud.chpxgcloudcommon.mapper.QrtzJobDetailsMapper">
+  <resultMap id="BaseResultMap" type="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzJobDetails">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="SCHED_NAME" jdbcType="VARCHAR" property="schedName" />
+    <result column="JOB_NAME" jdbcType="VARCHAR" property="jobName" />
+    <result column="JOB_GROUP" jdbcType="VARCHAR" property="jobGroup" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="JOB_CLASS_NAME" jdbcType="VARCHAR" property="jobClassName" />
+    <result column="IS_DURABLE" jdbcType="VARCHAR" property="isDurable" />
+    <result column="IS_NONCONCURRENT" jdbcType="VARCHAR" property="isNonconcurrent" />
+    <result column="IS_UPDATE_DATA" jdbcType="VARCHAR" property="isUpdateData" />
+    <result column="REQUESTS_RECOVERY" jdbcType="VARCHAR" property="requestsRecovery" />
+    <result column="JOB_DATA" jdbcType="VARCHAR" property="jobData" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, SCHED_NAME, JOB_NAME, JOB_GROUP, DESCRIPTION, JOB_CLASS_NAME, IS_DURABLE, IS_NONCONCURRENT, 
+    IS_UPDATE_DATA, REQUESTS_RECOVERY, JOB_DATA
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from QRTZ_JOB_DETAILS
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from QRTZ_JOB_DETAILS
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzJobDetails" useGeneratedKeys="true">
+    insert into QRTZ_JOB_DETAILS (SCHED_NAME, JOB_NAME, JOB_GROUP, 
+      DESCRIPTION, JOB_CLASS_NAME, IS_DURABLE, 
+      IS_NONCONCURRENT, IS_UPDATE_DATA, REQUESTS_RECOVERY, 
+      JOB_DATA)
+    values (#{schedName,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR}, #{jobGroup,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{jobClassName,jdbcType=VARCHAR}, #{isDurable,jdbcType=VARCHAR}, 
+      #{isNonconcurrent,jdbcType=VARCHAR}, #{isUpdateData,jdbcType=VARCHAR}, #{requestsRecovery,jdbcType=VARCHAR}, 
+      #{jobData,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzJobDetails" useGeneratedKeys="true">
+    insert into QRTZ_JOB_DETAILS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        SCHED_NAME,
+      </if>
+      <if test="jobName != null">
+        JOB_NAME,
+      </if>
+      <if test="jobGroup != null">
+        JOB_GROUP,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="jobClassName != null">
+        JOB_CLASS_NAME,
+      </if>
+      <if test="isDurable != null">
+        IS_DURABLE,
+      </if>
+      <if test="isNonconcurrent != null">
+        IS_NONCONCURRENT,
+      </if>
+      <if test="isUpdateData != null">
+        IS_UPDATE_DATA,
+      </if>
+      <if test="requestsRecovery != null">
+        REQUESTS_RECOVERY,
+      </if>
+      <if test="jobData != null">
+        JOB_DATA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        #{schedName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null">
+        #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="jobClassName != null">
+        #{jobClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDurable != null">
+        #{isDurable,jdbcType=VARCHAR},
+      </if>
+      <if test="isNonconcurrent != null">
+        #{isNonconcurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="isUpdateData != null">
+        #{isUpdateData,jdbcType=VARCHAR},
+      </if>
+      <if test="requestsRecovery != null">
+        #{requestsRecovery,jdbcType=VARCHAR},
+      </if>
+      <if test="jobData != null">
+        #{jobData,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzJobDetails">
+    update QRTZ_JOB_DETAILS
+    <set>
+      <if test="schedName != null">
+        SCHED_NAME = #{schedName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        JOB_NAME = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null">
+        JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="jobClassName != null">
+        JOB_CLASS_NAME = #{jobClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDurable != null">
+        IS_DURABLE = #{isDurable,jdbcType=VARCHAR},
+      </if>
+      <if test="isNonconcurrent != null">
+        IS_NONCONCURRENT = #{isNonconcurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="isUpdateData != null">
+        IS_UPDATE_DATA = #{isUpdateData,jdbcType=VARCHAR},
+      </if>
+      <if test="requestsRecovery != null">
+        REQUESTS_RECOVERY = #{requestsRecovery,jdbcType=VARCHAR},
+      </if>
+      <if test="jobData != null">
+        JOB_DATA = #{jobData,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzJobDetails">
+    update QRTZ_JOB_DETAILS
+    set SCHED_NAME = #{schedName,jdbcType=VARCHAR},
+      JOB_NAME = #{jobName,jdbcType=VARCHAR},
+      JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      JOB_CLASS_NAME = #{jobClassName,jdbcType=VARCHAR},
+      IS_DURABLE = #{isDurable,jdbcType=VARCHAR},
+      IS_NONCONCURRENT = #{isNonconcurrent,jdbcType=VARCHAR},
+      IS_UPDATE_DATA = #{isUpdateData,jdbcType=VARCHAR},
+      REQUESTS_RECOVERY = #{requestsRecovery,jdbcType=VARCHAR},
+      JOB_DATA = #{jobData,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

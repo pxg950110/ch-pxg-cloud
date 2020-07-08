@@ -28,6 +28,12 @@ spring:
 #          uri:  lb://wechat-server
           predicates:
             - Path=/manager/**
+#        后台管理服务接口
+        - id: formdesign-server
+          uri: http://192.168.126.1:7021
+#          uri:  lb://wechat-server
+          predicates:
+            - Path=/formdesign/**
         - id: sysadmin-server
           uri:  lb://sysadmin-server
           predicates:

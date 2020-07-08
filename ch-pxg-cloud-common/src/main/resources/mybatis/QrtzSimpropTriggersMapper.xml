@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ch.pxg.cloud.chpxgcloudcommon.mapper.QrtzSimpropTriggersMapper">
+  <resultMap id="BaseResultMap" type="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzSimpropTriggers">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="SCHED_NAME" jdbcType="VARCHAR" property="schedName" />
+    <result column="TRIGGER_NAME" jdbcType="VARCHAR" property="triggerName" />
+    <result column="TRIGGER_GROUP" jdbcType="VARCHAR" property="triggerGroup" />
+    <result column="STR_PROP_1" jdbcType="VARCHAR" property="strProp1" />
+    <result column="STR_PROP_2" jdbcType="VARCHAR" property="strProp2" />
+    <result column="STR_PROP_3" jdbcType="VARCHAR" property="strProp3" />
+    <result column="INT_PROP_1" jdbcType="INTEGER" property="intProp1" />
+    <result column="INT_PROP_2" jdbcType="INTEGER" property="intProp2" />
+    <result column="LONG_PROP_1" jdbcType="BIGINT" property="longProp1" />
+    <result column="LONG_PROP_2" jdbcType="BIGINT" property="longProp2" />
+    <result column="DEC_PROP_1" jdbcType="DECIMAL" property="decProp1" />
+    <result column="DEC_PROP_2" jdbcType="DECIMAL" property="decProp2" />
+    <result column="BOOL_PROP_1" jdbcType="VARCHAR" property="boolProp1" />
+    <result column="BOOL_PROP_2" jdbcType="VARCHAR" property="boolProp2" />
+    <result column="QRTZ_TRIGGERS_ID" jdbcType="INTEGER" property="qrtzTriggersId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, SCHED_NAME, `TRIGGER_NAME`, TRIGGER_GROUP, STR_PROP_1, STR_PROP_2, STR_PROP_3, 
+    INT_PROP_1, INT_PROP_2, LONG_PROP_1, LONG_PROP_2, DEC_PROP_1, DEC_PROP_2, BOOL_PROP_1, 
+    BOOL_PROP_2, QRTZ_TRIGGERS_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from QRTZ_SIMPROP_TRIGGERS
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from QRTZ_SIMPROP_TRIGGERS
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzSimpropTriggers" useGeneratedKeys="true">
+    insert into QRTZ_SIMPROP_TRIGGERS (SCHED_NAME, `TRIGGER_NAME`, TRIGGER_GROUP, 
+      STR_PROP_1, STR_PROP_2, STR_PROP_3, 
+      INT_PROP_1, INT_PROP_2, LONG_PROP_1, 
+      LONG_PROP_2, DEC_PROP_1, DEC_PROP_2, 
+      BOOL_PROP_1, BOOL_PROP_2, QRTZ_TRIGGERS_ID
+      )
+    values (#{schedName,jdbcType=VARCHAR}, #{triggerName,jdbcType=VARCHAR}, #{triggerGroup,jdbcType=VARCHAR}, 
+      #{strProp1,jdbcType=VARCHAR}, #{strProp2,jdbcType=VARCHAR}, #{strProp3,jdbcType=VARCHAR}, 
+      #{intProp1,jdbcType=INTEGER}, #{intProp2,jdbcType=INTEGER}, #{longProp1,jdbcType=BIGINT}, 
+      #{longProp2,jdbcType=BIGINT}, #{decProp1,jdbcType=DECIMAL}, #{decProp2,jdbcType=DECIMAL}, 
+      #{boolProp1,jdbcType=VARCHAR}, #{boolProp2,jdbcType=VARCHAR}, #{qrtzTriggersId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzSimpropTriggers" useGeneratedKeys="true">
+    insert into QRTZ_SIMPROP_TRIGGERS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        SCHED_NAME,
+      </if>
+      <if test="triggerName != null">
+        `TRIGGER_NAME`,
+      </if>
+      <if test="triggerGroup != null">
+        TRIGGER_GROUP,
+      </if>
+      <if test="strProp1 != null">
+        STR_PROP_1,
+      </if>
+      <if test="strProp2 != null">
+        STR_PROP_2,
+      </if>
+      <if test="strProp3 != null">
+        STR_PROP_3,
+      </if>
+      <if test="intProp1 != null">
+        INT_PROP_1,
+      </if>
+      <if test="intProp2 != null">
+        INT_PROP_2,
+      </if>
+      <if test="longProp1 != null">
+        LONG_PROP_1,
+      </if>
+      <if test="longProp2 != null">
+        LONG_PROP_2,
+      </if>
+      <if test="decProp1 != null">
+        DEC_PROP_1,
+      </if>
+      <if test="decProp2 != null">
+        DEC_PROP_2,
+      </if>
+      <if test="boolProp1 != null">
+        BOOL_PROP_1,
+      </if>
+      <if test="boolProp2 != null">
+        BOOL_PROP_2,
+      </if>
+      <if test="qrtzTriggersId != null">
+        QRTZ_TRIGGERS_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        #{schedName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null">
+        #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroup != null">
+        #{triggerGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="strProp1 != null">
+        #{strProp1,jdbcType=VARCHAR},
+      </if>
+      <if test="strProp2 != null">
+        #{strProp2,jdbcType=VARCHAR},
+      </if>
+      <if test="strProp3 != null">
+        #{strProp3,jdbcType=VARCHAR},
+      </if>
+      <if test="intProp1 != null">
+        #{intProp1,jdbcType=INTEGER},
+      </if>
+      <if test="intProp2 != null">
+        #{intProp2,jdbcType=INTEGER},
+      </if>
+      <if test="longProp1 != null">
+        #{longProp1,jdbcType=BIGINT},
+      </if>
+      <if test="longProp2 != null">
+        #{longProp2,jdbcType=BIGINT},
+      </if>
+      <if test="decProp1 != null">
+        #{decProp1,jdbcType=DECIMAL},
+      </if>
+      <if test="decProp2 != null">
+        #{decProp2,jdbcType=DECIMAL},
+      </if>
+      <if test="boolProp1 != null">
+        #{boolProp1,jdbcType=VARCHAR},
+      </if>
+      <if test="boolProp2 != null">
+        #{boolProp2,jdbcType=VARCHAR},
+      </if>
+      <if test="qrtzTriggersId != null">
+        #{qrtzTriggersId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzSimpropTriggers">
+    update QRTZ_SIMPROP_TRIGGERS
+    <set>
+      <if test="schedName != null">
+        SCHED_NAME = #{schedName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null">
+        `TRIGGER_NAME` = #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroup != null">
+        TRIGGER_GROUP = #{triggerGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="strProp1 != null">
+        STR_PROP_1 = #{strProp1,jdbcType=VARCHAR},
+      </if>
+      <if test="strProp2 != null">
+        STR_PROP_2 = #{strProp2,jdbcType=VARCHAR},
+      </if>
+      <if test="strProp3 != null">
+        STR_PROP_3 = #{strProp3,jdbcType=VARCHAR},
+      </if>
+      <if test="intProp1 != null">
+        INT_PROP_1 = #{intProp1,jdbcType=INTEGER},
+      </if>
+      <if test="intProp2 != null">
+        INT_PROP_2 = #{intProp2,jdbcType=INTEGER},
+      </if>
+      <if test="longProp1 != null">
+        LONG_PROP_1 = #{longProp1,jdbcType=BIGINT},
+      </if>
+      <if test="longProp2 != null">
+        LONG_PROP_2 = #{longProp2,jdbcType=BIGINT},
+      </if>
+      <if test="decProp1 != null">
+        DEC_PROP_1 = #{decProp1,jdbcType=DECIMAL},
+      </if>
+      <if test="decProp2 != null">
+        DEC_PROP_2 = #{decProp2,jdbcType=DECIMAL},
+      </if>
+      <if test="boolProp1 != null">
+        BOOL_PROP_1 = #{boolProp1,jdbcType=VARCHAR},
+      </if>
+      <if test="boolProp2 != null">
+        BOOL_PROP_2 = #{boolProp2,jdbcType=VARCHAR},
+      </if>
+      <if test="qrtzTriggersId != null">
+        QRTZ_TRIGGERS_ID = #{qrtzTriggersId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzSimpropTriggers">
+    update QRTZ_SIMPROP_TRIGGERS
+    set SCHED_NAME = #{schedName,jdbcType=VARCHAR},
+      `TRIGGER_NAME` = #{triggerName,jdbcType=VARCHAR},
+      TRIGGER_GROUP = #{triggerGroup,jdbcType=VARCHAR},
+      STR_PROP_1 = #{strProp1,jdbcType=VARCHAR},
+      STR_PROP_2 = #{strProp2,jdbcType=VARCHAR},
+      STR_PROP_3 = #{strProp3,jdbcType=VARCHAR},
+      INT_PROP_1 = #{intProp1,jdbcType=INTEGER},
+      INT_PROP_2 = #{intProp2,jdbcType=INTEGER},
+      LONG_PROP_1 = #{longProp1,jdbcType=BIGINT},
+      LONG_PROP_2 = #{longProp2,jdbcType=BIGINT},
+      DEC_PROP_1 = #{decProp1,jdbcType=DECIMAL},
+      DEC_PROP_2 = #{decProp2,jdbcType=DECIMAL},
+      BOOL_PROP_1 = #{boolProp1,jdbcType=VARCHAR},
+      BOOL_PROP_2 = #{boolProp2,jdbcType=VARCHAR},
+      QRTZ_TRIGGERS_ID = #{qrtzTriggersId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

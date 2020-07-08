@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ch.pxg.cloud.chpxgcloudcommon.mapper.QrtzFiredTriggersMapper">
+  <resultMap id="BaseResultMap" type="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzFiredTriggers">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="SCHED_NAME" jdbcType="VARCHAR" property="schedName" />
+    <result column="ENTRY_ID" jdbcType="VARCHAR" property="entryId" />
+    <result column="TRIGGER_NAME" jdbcType="VARCHAR" property="triggerName" />
+    <result column="TRIGGER_GROUP" jdbcType="VARCHAR" property="triggerGroup" />
+    <result column="INSTANCE_NAME" jdbcType="VARCHAR" property="instanceName" />
+    <result column="FIRED_TIME" jdbcType="BIGINT" property="firedTime" />
+    <result column="SCHED_TIME" jdbcType="BIGINT" property="schedTime" />
+    <result column="PRIORITY" jdbcType="INTEGER" property="priority" />
+    <result column="STATE" jdbcType="VARCHAR" property="state" />
+    <result column="JOB_NAME" jdbcType="VARCHAR" property="jobName" />
+    <result column="JOB_GROUP" jdbcType="VARCHAR" property="jobGroup" />
+    <result column="IS_NONCONCURRENT" jdbcType="VARCHAR" property="isNonconcurrent" />
+    <result column="REQUESTS_RECOVERY" jdbcType="VARCHAR" property="requestsRecovery" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SCHED_NAME, ENTRY_ID, `TRIGGER_NAME`, TRIGGER_GROUP, INSTANCE_NAME, FIRED_TIME, 
+    SCHED_TIME, PRIORITY, `STATE`, JOB_NAME, JOB_GROUP, IS_NONCONCURRENT, REQUESTS_RECOVERY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from QRTZ_FIRED_TRIGGERS
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from QRTZ_FIRED_TRIGGERS
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzFiredTriggers" useGeneratedKeys="true">
+    insert into QRTZ_FIRED_TRIGGERS (SCHED_NAME, ENTRY_ID, `TRIGGER_NAME`, 
+      TRIGGER_GROUP, INSTANCE_NAME, FIRED_TIME, 
+      SCHED_TIME, PRIORITY, `STATE`, 
+      JOB_NAME, JOB_GROUP, IS_NONCONCURRENT, 
+      REQUESTS_RECOVERY)
+    values (#{schedName,jdbcType=VARCHAR}, #{entryId,jdbcType=VARCHAR}, #{triggerName,jdbcType=VARCHAR}, 
+      #{triggerGroup,jdbcType=VARCHAR}, #{instanceName,jdbcType=VARCHAR}, #{firedTime,jdbcType=BIGINT}, 
+      #{schedTime,jdbcType=BIGINT}, #{priority,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, 
+      #{jobName,jdbcType=VARCHAR}, #{jobGroup,jdbcType=VARCHAR}, #{isNonconcurrent,jdbcType=VARCHAR}, 
+      #{requestsRecovery,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzFiredTriggers" useGeneratedKeys="true">
+    insert into QRTZ_FIRED_TRIGGERS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        SCHED_NAME,
+      </if>
+      <if test="entryId != null">
+        ENTRY_ID,
+      </if>
+      <if test="triggerName != null">
+        `TRIGGER_NAME`,
+      </if>
+      <if test="triggerGroup != null">
+        TRIGGER_GROUP,
+      </if>
+      <if test="instanceName != null">
+        INSTANCE_NAME,
+      </if>
+      <if test="firedTime != null">
+        FIRED_TIME,
+      </if>
+      <if test="schedTime != null">
+        SCHED_TIME,
+      </if>
+      <if test="priority != null">
+        PRIORITY,
+      </if>
+      <if test="state != null">
+        `STATE`,
+      </if>
+      <if test="jobName != null">
+        JOB_NAME,
+      </if>
+      <if test="jobGroup != null">
+        JOB_GROUP,
+      </if>
+      <if test="isNonconcurrent != null">
+        IS_NONCONCURRENT,
+      </if>
+      <if test="requestsRecovery != null">
+        REQUESTS_RECOVERY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="schedName != null">
+        #{schedName,jdbcType=VARCHAR},
+      </if>
+      <if test="entryId != null">
+        #{entryId,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null">
+        #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroup != null">
+        #{triggerGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="instanceName != null">
+        #{instanceName,jdbcType=VARCHAR},
+      </if>
+      <if test="firedTime != null">
+        #{firedTime,jdbcType=BIGINT},
+      </if>
+      <if test="schedTime != null">
+        #{schedTime,jdbcType=BIGINT},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null">
+        #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="isNonconcurrent != null">
+        #{isNonconcurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="requestsRecovery != null">
+        #{requestsRecovery,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzFiredTriggers">
+    update QRTZ_FIRED_TRIGGERS
+    <set>
+      <if test="schedName != null">
+        SCHED_NAME = #{schedName,jdbcType=VARCHAR},
+      </if>
+      <if test="entryId != null">
+        ENTRY_ID = #{entryId,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null">
+        `TRIGGER_NAME` = #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerGroup != null">
+        TRIGGER_GROUP = #{triggerGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="instanceName != null">
+        INSTANCE_NAME = #{instanceName,jdbcType=VARCHAR},
+      </if>
+      <if test="firedTime != null">
+        FIRED_TIME = #{firedTime,jdbcType=BIGINT},
+      </if>
+      <if test="schedTime != null">
+        SCHED_TIME = #{schedTime,jdbcType=BIGINT},
+      </if>
+      <if test="priority != null">
+        PRIORITY = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        `STATE` = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        JOB_NAME = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null">
+        JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="isNonconcurrent != null">
+        IS_NONCONCURRENT = #{isNonconcurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="requestsRecovery != null">
+        REQUESTS_RECOVERY = #{requestsRecovery,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.taskcenter.QrtzFiredTriggers">
+    update QRTZ_FIRED_TRIGGERS
+    set SCHED_NAME = #{schedName,jdbcType=VARCHAR},
+      ENTRY_ID = #{entryId,jdbcType=VARCHAR},
+      `TRIGGER_NAME` = #{triggerName,jdbcType=VARCHAR},
+      TRIGGER_GROUP = #{triggerGroup,jdbcType=VARCHAR},
+      INSTANCE_NAME = #{instanceName,jdbcType=VARCHAR},
+      FIRED_TIME = #{firedTime,jdbcType=BIGINT},
+      SCHED_TIME = #{schedTime,jdbcType=BIGINT},
+      PRIORITY = #{priority,jdbcType=INTEGER},
+      `STATE` = #{state,jdbcType=VARCHAR},
+      JOB_NAME = #{jobName,jdbcType=VARCHAR},
+      JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
+      IS_NONCONCURRENT = #{isNonconcurrent,jdbcType=VARCHAR},
+      REQUESTS_RECOVERY = #{requestsRecovery,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
