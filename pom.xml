@@ -9,8 +9,6 @@
         <module>ch-pxg-cloud-gateway</module>
         <module>ch-pxg-cloud-wechat</module>
         <module>ch-pxg-cloud-manager</module>
-        <module>ch-pxg-cloud-sso</module>
-        <module>ch-pxg-cloud-oauth</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
