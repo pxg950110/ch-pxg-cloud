@@ -82,6 +82,7 @@ private MailService mailService;
     public CommonResult<Boolean> checkMailCode(String  msgId, String emailCode, HttpServletRequest request, HttpServletResponse response){
         return mailService.checkMailCode(msgId,emailCode,request,response);
     }
+
     @GetMapping("/")
     @ApiOperation("测试")
     public String test(String to) {
@@ -92,10 +93,14 @@ private MailService mailService;
         return "测试";
     }
 
+
     @GetMapping("/mail/code/info")
     @ApiOperation("获取邮箱验证码")
     public ResultInfo getMailCode(String msgId){
         return mailService.getMailInfo(msgId);
     }
+
+
+
 
 }

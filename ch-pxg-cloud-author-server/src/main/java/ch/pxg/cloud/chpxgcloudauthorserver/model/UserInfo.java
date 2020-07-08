@@ -23,6 +23,24 @@ public class UserInfo implements Serializable {
 
     private Integer status;
 
+    public UserInfo(String userName, Integer status) {
+        this.userName = userName;
+        this.status = status;
+    }
+
+    public UserInfo(String userName, String userPassword, Integer status, String salt) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.status = status;
+        this.salt = salt;
+    }
+
+    public UserInfo(String userName, Integer status, String salt) {
+        this.userName = userName;
+        this.status = status;
+        this.salt = salt;
+    }
+
     //role
     private List<UserRole> roleList;
     /**

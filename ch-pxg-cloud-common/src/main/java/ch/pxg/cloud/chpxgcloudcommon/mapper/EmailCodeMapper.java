@@ -20,7 +20,10 @@ public interface EmailCodeMapper {
     int  updateStatusbyPrimary(Integer id);
     List<EmailCode> selectByEmailUrl(String emailUrl);
 
+    EmailCode selectByMsgId(String msgId);
 
+    //最大查询500条
+    List<EmailCode> selectSelective(EmailCode emailCode);
 
 
 }

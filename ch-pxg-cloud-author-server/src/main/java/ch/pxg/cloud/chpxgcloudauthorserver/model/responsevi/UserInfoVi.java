@@ -1,11 +1,6 @@
 package ch.pxg.cloud.chpxgcloudauthorserver.model.responsevi;
 
 import ch.pxg.cloud.chpxgcloudauthorserver.util.CommonUtil;
-import ch.pxg.cloud.chpxgcloudauthorserver.util.JWTUtil;
-import sun.plugin2.message.Serializer;
-
-import java.io.Serializable;
-import java.util.UUID;
 
 /**
  * <p>
@@ -28,12 +23,31 @@ public class UserInfoVi {
      * 用户登录后产生的唯一id
      */
     private String messageId;
+    private String token ;
     public UserInfoVi() {
         this.messageId= CommonUtil.UUID();
+    }
+
+    public UserInfoVi(String token) {
+        this.messageId= CommonUtil.UUID();
+        this.token = token;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getMessageId() {
         return messageId;
     }
+
 
 }

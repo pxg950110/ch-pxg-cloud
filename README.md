@@ -25,6 +25,7 @@
 * [spring-cloud-qaserver qa程序](http://localhost:7012/#/)
 * [spring-cloud-hadoop-common hadoop相关服务](http://localhost:7015/#/)
 * [ch-pxg-cloud-manager 后台配置接口](http://localhost:7016)
+* [ch-pxg-clold-formdesign 表单配置和操作](http://localhost:7021)
 ****
 
 

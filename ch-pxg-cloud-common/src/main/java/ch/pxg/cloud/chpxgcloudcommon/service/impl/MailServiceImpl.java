@@ -105,7 +105,7 @@ public class MailServiceImpl implements MailService {
             String code = RandmoUtil.getCode(6);
             String content = "欢迎注册皮小怪和皮皮妹的空间:" +
                     "\r\n" +
-                    "验证码:" + code;
+                    "验证码:" + code+"\r\n 验证码有效时间为3分钟";
             // 发送邮件
             Map<String, Object> map = new HashMap<>();
             map.put("subject", subject);
@@ -167,11 +167,28 @@ public class MailServiceImpl implements MailService {
     public CommonResult<Boolean> checkMailCode(String msgId, String emailCode, HttpServletRequest request, HttpServletResponse response) {
         //redis判断key 是否存在
         //
+
+
         boolean hasKey = redisUtil.hasKey(msgId);
+
         if (!hasKey) {
+            log.info("不存在key:{}",msgId);
+            try {
+                EmailCode emailCodeinfo=emailCodeMapper.selectByMsgId(msgId);
+                if (emailCodeinfo!=null)
+                {
+
+                    //更新数据库中数据为无效
+                    emailCodeMapper.updateStatusbyPrimary(emailCodeinfo.getId());
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+                log.error(e.getMessage());
+            }
             return CommonResult.commomResult(false, HttpResultStatus.STATUS300, "邮箱验证错误，确认是否发送邮箱  &&  验证码是否过期");
         } else {
-            if (emailCode.equals(redisUtil.get("key").toString())) {
+            log.info(redisUtil.get(msgId).toString());
+            if (emailCode.equals(redisUtil.get(msgId).toString())) {
                 return CommonResult.commomResult(true, HttpResultStatus.STATUS200);
             } else {
                 return CommonResult.commomResult(false, HttpResultStatus.STATUS300, "邮箱验证错错误");

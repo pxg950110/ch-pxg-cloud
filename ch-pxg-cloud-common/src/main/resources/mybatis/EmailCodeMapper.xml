@@ -24,7 +24,39 @@
     <include refid="Base_Column_List"/>
     from appcommon.email_code where email_url= #{emailUrl,jdbcType=VARCHAR} and  status=0
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="selectByMsgId" resultType="ch.pxg.cloud.chpxgcloudcommon.model.EmailCode">
+    select
+    <include refid="Base_Column_List"/>
+    from  appcommon.email_code where msg_id=#{msgId,jdbcType=VARCHAR} and status=0
+  </select>
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="ch.pxg.cloud.chpxgcloudcommon.model.EmailCode">
+      select <include refid="Base_Column_List"/>
+      from  appcommon.email_code
+     <where>
+           <trim prefixOverrides="and">
+             <if test="msgId != null">
+              and msg_id= #{msgId,jdbcType=VARCHAR}
+             </if>
+             <if test="msgDetail != null">
+             and msg_detail=  #{msgDetail,jdbcType=VARCHAR}
+             </if>
+             <if test="emailUrl != null">
+             and email_url=  #{emailUrl,jdbcType=VARCHAR}
+             </if>
+             <if test="emialCode != null">
+              and emial_code =#{emialCode,jdbcType=VARCHAR}
+             </if>
+             <if test="createTime != null">
+             and create_time=  #{createTime,jdbcType=TIMESTAMP}
+             </if>
+             <if test="status != null">
+            and `status`=   #{status,jdbcType=SMALLINT}
+             </if>
+           </trim>
+     </where>
+           limit 500 ;
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from appcommon.email_code
     where id = #{id,jdbcType=INTEGER}
   </delete>

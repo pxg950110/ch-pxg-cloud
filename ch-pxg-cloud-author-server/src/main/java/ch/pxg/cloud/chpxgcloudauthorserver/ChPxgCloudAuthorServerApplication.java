@@ -14,4 +14,6 @@ public class ChPxgCloudAuthorServerApplication {
         SpringApplication.run(ChPxgCloudAuthorServerApplication.class, args);
     }
 
+    // app开发
+
 }

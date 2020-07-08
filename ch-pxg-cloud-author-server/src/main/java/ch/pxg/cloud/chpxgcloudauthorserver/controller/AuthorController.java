@@ -11,13 +11,11 @@ import ch.pxg.cloud.chpxgcloudauthorserver.util.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 
 /**
  * <p>
@@ -46,8 +44,9 @@ private AuthorService authorService;
      */
     @ApiOperation("用户登录")
     @PostMapping("login")
-    public CommonResult<UserInfoVi> login(LoginVI loginVI, HttpServletRequest request, HttpServletResponse response){
-        return  CommonResult.success(new UserInfoVi());
+    public CommonResult<UserInfoVi> login(@RequestBody LoginVI loginVI, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        return  authorService.login(loginVI,request,response);
     }
 
 
@@ -66,6 +65,7 @@ private AuthorService authorService;
                 request,
                 response
         );
+
     }
 
     /**
@@ -83,4 +83,17 @@ private AuthorService authorService;
         //发送邮件
         return authorService.sendMailCode(mailCodeVI,request,response);
     }
+
+
+    /**
+     * 获取授权用户的信息
+     * @param user 当前用户
+     * @return 授权信息
+     */
+    @ApiOperation("获取授权用户的信息")
+    @GetMapping("/user")
+    public Principal user(Principal user){
+        return user;
+    }
+
 }
